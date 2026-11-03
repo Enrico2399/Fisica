@@ -1,6 +1,6 @@
 # Fisica — Esercizi risolti
 
-Pagina statica (un solo file `index.html`) con la teoria per macroargomento (domande d'esame con frase-risposta, schema e applicazioni reali) e gli esercizi di Fisica risolti passo passo, divisi per macroargomento, con formule LaTeX (KaTeX), figure della dispensa e rimandi al formulario d'esame.
+Pagina statica (un solo file `index.html`) con la piramide interattiva degli argomenti, la teoria per macroargomento (domande d'esame con frase-risposta, schema e applicazioni reali) e gli esercizi di Fisica risolti passo passo, divisi per macroargomento, con formule LaTeX (KaTeX), figure della dispensa e rimandi al formulario d'esame.
 
 ## Pubblicazione su GitHub Pages
 1. Crea un repo (es. `fisica`) e carica il contenuto di questa cartella.
@@ -22,6 +22,7 @@ L'installazione non funziona aprendo il file in locale (`file://`): serve l'indi
 - `src/formulario_esame.tex` — formulario d'esame (sorgente LaTeX)
 - `img/` — figure degli esercizi (PNG, nome = numero esercizio)
 - `img_teo/` — schemi della teoria (PNG, `figNN`)
+- `build/piramide.py` — mattoni della piramide interattiva (formula, spiegazione, dipendenze)
 - `build/teoria.py` — teoria per area: introduzione, domande con frase-risposta, concetti, vita reale
 - `build/template.html` — HTML/CSS/JS della pagina
 - `build/conv.py` — converte i `.tex` e le immagini in `build/data.json`

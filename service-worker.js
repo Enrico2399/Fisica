@@ -3,7 +3,7 @@
  * - CACHE_APP: i file del sito; cambia il numero di versione quando aggiorni index.html.
  * - CACHE_RUNTIME: KaTeX e il font da CDN. Le URL contengono la versione, quindi restano valide.
  */
-const CACHE_APP = "fis-app-v1";
+const CACHE_APP = "fis-app-v2";
 const CACHE_RUNTIME = "fis-runtime-v1";
 
 const APP_ASSETS = [

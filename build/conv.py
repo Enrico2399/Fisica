@@ -157,9 +157,10 @@ for f in os.listdir(f'{ROOT}/img'):
         imgs[f[:-4]]='data:image/png;base64,'+base64.b64encode(open(f'{ROOT}/img/{f}','rb').read()).decode()
 import sys as _s; _s.path.insert(0,str(pathlib.Path(__file__).resolve().parent))
 from teoria import T as TEO
+from piramide import P as PIR, APEX as PAPEX
 teoimg={}
 for f in os.listdir(f'{ROOT}/img_teo'):
     if f.endswith('.png'):
         teoimg[f[:-4]]='data:image/png;base64,'+base64.b64encode(open(f'{ROOT}/img_teo/{f}','rb').read()).decode()
-json.dump({'sections':sections,'formulario':fsecs,'img':imgs,'teo':{str(k):v for k,v in TEO.items()},'teoimg':teoimg},open(f'{ROOT}/build/data.json','w',encoding='utf-8'),ensure_ascii=False)
+json.dump({'sections':sections,'formulario':fsecs,'img':imgs,'teo':{str(k):v for k,v in TEO.items()},'pir':PIR,'apex':PAPEX,'teoimg':teoimg},open(f'{ROOT}/build/data.json','w',encoding='utf-8'),ensure_ascii=False)
 print(len(sections),sum(len(s['ex']) for s in sections),len(fsecs))

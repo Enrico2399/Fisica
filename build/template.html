@@ -172,6 +172,44 @@ ol.steps li:nth-child(odd) { background: var(--zebra); }
 #install-instructions { font-size: 13px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.35); }
 @media (max-width: 560px) { #install-banner { flex-wrap: wrap; } #install-banner .btn-install-cta { width: 100%; } }
 .pdf-link { display: inline-flex; gap: 8px; align-items: center; font-weight: 700; font-size: 13.5px; background: var(--gold-bg); border: 1px solid var(--gold-border); color: var(--gold); border-radius: 8px; padding: 7px 12px; text-decoration: none; margin-bottom: 14px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: var(--text2); margin: 0 0 12px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 14px; height: 10px; border-radius: 3px; display: inline-block; }
+.pir-scroll { overflow-x: auto; padding-bottom: 4px; }
+.pyramid { min-width: 640px; display: flex; flex-direction: column-reverse; align-items: center; gap: 6px; padding: 6px 0; }
+.prow { display: flex; gap: 6px; }
+.brick { flex: 1 1 0; min-width: 0; border-radius: 6px; border: 1.5px solid var(--b-bd); background: var(--b-bg); color: var(--text); cursor: pointer;
+  padding: 0; text-align: center; font-family: var(--sans); display: flex; flex-direction: column; overflow: hidden; transition: transform .12s, opacity .15s, box-shadow .15s; }
+.brick .bt { background: var(--b-bd); color: #fff; font-size: 12px; font-weight: 700; padding: 5px 4px; line-height: 1.25; min-height: 40px; display: grid; place-items: center; }
+.brick .bf { font-size: 11px; padding: 6px 4px; color: var(--text2); line-height: 1.3; overflow: hidden; }
+.brick:hover { transform: translateY(-2px); box-shadow: 0 3px 10px rgba(0,0,0,.15); }
+.pyramid.sel .brick { opacity: .38; }
+.pyramid.sel .brick.on { opacity: 1; box-shadow: 0 0 0 3px var(--text); transform: translateY(-2px); }
+.pyramid.sel .brick.dep { opacity: 1; outline: 2px dashed var(--b-bd); outline-offset: 2px; }
+.pyramid.sel .brick.up { opacity: .85; }
+.apex { width: 210px; height: 92px; clip-path: polygon(50% 0, 100% 100%, 0 100%); background: #9a6410; color: #fff; border: none; cursor: pointer; font-weight: 800; font-size: 14px; letter-spacing: .06em; padding-top: 36px; }
+.pyramid.sel .apex { opacity: .45; } .pyramid.sel .apex.on { opacity: 1; }
+.b-mat { --b-bd: #6f747d; --b-bg: #eceef1; } .b-mec { --b-bd: #2e6db4; --b-bg: #e3edf8; } .b-ter { --b-bd: #b8392c; --b-bg: #f8e5e2; }
+.b-ele { --b-bd: #1e8449; --b-bg: #e1f2e8; } .b-ott { --b-bd: #7d3c98; --b-bg: #efe3f4; } .b-esa { --b-bd: #9a6410; --b-bg: #f6ecd9; }
+:root[data-theme="dark"] .brick { --b-bg: var(--bg-card); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .brick { --b-bg: var(--bg-card); } }
+.brick-detail { margin-top: 16px; }
+@media (max-width: 700px) {
+  .pyramid { min-width: 0; gap: 4px; } .prow { gap: 3px; }
+  .brick .bf { display: none; } .brick .bt { font-size: 10px; min-height: 46px; padding: 4px 2px; hyphens: auto; }
+  .apex { width: 120px; height: 60px; font-size: 11px; padding-top: 26px; }
+}
+:root[data-theme="dark"] .mini, :root[data-theme="dark"] .bd-card { --b-bg: var(--bg-card); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .mini, :root:not([data-theme="light"]) .bd-card { --b-bg: var(--bg-card); } }
+.bd-card { overflow: hidden; background: var(--bg-card); border: 1px solid var(--border); border-left: 6px solid var(--b-bd); border-radius: var(--radius); padding: 14px 20px; }
+.bd-card .area { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--text3); }
+.bd-card h2 { margin-top: 2px; }
+.bd-card .ff { position: relative; background: var(--gold-bg); border: 1px solid var(--gold-border); border-radius: 8px; padding: 8px 12px; overflow-x: auto; margin: 10px 0; }
+.bd-card .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 8px 0; font-size: 13px; color: var(--text2); }
+.bd-card .row b { margin-right: 4px; color: var(--text); }
+.mini { border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid var(--b-bd); background: var(--b-bg); color: var(--text); }
+.bd-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.bd-empty { color: var(--text3); font-style: italic; text-align: center; padding: 14px; border: 1px dashed var(--border); border-radius: var(--radius); }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
 </style>
 
@@ -179,6 +217,7 @@ ol.steps li:nth-child(odd) { background: var(--zebra); }
   <div class="brand">Fisica <small>ESAME UNICO · I + II</small></div>
   <nav>
     <button class="navbtn active" id="nav-esercizi" data-view="esercizi">Teoria ed esercizi</button>
+    <button class="navbtn" id="nav-piramide" data-view="piramide">Piramide</button>
     <button class="navbtn" id="nav-formulario" data-view="formulario">Formulario</button>
   </nav>
   <button class="theme-btn" id="theme-btn" type="button">Tema</button>
@@ -211,6 +250,15 @@ ol.steps li:nth-child(odd) { background: var(--zebra); }
         <ol id="side-list"></ol>
       </aside>
     </div>
+  </section>
+
+
+  <section class="view" id="view-piramide">
+    <h1>Piramide dell'esame</h1>
+    <p class="subtitle">Si costruisce dal basso: un mattone regge solo se quelli sotto sono solidi. Tocca un mattone per vedere sotto la formula, la spiegazione e su quali mattoni si appoggia.</p>
+    <div class="legend" id="pir-legend"></div>
+    <div class="pir-scroll"><div class="pyramid" id="pyramid" role="group" aria-label="Piramide degli argomenti"></div></div>
+    <div class="brick-detail" id="brick-detail" aria-live="polite"></div>
   </section>
 
   <section class="view" id="view-formulario">
@@ -381,7 +429,8 @@ document.querySelectorAll('.navbtn').forEach(b => b.addEventListener('click', ()
 function route() {
   const h = location.hash.slice(1);
   let m;
-  if ((m = h.match(/^formulario(?:-(\d+))?$/))) { show('formulario', false); if (m[1]) setTimeout(() => goF(+m[1]), 50); }
+  if ((m = h.match(/^piramide(?:-([a-z0-9]+))?$/))) { show('piramide', false); if (m[1]) selBrick(m[1], false); }
+  else if ((m = h.match(/^formulario(?:-(\d+))?$/))) { show('formulario', false); if (m[1]) setTimeout(() => goF(+m[1]), 50); }
   else if ((m = h.match(/^esercizi-(\d+)$/)) && D.sections[+m[1]]) { topic = +m[1]; show('esercizi', false); renderTopics(); renderEx(); }
   else show('esercizi', false);
 }
@@ -408,8 +457,49 @@ $('#btn-install').addEventListener('click', async () => {
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js').catch(e => console.warn('SW non registrato:', e)));
 }
+
+/* ---------- piramide ---------- */
+const AREA = { mat: 'Matematica', mec: 'Meccanica', ter: 'Termodinamica', ele: 'Elettromagnetismo', ott: 'Ottica e onde EM', esa: "Esercizi d'esame" };
+const LIV = ['Strumenti', 'Concetti base', 'Leggi di conservazione', 'Leggi fondamentali', 'Teoria avanzata', "Argomenti d'esame", 'Esercizi tipo', 'Vertice'];
+const BR = {}; D.pir.forEach((row, r) => row.forEach(b => BR[b.id] = Object.assign({ row: r }, b))); BR[D.apex.id] = Object.assign({ row: 7 }, D.apex);
+const UP = {}; Object.values(BR).forEach(b => b.dep.forEach(d => (UP[d] = UP[d] || []).push(b.id)));
+const plain = f => f;
+function renderPyr() {
+  $('#pir-legend').innerHTML = Object.entries(AREA).map(([k, v]) => `<span class="b-${k}"><i style="background:var(--b-bd)"></i>${v}</span>`).join('');
+  const rows = D.pir.map((row, r) => `<div class="prow" style="width:${100 - r * 9}%">${row.map(b =>
+    `<button class="brick b-${b.a}" data-b="${b.id}" type="button" aria-label="${b.t}"><span class="bt">${b.t}</span><span class="bf">$${b.f.split('\\quad')[0].replace(/,\s*$/, '')}$</span></button>`).join('')}</div>`).join('');
+  $('#pyramid').innerHTML = rows + `<button class="apex" data-b="ex" type="button" aria-label="Esame">ESAME</button>`;
+  math($('#pyramid'));
+  $('#pyramid').querySelectorAll('[data-b]').forEach(el => el.addEventListener('click', () => selBrick(el.dataset.b, true)));
+  $('#brick-detail').innerHTML = '<div class="bd-empty">Tocca un mattone della piramide per vederne qui il dettaglio.</div>';
+}
+function selBrick(id, scroll) {
+  const b = BR[id]; if (!b) return;
+  const pyr = $('#pyramid'); pyr.classList.add('sel');
+  pyr.querySelectorAll('[data-b]').forEach(el => { const k = el.dataset.b; el.classList.toggle('on', k === id); el.classList.toggle('dep', b.dep.includes(k)); el.classList.toggle('up', (UP[id] || []).includes(k)); });
+  const chip = k => `<button class="mini b-${BR[k].a}" data-go-b="${k}" type="button">${BR[k].t}</button>`;
+  const deps = b.dep.length ? b.dep.map(chip).join('') : '<span>è un mattone di base</span>';
+  const ups = (UP[id] || []).length ? UP[id].map(chip).join('') : '<span>—</span>';
+  $('#brick-detail').innerHTML = `<div class="bd-card b-${b.a}">
+    <div class="area">${AREA[b.a]} · livello ${b.row + 1} di 8 · ${LIV[b.row]}</div>
+    <h2>${b.t}</h2>
+    <div class="ff">\\[${b.f}\\]</div>
+    <p>${b.d}</p>
+    <div class="row"><b>Si regge su:</b>${deps}</div>
+    <div class="row"><b>Regge:</b>${ups}</div>
+    <div class="bd-actions">
+      ${b.top !== null && b.top !== undefined ? `<button class="sbtn" data-topic="${b.top}" type="button">Vai a teoria ed esercizi: ${short(D.sections[b.top].name)}</button>` : ''}
+      <button class="sbtn ghost" data-fs="${b.fs}" type="button">Apri formulario §${b.fs}</button>
+    </div></div>`;
+  const det = $('#brick-detail'); math(det);
+  det.querySelectorAll('[data-go-b]').forEach(c => c.addEventListener('click', () => selBrick(c.dataset.goB, false)));
+  const t = det.querySelector('[data-topic]'); if (t) t.addEventListener('click', () => { topic = +t.dataset.topic; store.set('fis_topic_v1', topic); $('#search').value = ''; show('esercizi'); renderTopics(); renderEx(); window.scrollTo({top: 0}); });
+  det.querySelector('[data-fs]').addEventListener('click', () => { show('formulario', false); setTimeout(() => goF(b.fs), 30); });
+  if (scroll) det.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest'});
+  setHash('piramide-' + id);
+}
 if (topic >= D.sections.length) topic = 0;
-renderTopics(); renderEx(); renderF(); route();
+renderTopics(); renderEx(); renderF(); renderPyr(); route();
 window.addEventListener('hashchange', route);
 window.addEventListener('load', () => { math($('#ex-list')); math($('#fbody')); });
 })();
