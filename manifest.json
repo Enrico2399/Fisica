@@ -1,0 +1,16 @@
+{
+  "name": "Fisica — Teoria ed esercizi",
+  "short_name": "Fisica",
+  "description": "Teoria con domande d'esame, esercizi risolti passo passo e formulario per l'esame unico di Fisica I + II. Funziona anche offline.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f7f6f2",
+  "theme_color": "#2e5c8a",
+  "lang": "it",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

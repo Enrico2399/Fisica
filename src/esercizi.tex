@@ -1,0 +1,940 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,margin=1.9cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\hypersetup{colorlinks,linkcolor=blue!50!black}
+\definecolor{blu}{HTML}{1F4E79}
+\definecolor{ros}{HTML}{B03A2E}
+\definecolor{ver}{HTML}{1E7B4A}
+\titleformat{\section}{\Large\bfseries\color{blu}}{\thesection}{0.6em}{}[\vspace{-2pt}{\color{blu}\titlerule[0.8pt]}]
+\titleformat{\subsection}{\large\bfseries\color{blu}}{}{0em}{}
+\titlespacing*{\subsection}{0pt}{10pt}{3pt}
+\setlength{\parindent}{0pt}\setlength{\parskip}{3pt}
+\setlist{topsep=1pt,itemsep=1pt}
+\tcbset{testo/.style={colback=blu!4,colframe=blu!40,boxrule=0.4pt,arc=1pt,left=4pt,right=4pt,top=2pt,bottom=2pt,fontupper=\small}}
+\newcommand{\es}[2]{\subsection*{#1\quad #2}\addcontentsline{toc}{subsection}{#1\ \ #2}}
+\newcommand{\testo}[1]{\begin{tcolorbox}[testo]#1\end{tcolorbox}}
+\newcommand{\idea}[1]{\textbf{\color{ver}Idea:} #1\par}
+\newcommand{\nota}[1]{\begin{tcolorbox}[colback=ros!4,colframe=ros!60,boxrule=0.4pt,arc=1pt,left=4pt,right=4pt,top=2pt,bottom=2pt,fontupper=\small]\textbf{\color{ros}Nota sul libro:} #1\end{tcolorbox}}
+\newcommand{\ris}[1]{\fbox{$\displaystyle #1$}}
+\newcommand{\pas}{\textbf{\color{blu}$\triangleright$}\ }
+\pagestyle{fancy}\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\small Esercizi di Fisica risolti passo passo -- pag. \thepage}
+\begin{document}
+
+\begin{center}
+{\Huge\bfseries\color{blu} Esercizi di Fisica risolti passo passo}\\[4pt]
+{\large Compito d'esempio + tutti gli esercizi della dispensa (lezioni 5--49)}
+\end{center}
+
+\textbf{Come usare questo documento.} Per ogni esercizio: \emph{testo} (riassunto), \emph{idea} (il principio da usare: è la cosa da imparare), \emph{passaggi} numerati, \emph{risultato} incorniciato. Prima prova da solo coprendo tutto sotto il testo, poi leggi solo l'\emph{idea} e riprova, infine confronta i passaggi.
+
+Tutti i risultati sono stati ricalcolati. Dove la soluzione riportata nella dispensa non torna con i dati (refusi, dati mancanti, unità sbagliate) c'è un riquadro rosso \textbf{Nota sul libro}: all'esame conta il procedimento, quindi segui il ragionamento.
+
+Convenzioni: $g=9{,}81$ m/s$^2$, temperature in kelvin dove servono, $k=1/(4\pi\varepsilon_0)=8{,}99\cdot10^9$, $\mu_0=4\pi\cdot10^{-7}$.
+
+\tableofcontents
+\newpage
+
+%==========================================================
+\section{Compito d'esempio}
+
+\es{F1a}{Disco con punto materiale al bordo}
+\testo{Disco omogeneo ($M$, $R$) libero di ruotare in un piano verticale attorno all'asse per il centro. Punto $m$ fissato al bordo, parte fermo in A (orizzontale, alla quota del centro). Trovare: 1) velocità di P nel punto più basso B; 2) periodo delle piccole oscillazioni.}
+\idea{asse fisso e nessun attrito $\Rightarrow$ conservazione dell'energia; per le piccole oscillazioni è un \emph{pendolo fisico}.}
+\begin{enumerate}
+\item Il centro del disco è fermo: l'energia potenziale del disco non cambia. Solo $m$ scende di $R$: $\Delta U=-mgR$.
+\item Energia cinetica di rotazione del sistema: $K=\tfrac12I\omega^2$ con $I=I_{disco}+I_{punto}=\tfrac12MR^2+mR^2$.
+\item Conservazione: $mgR=\tfrac12\left(\tfrac12M+m\right)R^2\omega^2$, e $v=\omega R$:
+\[mgR=\tfrac12\left(\tfrac12M+m\right)v^2\ \Rightarrow\ \ris{v_B=\sqrt{\frac{4mgR}{M+2m}}}\]
+\item Piccole oscillazioni attorno a B: ruotando di $\theta$, il peso di $m$ dà momento $\tau=-mgR\sin\theta\simeq-mgR\theta$.
+\item II eq. cardinale: $I\ddot\theta=-mgR\theta$ $\Rightarrow$ $\omega_0^2=\dfrac{mgR}{(\frac12M+m)R^2}=\dfrac{2mg}{(M+2m)R}$.
+\item \[\ris{T=\frac{2\pi}{\omega_0}=2\pi\sqrt{\frac{(M+2m)R}{2mg}}}\]
+\item Controllo: se $M\to0$, $T\to2\pi\sqrt{R/g}$ (pendolo semplice di lunghezza $R$). \checkmark
+\end{enumerate}
+
+\es{F1b}{Rendimento del ciclo con gas biatomico}
+\testo{Ciclo reversibile: BC adiabatica (compressione), CD isobara (espansione), DE adiabatica (espansione), EB isocora. Gas biatomico. $T_B=40^\circ$C, $T_C=600^\circ$C, $T_D=1800^\circ$C. Trovare $\eta$.}
+\idea{$\eta=1-|Q_{ced}|/Q_{ass}$; individua dove il calore entra ed esce; ricava la temperatura mancante $T_E$ con le leggi delle adiabatiche.}
+\begin{enumerate}
+\item Kelvin: $T_B=313{,}15$, $T_C=873{,}15$, $T_D=2073{,}15$ K. Biatomico: $c_V=\frac52R$, $c_p=\frac72R$, $\gamma=1{,}4$.
+\item Adiabatiche: $Q=0$. CD isobara con $T$ che sale: $Q_{ass}=nc_p(T_D-T_C)$. EB isocora con $T$ che scende: $|Q_{ced}|=nc_V(T_E-T_B)$.
+\item $T_E$: su DE $T_DV_D^{\gamma-1}=T_EV_E^{\gamma-1}$, con $V_E=V_B$ $\Rightarrow$ $T_E=T_D(V_D/V_B)^{\gamma-1}$.
+\item Spezzo $\frac{V_D}{V_B}=\frac{V_D}{V_C}\cdot\frac{V_C}{V_B}$: isobara $\frac{V_D}{V_C}=\frac{T_D}{T_C}$; adiabatica BC $\left(\frac{V_C}{V_B}\right)^{\gamma-1}=\frac{T_B}{T_C}$.
+\item Quindi $T_E=T_D\left(\frac{T_D}{T_C}\right)^{\gamma-1}\frac{T_B}{T_C}=T_B\left(\frac{T_D}{T_C}\right)^\gamma=313{,}15\cdot2{,}374^{1{,}4}=1051$ K.
+\item \[\eta=1-\frac{c_V(T_E-T_B)}{c_p(T_D-T_C)}=1-\frac{1}{1{,}4}\cdot\frac{737{,}6}{1200}\ \Rightarrow\ \ris{\eta\simeq0{,}56}\]
+\item Controllo: $\eta<\eta_{Carnot}=1-T_B/T_D=0{,}85$. \checkmark
+\end{enumerate}
+
+\es{F2a}{Condensatore a disco + corona circolare}
+\testo{Dischi di raggio $r_1=30$ cm a distanza $d_1$ con dielettrico $\varepsilon_r=10$; corone circolari (raggio esterno $r_2=50$ cm) a distanza $d_2=d_1/2$ nel vuoto. $C_{tot}=25$ nF. Trovare $d_1$ e l'energia con $V=100$ V.}
+\idea{le due zone hanno la stessa d.d.p. $\Rightarrow$ due condensatori piani \textbf{in parallelo}.}
+\begin{enumerate}
+\item Aree: $A_1=\pi r_1^2=0{,}283$ m$^2$; \ $A_2=\pi(r_2^2-r_1^2)=0{,}503$ m$^2$.
+\item $C_1=\dfrac{\varepsilon_0\varepsilon_rA_1}{d_1}$, \quad $C_2=\dfrac{\varepsilon_0A_2}{d_1/2}=\dfrac{2\varepsilon_0A_2}{d_1}$.
+\item $C=C_1+C_2=\dfrac{\varepsilon_0}{d_1}(\varepsilon_rA_1+2A_2)$ $\Rightarrow$ $d_1=\dfrac{\varepsilon_0(\varepsilon_rA_1+2A_2)}{C}=\dfrac{8{,}854\cdot10^{-12}\cdot3{,}83}{25\cdot10^{-9}}$
+\item \ris{d_1\simeq1{,}36\ \text{mm}} \quad (se $r_1$ fosse il diametro, come dice il testo, $d_1\simeq0{,}76$ mm: dichiara l'interpretazione).
+\item Energia: $U=\tfrac12CV^2=\tfrac12\cdot25\cdot10^{-9}\cdot10^4=\ris{1{,}25\cdot10^{-4}\ \text{J}}$.
+\end{enumerate}
+
+\es{F2b}{Bobina in campo magnetico esponenziale}
+\testo{200 spire, diametro 10 cm, $R=100\,\Omega$; $\vec B$ forma $30^\circ$ con il piano della bobina; $B=B_0e^{-t/\tau}$, $B_0=5\cdot10^4$, $\tau=3$ s. Quando $i=1$ A? Potenza in quell'istante?}
+\idea{Faraday: $\mathcal E=-d\Phi/dt$, poi Ohm e Joule. Attenzione all'angolo (piano $\ne$ normale).}
+\begin{enumerate}
+\item Angolo con la normale $=60^\circ$ $\Rightarrow$ $\Phi=NBA\cos60^\circ=NBA\sin30^\circ$, \ $A=\pi(0{,}05)^2=7{,}85\cdot10^{-3}$ m$^2$.
+\item $\mathcal E=-\dfrac{d\Phi}{dt}=\dfrac{NA\sin30^\circ\,B_0}{\tau}e^{-t/\tau}=\mathcal E_0e^{-t/\tau}$.
+\item $i=\mathcal E/R=1$ A $\Rightarrow$ $\mathcal E=100$ V $\Rightarrow$ $\ris{t=\tau\ln\frac{\mathcal E_0}{100\ \text{V}}}$.
+\item Con $B_0=5\cdot10^4$ (usato come T): $\mathcal E_0=1{,}31\cdot10^4$ V $\Rightarrow$ $t=3\ln130{,}9\simeq\ris{14{,}6\ \text{s}}$.
+\item Potenza: $P=Ri^2=\ris{100\ \text{W}}$.
+\end{enumerate}
+\nota{il testo dà $B_0$ in A/m (cioè è un campo $H$). Con $B=\mu_0H=0{,}063$ T si avrebbe $\mathcal E_0=0{,}016$ V e la corrente non arriverebbe mai a 1 A. La risposta ``attesa'' è quella con $B_0$ numerico in tesla: segnalalo nel compito.}
+
+%==========================================================
+\section{Cinematica (lezioni 5--6)}
+
+\es{5.1}{Somma di due vettori}
+\testo{$|\vec a|=20$ a $\theta=30^\circ$ dall'asse $x$, $|\vec b|=40$ a $\varphi=60^\circ$ dall'asse $x$. Modulo e direzione di $\vec c=\vec a+\vec b$.}
+\idea{si sommano le componenti.}
+\begin{enumerate}
+\item $c_x=20\cos30^\circ+40\cos60^\circ=17{,}32+20=37{,}32$
+\item $c_y=20\sin30^\circ+40\sin60^\circ=10+34{,}64=44{,}64$
+\item $|\vec c|=\sqrt{c_x^2+c_y^2}=\ris{58{,}2}$, \quad $\alpha=\arctan\frac{c_y}{c_x}=\ris{50^\circ{,}1}$
+\end{enumerate}
+
+\es{5.2}{Centrifuga}
+\testo{Raggio 5 cm, accelerazione centripeta $=1000g$. Giri al minuto?}
+\idea{$a_c=\omega^2r$.}
+\begin{enumerate}
+\item $\omega=\sqrt{1000g/r}=\sqrt{9810/0{,}05}=443$ rad/s.
+\item $n=\omega\cdot\frac{60}{2\pi}=\ris{4230\ \text{giri/min}}$
+\end{enumerate}
+
+\es{5.3}{Proiettile tra due dischi rotanti}
+\testo{Dischi coassiali a 30 m, ruotano a $n$ giri/min; proiettile a 500 km/h parallelo all'asse; i due fori sono sfasati di $90^\circ$. Trovare $n$.}
+\idea{nel tempo di volo tra i dischi, il disco ruota di $90^\circ$ (più eventuali giri interi).}
+\begin{enumerate}
+\item $v=138{,}9$ m/s, \ $t=30/138{,}9=0{,}216$ s.
+\item $\omega t=\frac\pi2+2\pi k$ $\Rightarrow$ $n=\frac{\omega\cdot60}{2\pi}=\left(\tfrac14+k\right)\frac{60}{t}$.
+\item Valore minimo ($k=0$): $\ris{n=69{,}4\ \text{giri/min}}$; in generale $n=69{,}4+277{,}8\,k$.
+\end{enumerate}
+\nota{la dispensa dà 4167 giri/min, che corrisponde a 15 giri \emph{interi} (fori allineati), non a $90^\circ$. Il metodo è quello sopra.}
+
+\es{5.4}{Lancette dell'orologio}
+\testo{Sovrapposte alle 12. Quando: 1) di nuovo sovrapposte; 2) ad angolo retto; 3) opposte?}
+\idea{moto relativo: la lancetta dei minuti ``guadagna'' su quella delle ore con $\omega_{rel}=\omega_m-\omega_h$.}
+\begin{enumerate}
+\item $\omega_m=\frac{2\pi}{3600}$, $\omega_h=\frac{2\pi}{43200}$ $\Rightarrow$ $\omega_{rel}=2\pi\frac{11}{43200}$ rad/s.
+\item Sovrapposte: $\omega_{rel}t=2\pi$ $\Rightarrow$ $t_1=\frac{43200}{11}=\ris{3927\ \text{s}}$
+\item Angolo retto: $\omega_{rel}t=\frac\pi2$ $\Rightarrow$ $t_2=t_1/4=\ris{982\ \text{s}}$; \ opposte: $t_3=t_1/2=\ris{1964\ \text{s}}$
+\end{enumerate}
+
+\es{6.1}{Treno che frena}
+\testo{$v_0=85$ km/h, si ferma in 17 s, moto uniformemente ritardato. Spazio?}
+\begin{enumerate}
+\item $v_0=23{,}6$ m/s; \ $a=-v_0/t=-1{,}39$ m/s$^2$.
+\item $s=\frac{v_0+0}{2}t=\frac{23{,}6}{2}\cdot17=\ris{200\ \text{m}}$
+\end{enumerate}
+
+\es{6.2}{Due treni in partenza}
+\testo{Partono a 5 min di distanza, accelerano uniformemente fino a 120 km/h in 3 km, poi moto uniforme. a) Dove è il primo quando parte il secondo? b) Distanza a regime?}
+\begin{enumerate}
+\item $v=33{,}3$ m/s; $a=\frac{v^2}{2s}=\frac{33{,}3^2}{6000}=0{,}185$ m/s$^2$; tempo di accelerazione $t_a=v/a=180$ s.
+\item a) A $t=300$ s: $3000+33{,}3\cdot(300-180)=\ris{7\ \text{km}}$
+\item b) A regime fanno lo stesso moto sfasato di 300 s: $d=v\cdot300=\ris{10\ \text{km}}$
+\end{enumerate}
+
+%==========================================================
+\section{Dinamica, lavoro ed energia (lezioni 7--12)}
+
+\es{7.1}{Due forze in rapporto 3:4}
+\testo{Risultante 15 N; intensità delle due forze (perpendicolari).}
+\begin{enumerate}
+\item $F_1=3k$, $F_2=4k$, perpendicolari: $R=\sqrt{9k^2+16k^2}=5k=15$ $\Rightarrow$ $k=3$.
+\item \ris{F_1=9\ \text{N},\quad F_2=12\ \text{N}}
+\end{enumerate}
+
+\es{7.2}{Quattro forze a $45^\circ$}
+\testo{Intensità 10, 4, 10, 12 N, ognuna a $45^\circ$ dalla precedente. Risultante?}
+\begin{enumerate}
+\item Direzioni $0^\circ,45^\circ,90^\circ,135^\circ$.
+\item $R_x=10+4\cos45^\circ+0+12\cos135^\circ=4{,}34$; \ $R_y=0+4\sin45^\circ+10+12\sin135^\circ=21{,}31$.
+\item $R=\sqrt{R_x^2+R_y^2}=\ris{21{,}7\ \text{N}}$
+\end{enumerate}
+
+\es{7.3}{Corpo spinto su piano liscio}
+\testo{$m=20$ kg, $F=50$ N. Accelerazione, spazio e velocità dopo 10 s.}
+\begin{enumerate}
+\item $a=F/m=\ris{2{,}5\ \text{m/s}^2}$
+\item $s=\tfrac12at^2=\ris{125\ \text{m}}$, \quad $v=at=\ris{25\ \text{m/s}}$
+\end{enumerate}
+
+\es{7.4}{Forza frenante}
+\testo{$m=1500$ kg, $v=25$ km/h, forza opposta 590 N. Tempo e spazio di arresto.}
+\begin{enumerate}
+\item $v=6{,}94$ m/s, $a=F/m=0{,}393$ m/s$^2$.
+\item $t=v/a=\ris{17{,}7\ \text{s}}$, \quad $x=\frac{v^2}{2a}=\ris{61\ \text{m}}$
+\end{enumerate}
+\nota{la dispensa riporta 1,8 s e 6,18 m: corrisponde a una forza di 5900 N (refuso di un fattore 10).}
+
+\es{8.1}{Potenza di un'automobile}
+\testo{$P=14700$ W a 54 km/h costante. a) Forza resistente; b) potenza a 24 km/h se $F=kv$; c) potenza a 90 km/h.}
+\idea{velocità costante $\Rightarrow$ la spinta uguaglia la resistenza: $P=Fv$.}
+\begin{enumerate}
+\item a) $F=P/v=14700/15=\ris{980\ \text{N}}$
+\item $k=F/v=65{,}3$ N\,s/m, quindi $P=Fv=kv^2$.
+\item b) $v=6{,}67$ m/s: $P=65{,}3\cdot6{,}67^2\simeq\ris{2{,}9\ \text{kW}}$; \ c) $v=25$ m/s: $P=65{,}3\cdot625\simeq\ris{41\ \text{kW}}$
+\end{enumerate}
+
+\es{8.2}{Forza da un grafico di energia potenziale}
+\testo{Grafico $U(x)$: da $(-6,-1)$ a $(-2,-4)$ retta, piatto fino a $(2,-4)$, poi retta fino a $(4,3)$. Forza in vari punti e lavoro per portare il corpo da $x=-7{,}5$ a $x=6$ m.}
+\idea{$F=-\dfrac{dU}{dx}$: la forza è \emph{meno la pendenza}. Lavoro esterno (quasi-statico) $=\Delta U$.}
+\begin{enumerate}
+\item Tratti piatti ($x=0$ e, fuori grafico, $x=-7{,}5$ e $x=6$): $F=0$.
+\item $x=-4$: pendenza $\frac{-4-(-1)}{4}=-0{,}75$ $\Rightarrow$ $F=+0{,}75$ N (spinge verso $+x$).
+\item $x=3$: pendenza $\frac{3-(-4)}{2}=3{,}5$ $\Rightarrow$ $F=-3{,}5$ N.
+\item Lavoro: $W_{est}=U(6)-U(-7{,}5)$; il lavoro della forza conservativa è $-\Delta U$.
+\end{enumerate}
+\nota{la dispensa riporta 0,5 N, $-3$ N e $L=-4$ J, valori che non coincidono esattamente con il grafico stampato. Imparare il metodo: forza = $-$pendenza, lavoro = differenza di $U$.}
+
+\es{9.1}{Sgancio di bombe}
+\testo{Aereo a 400 km/h, quota 6000 m. Angolo tra verticale e linea di mira al bersaglio al momento dello sgancio.}
+\idea{la bomba ha la velocità orizzontale dell'aereo: moto parabolico.}
+\begin{enumerate}
+\item Tempo di caduta $t=\sqrt{2h/g}=35{,}0$ s.
+\item Percorso orizzontale $x=v t=111{,}1\cdot35=3885$ m.
+\item $\tan\varphi=x/h=0{,}648$ $\Rightarrow$ $\ris{\varphi\simeq33^\circ}$ \ (la dispensa: $32^\circ{,}6$, arrotondamenti).
+\end{enumerate}
+
+\es{9.2}{Ombrello sotto la pioggia}
+\testo{Persona a 4 km/h, pioggia verticale a 19 m/s. Inclinazione dell'ombrello.}
+\idea{moto relativo: la pioggia vista dalla persona ha velocità $\vec v_{pioggia}-\vec v_{persona}$.}
+\begin{enumerate}
+\item $v_p=1{,}11$ m/s. \ $\tan\alpha=\frac{1{,}11}{19}=0{,}0585$ $\Rightarrow$ $\ris{\alpha\simeq3^\circ{,}3}$ in avanti.
+\end{enumerate}
+\nota{la dispensa dà $6^\circ{,}4$; con i dati si ottiene $3^\circ{,}3$.}
+
+\es{9.3}{Biglia lanciata in alto}
+\testo{A 9,8 m di quota ha velocità 4,9 m/s. a) Quota max; b) tempo da 9,8 m alla cima; c) $v,a$ a 0,5 s; d) a 2 s. ($g=9{,}8$)}
+\begin{enumerate}
+\item $v_0^2=v^2+2gh=24+192=216$ $\Rightarrow$ $v_0=14{,}7$ m/s.
+\item a) $h_{max}=\frac{v_0^2}{2g}=\ris{11{,}03\ \text{m}}$; \ b) $t=\frac{4{,}9}{9{,}8}=\ris{0{,}5\ \text{s}}$
+\item c) $v=14{,}7-9{,}8\cdot0{,}5=\ris{9{,}8\ \text{m/s}}$; d) $v=14{,}7-19{,}6=\ris{-4{,}9\ \text{m/s}}$ (scende). Sempre $a=-9{,}8$ m/s$^2$.
+\end{enumerate}
+
+\es{9.4}{Palla a metà quota}
+\testo{A metà della quota massima ha $v=9{,}8$ m/s. Quota max, $v$ a 1 s e 3 s, velocità media nel primo mezzo secondo.}
+\begin{enumerate}
+\item $v_0^2=2gh$ e $v_0^2=v^2+2g\frac h2$ $\Rightarrow$ $gh=v^2$ $\Rightarrow$ $\ris{h=9{,}8\ \text{m}}$, $v_0=13{,}86$ m/s.
+\item $v(1)=13{,}86-9{,}8=\ris{4{,}06}$ m/s; \ $v(3)=13{,}86-29{,}4=\ris{-15{,}54}$ m/s.
+\item Media su $[0;0{,}5]$ (MRUA $\Rightarrow$ media delle velocità): $\bar v=v_0-g\cdot0{,}25=\ris{11{,}41\ \text{m/s}}$
+\end{enumerate}
+
+\es{9.5}{Proiettile che colpisce un edificio}
+\testo{Lancio a $60^\circ$; bersaglio a 24 m di distanza e 13,4 m di altezza. $v_0$ e velocità all'impatto.}
+\idea{equazione della traiettoria, poi componenti della velocità.}
+\begin{enumerate}
+\item $y=x\tan\theta-\dfrac{gx^2}{2v_0^2\cos^2\theta}$ $\Rightarrow$ $v_0^2=\dfrac{gx^2}{2\cos^2\theta(x\tan\theta-y)}=\dfrac{9{,}81\cdot576}{0{,}5\cdot(41{,}57-13{,}4)}$ $\Rightarrow$ $\ris{v_0=20{,}0\ \text{m/s}}$
+\item $v_x=v_0\cos60^\circ=10{,}0$; \ $t=x/v_x=2{,}40$ s; \ $v_y=v_0\sin60^\circ-gt=-6{,}2$ m/s.
+\item $v=\sqrt{v_x^2+v_y^2}=\ris{11{,}76\ \text{m/s}}$, inclinata di $\ris{31^\circ36'}$ sotto l'orizzontale.
+\end{enumerate}
+
+\es{9.6}{Sciatore sul fossato}
+\testo{Dalla figura: lo sciatore stacca in A con inclinazione $15^\circ$ verso l'alto; il fossato è largo 3 m e l'altro bordo è 0,5 m più in basso di A. Velocità minima in A.}
+\begin{enumerate}
+\item Origine in A: deve arrivare a $x=3$ m con $y\ge-0{,}5$ m.
+\item $-0{,}5=3\tan15^\circ-\dfrac{g\cdot9}{2v^2\cos^215^\circ}$ $\Rightarrow$ $v^2=\dfrac{88{,}3}{2\cdot0{,}933\cdot1{,}304}=36{,}3$
+\item \ris{v_{min}=6{,}02\ \text{m/s}}
+\end{enumerate}
+
+\es{10.1}{Forza di richiamo elastica}
+\testo{$m=500$ kg a 22 km/h; da P agisce $-kx$, $k=82{,}7\cdot10^3$ N/m. Dove si ferma?}
+\begin{enumerate}
+\item Energia: $\tfrac12mv^2=\tfrac12kd^2$ $\Rightarrow$ $d=v\sqrt{m/k}=6{,}11\sqrt{500/82700}=\ris{0{,}48\ \text{m}}$
+\end{enumerate}
+
+\es{10.2}{Due masse unite da una molla}
+\testo{$m_1=12$ g, $m_2=7$ g, molla $k$. Frequenza di oscillazione.}
+\idea{il sistema isolato oscilla con la \emph{massa ridotta} $\mu=\frac{m_1m_2}{m_1+m_2}$.}
+\begin{enumerate}
+\item $\mu=\frac{12\cdot7}{19}=4{,}42$ g.
+\item $f=\frac1{2\pi}\sqrt{k/\mu}$. Con $k=32{,}6$ N/m: $\ris{f=13{,}7\ \text{Hz}}$.
+\end{enumerate}
+\nota{il testo scrive $k=32{,}6\cdot10^3$ N/m, ma la soluzione 13,67 Hz si ottiene con $k=32{,}6$ N/m (con $10^3$ verrebbero 432 Hz).}
+
+\es{11.1}{Corpo lanciato su piano inclinato}
+\testo{Piano liscio a $30^\circ$; velocità iniziale = metà di quella di caduta libera da 80 cm; arriva giusto in cima. Altezza del piano.}
+\begin{enumerate}
+\item $v_{cad}=\sqrt{2g\cdot0{,}8}$, \ $v_0=\tfrac12v_{cad}$ $\Rightarrow$ $v_0^2=\tfrac14\cdot2g\cdot0{,}8$.
+\item Energia: $h=\frac{v_0^2}{2g}=\frac{0{,}8}{4}=\ris{20\ \text{cm}}$ \ (l'angolo non serve: piano liscio).
+\end{enumerate}
+
+\es{11.2}{Cannoncino, pallina appesa e molla}
+\testo{Molla ($k=5$ N/m) con pallina $m=20$ g a quota $h=5{,}2$ m sopra il cannoncino; proiettili di massa $m$. a) $v$ minima per arrivare a $h$; b) $v$ minima perché, dopo urto elastico, la molla si comprima di $l=20$ cm; c) compressione se agisce anche una resistenza $R=1$ N.}
+\idea{energia per il volo; urto elastico tra masse uguali $\Rightarrow$ scambio delle velocità; poi energia con molla (e lavoro di $R$).}
+\begin{enumerate}
+\item a) $\tfrac12mv^2=mgh$ $\Rightarrow$ $v=\sqrt{2gh}=\ris{10{,}1\ \text{m/s}}$
+\item b) Dopo l'urto la pallina ha la velocità $v'$ del proiettile. Per comprimere di $l$ salendo: $\tfrac12mv'^2=\tfrac12kl^2+mgl$ $\Rightarrow$ $v'^2=13{,}9$ m$^2$/s$^2$.
+\item Il proiettile deve arrivare con $v'$: $v_0^2=v'^2+2gh=115{,}9$ $\Rightarrow$ $\ris{v_0=10{,}8\ \text{m/s}}$
+\item c) $\tfrac12mv'^2=\tfrac12k\Delta z^2+(mg+R)\Delta z$ $\Rightarrow$ $2{,}5\Delta z^2+1{,}196\Delta z-0{,}139=0$ $\Rightarrow$ $\ris{\Delta z\simeq9{,}7\ \text{cm}}$
+\end{enumerate}
+\nota{la dispensa riporta 8 m/s, 8,5 m/s e 8 cm: con $h=5{,}2$ m la velocità minima non può essere 8 m/s. Probabilmente c'è un dato diverso nell'originale; il procedimento resta quello indicato.}
+
+\es{11.3}{Molla e forza costante}
+\testo{$M=100$ g, $k=10^{-3}$ N/m, forza costante $F_0=5\cdot10^{-4}$ N. a) $v$ quando l'allungamento è $a=0{,}5$ m; b) allungamento massimo se poi $F_0$ cessa.}
+\idea{teorema dell'energia cinetica: lavoro di $F_0$ meno energia elastica.}
+\begin{enumerate}
+\item a) $F_0a-\tfrac12ka^2=\tfrac12Mv^2$: $2{,}5\cdot10^{-4}-1{,}25\cdot10^{-4}=0{,}05v^2$ $\Rightarrow$ $\ris{v=5\ \text{cm/s}}$
+\item b) Dopo, solo la molla: $\tfrac12kb^2=\tfrac12ka^2+\tfrac12Mv^2$ $\Rightarrow$ $b^2=0{,}25+0{,}25$ $\Rightarrow$ $\ris{b=0{,}707\ \text{m}}$
+\end{enumerate}
+
+\es{11.4}{Punto che scivola su un blocco mobile}
+\testo{Blocco $M=0{,}2$ kg con profilo a quarto di circonferenza $R=20$ cm, libero su piano liscio; punto $m=50$ g parte fermo dalla cima. a) Velocità finali; b) velocità di P rispetto al blocco; c) posizione del blocco quando P è in $x=l=10$ cm (origine nel CM).}
+\idea{nessuna forza esterna orizzontale $\Rightarrow$ si conserva $p_x$ (e il CM non si muove in $x$); nessun attrito $\Rightarrow$ si conserva l'energia.}
+\begin{enumerate}
+\item $mv=MV$ \ e \ $mgR=\tfrac12mv^2+\tfrac12MV^2$.
+\item $v=\sqrt{\dfrac{2gRM}{M+m}}=\ris{1{,}77\ \text{m/s}}$, \quad $V=\frac mMv=\ris{0{,}44\ \text{m/s}}$ (verso opposto).
+\item b) $v_{rel}=v+V=\ris{2{,}2\ \text{m/s}}$
+\item c) CM fermo: $mx_P+MX=0$ $\Rightarrow$ $X=-\frac mMl=\ris{-2{,}5\ \text{cm}}$
+\end{enumerate}
+\nota{la dispensa scrive $-2{,}5$ m: è $-2{,}5$ cm.}
+
+\es{11.5}{Blocco trascinato da un peso}
+\testo{$M_A=4$ kg sul piano liscio, $M_B=2$ kg appeso tramite fune e carrucola ideali. a) $a$ e $T$; b) massa $m$ da aggiungere a B.}
+\begin{enumerate}
+\item A: $T=M_Aa$; \ B: $M_Bg-T=M_Ba$ $\Rightarrow$ $a=\dfrac{M_Bg}{M_A+M_B}=\ris{3{,}27\ \text{m/s}^2}$, \ $T=M_Aa=\ris{13{,}1\ \text{N}}$
+\item b) Con $m$: $a'=\dfrac{(M_B+m)g}{M_A+M_B+m}$, e $h=\tfrac12a't^2$.
+\end{enumerate}
+\nota{nel testo manca un dato (il tempo o la velocità finale). La soluzione $m=7{,}73$ kg corrisponde a $a'=6{,}95$ m/s$^2$, cioè a una discesa di 5 m in circa 1,2 s. Procedura: ricava $a'$ dal dato mancante, poi $m=\frac{a'(M_A+M_B)-M_Bg}{g-a'}$.}
+
+\es{11.6}{Sfera trattenuta da due cavi}
+\testo{$M=3$ kg; cavo obliquo da O che forma $15^\circ$ con la verticale (in figura $2\theta=30^\circ$) e cavo orizzontale. a) Tensione in A; b) tensione in B dopo il taglio del cavo orizzontale.}
+\begin{enumerate}
+\item a) Equilibrio verticale: $T\cos15^\circ=Mg$ $\Rightarrow$ $\ris{T_A=30{,}4\ \text{N}}$
+\item b) B è il punto di massima oscillazione: $v=0$, quindi nessuna forza centripeta: $T_B=Mg\cos15^\circ=\ris{28{,}4\ \text{N}}$
+\end{enumerate}
+
+\es{11.7}{Pendolo da $60^\circ$}
+\testo{$M=50$ g, $l=1$ m, parte fermo a $60^\circ$. $v$ e $T$ nel punto più basso.}
+\begin{enumerate}
+\item Dislivello $h=l(1-\cos60^\circ)=0{,}5$ m; \ $v=\sqrt{2gh}=\ris{3{,}13\ \text{m/s}}$
+\item $T-Mg=\frac{Mv^2}{l}$ $\Rightarrow$ $T=Mg+\frac{Mv^2}{l}=2Mg=\ris{0{,}98\ \text{N}}$
+\end{enumerate}
+
+\es{12.1}{Auto in curva}
+\testo{Raggio 50 m, $\mu=0{,}25$. Velocità massima.}
+\begin{enumerate}
+\item L'attrito fornisce la forza centripeta: $\frac{mv^2}{r}\le\mu mg$ $\Rightarrow$ $v_{max}=\sqrt{\mu gr}=\ris{11{,}1\ \text{m/s}}$
+\end{enumerate}
+
+\es{12.2}{Blocchetto nel cilindro rotante}
+\testo{Raggio 8 cm, 4 giri/s; il blocchetto scivola quando l'asse è inclinato di $6^\circ$ dalla verticale. $\mu_s$?}
+\idea{la normale è data dalla forza centripeta; l'attrito deve reggere la componente del peso lungo l'asse. Caso peggiore: dove la componente radiale del peso riduce la normale.}
+\begin{enumerate}
+\item $\omega=25{,}1$ rad/s, $\omega^2r=50{,}5$ m/s$^2$.
+\item $N/m=\omega^2r-g\sin6^\circ=49{,}5$; \ componente del peso lungo l'asse: $g\cos6^\circ=9{,}76$.
+\item $\mu_s=\frac{9{,}76}{49{,}5}=\ris{0{,}20}$
+\end{enumerate}
+
+%==========================================================
+\section{Corpo rigido e statica (lezioni 13--17)}
+
+\es{13.1}{Squadra metallica in equilibrio}
+\testo{Due aste omogenee ad angolo retto, lunghe 20 e 40 cm, ruotano attorno al vertice in un piano verticale. Angolo dell'asta lunga con la verticale all'equilibrio.}
+\idea{equilibrio $\Rightarrow$ somma dei momenti del peso rispetto al perno nulla. Masse proporzionali alle lunghezze.}
+\begin{enumerate}
+\item Asta lunga: massa $2m$, baricentro a 20 cm; asta corta: massa $m$, baricentro a 10 cm.
+\item Se la lunga forma $\varphi$ con la verticale, la corta forma $90^\circ-\varphi$ dall'altra parte.
+\item $2m\cdot0{,}2\sin\varphi=m\cdot0{,}1\cos\varphi$ $\Rightarrow$ $\tan\varphi=0{,}25$ $\Rightarrow$ $\ris{\varphi\simeq14^\circ}$
+\end{enumerate}
+\nota{nella dispensa le soluzioni di 13.1 e 13.2 sono scambiate.}
+
+\es{13.2}{Sbarra con disco all'estremo}
+\testo{Sbarra 1,80 m, 20 kg, incernierata a un estremo; all'altro un disco di 90 kg. Forza orizzontale sul centro del disco per tenere la sbarra a $30^\circ$ dalla verticale.}
+\begin{enumerate}
+\item Momenti rispetto al perno: braccio del peso $=$ distanza orizzontale ($\cdot\sin30^\circ$), braccio di $F$ orizzontale $=$ distanza verticale ($\cdot\cos30^\circ$).
+\item $F\cdot1{,}8\cos30^\circ=(20\cdot0{,}9+90\cdot1{,}8)g\sin30^\circ$
+\item $F=\dfrac{180\cdot9{,}81\cdot0{,}5}{1{,}559}=\ris{566\ \text{N}}$ \ ($=57{,}7$ kg-peso, il valore della dispensa).
+\end{enumerate}
+
+\es{14.1}{Cilindro che rotola e cade dal tavolo}
+\testo{Parte da fermo, rotola senza strisciare per $l=1{,}5$ m su un piano inclinato di $10^\circ$, poi cade da $h=1{,}1$ m. Velocità all'arrivo a terra.}
+\idea{rotolamento: $K=\frac12(M+I/R^2)v^2=\frac34Mv^2$; in volo la rotazione non cambia, conta solo il moto del centro.}
+\begin{enumerate}
+\item Dislivello sul tavolo: $h_1=1{,}5\sin10^\circ=0{,}26$ m. \ $Mgh_1=\frac34Mv_1^2$ $\Rightarrow$ $v_1^2=\frac43gh_1=3{,}41$.
+\item Caduta (moto del CM): $v^2=v_1^2+2gh=3{,}41+21{,}58$ $\Rightarrow$ $\ris{v=5{,}0\ \text{m/s}}$
+\end{enumerate}
+
+\es{14.2}{Cinghia su puleggia}
+\testo{Cinghia $l=10$ m, $m=10$ kg, appoggiata al centro su una puleggia $M=20$ kg (raggio piccolo), senza slittamento. Velocità quando lascia la puleggia.}
+\idea{energia: il CM della cinghia scende; ruotano anche la puleggia ($I=\frac12Mr^2$, $\omega=v/r$).}
+\begin{enumerate}
+\item Inizio: due tratti di 5 m appesi, CM a $2{,}5$ m sotto la puleggia. Fine: 10 m appesi da un lato, CM a 5 m. Discesa $\Delta h=2{,}5$ m.
+\item $mg\Delta h=\tfrac12mv^2+\tfrac12\cdot\tfrac12Mr^2\cdot\frac{v^2}{r^2}=\tfrac12(m+\tfrac M2)v^2$
+\item $10\cdot9{,}81\cdot2{,}5=\tfrac12\cdot20\,v^2$ $\Rightarrow$ $\ris{v\simeq5\ \text{m/s}}$
+\end{enumerate}
+
+\es{15.1}{Vagoncino su cuneo mobile}
+\testo{Cuneo 20 g su piano liscio, faccia inclinata a $30^\circ$ lunga 10 cm; vagoncino 5 g parte fermo dalla cima. Tempo di discesa e spostamento del cuneo.}
+\idea{$p_x$ conservata (CM fermo in $x$); per il tempo serve l'accelerazione relativa.}
+\begin{enumerate}
+\item Spostamento orizzontale relativo $=10\cos30^\circ=8{,}66$ cm. CM fermo: $m\,\Delta x_v=M\,\Delta x_c$ con $\Delta x_v+\Delta x_c=8{,}66$.
+\item $\Delta x_c=\frac{m}{m+M}\cdot8{,}66=\ris{1{,}73\ \text{cm}}$
+\item Accelerazione relativa lungo la faccia: $a_{rel}=\dfrac{(M+m)g\sin\theta}{M+m\sin^2\theta}=\dfrac{0{,}025\cdot4{,}905}{0{,}02125}=5{,}77$ m/s$^2$.
+\item $t=\sqrt{2\cdot0{,}1/5{,}77}=\ris{0{,}19\ \text{s}}$
+\end{enumerate}
+
+\es{15.2}{Sfera lanciata che striscia}
+\testo{Sfera $R=6$ cm, $v_0=5$ m/s, $\omega_0=12$ rad/s nel verso di avanzamento, $\mu_d=0{,}8$. Quando cessa lo strisciamento?}
+\idea{l'attrito dinamico frena il CM e aumenta $\omega$ finché $v=\omega R$.}
+\begin{enumerate}
+\item CM: $v=v_0-\mu gt$. \ Rotazione: $I\dot\omega=\mu MgR$ $\Rightarrow$ $\omega=\omega_0+\frac{5\mu g}{2R}t$.
+\item Condizione $v=\omega R$: $v_0-\mu gt=\omega_0R+\frac52\mu gt$ $\Rightarrow$ $t=\dfrac{v_0-\omega_0R}{\frac72\mu g}=\dfrac{5-0{,}72}{27{,}5}=\ris{0{,}16\ \text{s}}$
+\end{enumerate}
+\nota{la dispensa dà 0,18 s, che si ottiene trascurando $\omega_0$ ($t=v_0/(3{,}5\mu g)$).}
+
+\es{16.1}{Scala appoggiata alla parete}
+\testo{Scala 7 m, 50 kg, a $70^\circ$ col suolo, parete liscia, attrito al suolo 0,2; uomo di 60 kg. Fin dove può salire?}
+\idea{statica: forze e momenti. Momenti rispetto alla base (lì agiscono due incognite).}
+\begin{enumerate}
+\item Verticale: $N_s=(50+60)g$. \ Orizzontale: $N_p=f\le\mu N_s=22g$.
+\item Momenti rispetto alla base: $N_pL\sin70^\circ=50g\frac L2\cos70^\circ+60gx\cos70^\circ$.
+\item Al limite $N_p=22g$: $22\cdot7\cdot0{,}940=50\cdot3{,}5\cdot0{,}342+60x\cdot0{,}342$ $\Rightarrow$ $\ris{x\le4{,}1\ \text{m}}$ (lungo la scala).
+\end{enumerate}
+
+\es{16.2}{Asta che cade su piano liscio}
+\testo{Asta $l=80$ cm verticale su piano senza attrito, lasciata cadere. Velocità del baricentro all'impatto.}
+\idea{nessuna forza orizzontale $\Rightarrow$ il CM scende in verticale. All'impatto l'estremo basso ha velocità orizzontale e il CM verticale: il centro istantaneo di rotazione è l'estremo basso $\Rightarrow$ $v_{cm}=\omega l/2$.}
+\begin{enumerate}
+\item $mg\frac l2=\tfrac12mv^2+\tfrac12\frac{ml^2}{12}\omega^2$ con $\omega=\frac{2v}{l}$ $\Rightarrow$ $mg\frac l2=\tfrac12mv^2\left(1+\tfrac13\right)$.
+\item $v=\sqrt{\tfrac34gl}=\ris{2{,}43\ \text{m/s}}$
+\end{enumerate}
+
+\es{17.1}{Bilancia a bracci disuguali}
+\testo{Corpo sul piatto A equilibrato da $p_A$, sul piatto B da $p_B$. Peso vero ed errore usando la media.}
+\begin{enumerate}
+\item $p\,l_A=p_A\,l_B$ e $p\,l_B=p_B\,l_A$. Moltiplicando: $p^2=p_Ap_B$ $\Rightarrow$ $\ris{p=\sqrt{p_Ap_B}}$ (media geometrica).
+\item $\frac{p_A+p_B}{2}=\frac p2\left(\frac{l_A}{l_B}+\frac{l_B}{l_A}\right)$ $\Rightarrow$ $\ris{\frac{\Delta p}{p}=\frac{(l_A-l_B)^2}{2l_Al_B}}$
+\end{enumerate}
+
+\es{17.2}{Punto su asta rotante}
+\testo{Asta OA a $60^\circ$ dall'asse verticale, ruota a $\omega=5$ rad/s; punto $m=100$ g scorre senza attrito. a) Equilibrio; b) energia cinetica; c) zona di equilibrio con $\mu_s=0{,}25$.}
+\idea{nel riferimento rotante: forza centrifuga $m\omega^2\rho$ ($\rho=l\sin60^\circ$) e peso; equilibrio lungo l'asta.}
+\begin{enumerate}
+\item Componenti lungo l'asta (verso l'esterno): $\omega^2l\sin^260^\circ-g\cos60^\circ=0$ $\Rightarrow$ $l=\dfrac{g\cos60^\circ}{\omega^2\sin^260^\circ}=\ris{0{,}26\ \text{m}}$
+\item $K=\tfrac12m(\omega l\sin60^\circ)^2=\ris{0{,}064\ \text{J}}$
+\item Con attrito: normale $N/m=\omega^2l\sin60^\circ\cos60^\circ+g\sin60^\circ$; equilibrio se $|\omega^2l\sin^260^\circ-g\cos60^\circ|\le\mu N/m$.
+\item Estremi: $l_1=\dfrac{g(\cos60^\circ-\mu\sin60^\circ)}{\omega^2\sin60^\circ(\sin60^\circ+\mu\cos60^\circ)}=\ris{13\ \text{cm}}$, \ $l_2=\dfrac{g(\cos60^\circ+\mu\sin60^\circ)}{\omega^2\sin60^\circ(\sin60^\circ-\mu\cos60^\circ)}=\ris{43{,}8\ \text{cm}}$
+\end{enumerate}
+
+%==========================================================
+\section{Fluidi (lezioni 18--21)}
+
+\es{18.1}{Torchio idraulico con leva}
+\testo{Forza 250 N con leva di vantaggio 5; sezioni in rapporto 1:50.}
+\begin{enumerate}
+\item Sullo stantuffo piccolo: $250\cdot5=1250$ N. \ Pascal: $F_2=F_1\frac{A_2}{A_1}=1250\cdot50=\ris{62\,500\ \text{N}}$
+\end{enumerate}
+
+\es{18.2}{Falla in una nave}
+\testo{Foro di diametro 20 cm a 3,2 m di profondità, $\rho=1025$ kg/m$^3$. Forza sul tappo.}
+\begin{enumerate}
+\item Pressione relativa (l'atmosfera agisce anche dall'interno): $p=\rho gh=32\,200$ Pa.
+\item $F=pA=32\,200\cdot\pi(0{,}1)^2=\ris{\approx1010\ \text{N}}$ \ (la dispensa: 1030 N).
+\end{enumerate}
+
+\es{19.1}{Campana pneumatica}
+\testo{Campana alta 2 m, bordo a 7,3 m di profondità, acqua interna 80 cm sopra il bordo. Pressione dell'aria.}
+\begin{enumerate}
+\item Superficie dell'acqua interna a $7{,}3-0{,}8=6{,}5$ m di profondità.
+\item $p=p_0+\rho gh=10^5+1000\cdot9{,}81\cdot6{,}5=\ris{1{,}64\cdot10^5\ \text{Pa}}$
+\end{enumerate}
+
+\es{19.2}{Barometro con aria}
+\testo{Aria sopra il mercurio: spazio 10 cm con colonna 73,2 cm; spingendo il tubo: 5 cm e 71,6 cm. Pressione esterna.}
+\idea{$p_0=$ colonna di Hg $+$ pressione dell'aria; per l'aria vale Boyle.}
+\begin{enumerate}
+\item $p_0=732+p_1=716+p_2$ (in mmHg). Boyle: $p_1\cdot10=p_2\cdot5$ $\Rightarrow$ $p_2=2p_1$.
+\item $732+p_1=716+2p_1$ $\Rightarrow$ $p_1=16$ $\Rightarrow$ $\ris{p_0=748\ \text{mmHg}}$
+\end{enumerate}
+
+\es{20.1}{Ferro e rame immersi}
+\testo{Ferro ($7{,}8$ g/cm$^3$) e rame ($8{,}8$) in equilibrio quando immersi in acqua; fuori dall'acqua bisogna aggiungere 0,502 g dal lato del rame. Pesi.}
+\begin{enumerate}
+\item In acqua: $P_f\left(1-\frac1{7{,}8}\right)=P_r\left(1-\frac1{8{,}8}\right)$. \ In aria: $P_f=P_r+0{,}502$.
+\item $P_f\cdot0{,}8718=(P_f-0{,}502)\cdot0{,}8864$ $\Rightarrow$ $\ris{P_f=30{,}54\ \text{g},\ P_r=30{,}04\ \text{g}}$
+\end{enumerate}
+
+\es{20.2}{Sfera cava di piombo}
+\testo{100 kg di piombo ($11{,}35$ g/cm$^3$), sfera cava che galleggia immersa per metà in mare ($1{,}026$). Raggi.}
+\begin{enumerate}
+\item Archimede: $M=\rho_m\cdot\frac12\cdot\frac43\pi R^3$ $\Rightarrow$ $R^3=\frac{3M}{2\pi\rho_m}$ $\Rightarrow$ $\ris{R=36\ \text{cm}}$
+\item Volume di piombo $V=M/\rho_{Pb}=8{,}81$ dm$^3$; \ $r^3=R^3-\frac{3V}{4\pi}$ $\Rightarrow$ $\ris{r=35{,}4\ \text{cm}}$
+\end{enumerate}
+
+\es{21.1}{Strozzatura in un tubo verticale}
+\testo{Tubo di 15 cm$^2$, portata 0,5 L/min, sbocca in atmosfera; 69 cm sopra c'è una strozzatura di 5 cm$^2$. Pressione nella strozzatura.}
+\begin{enumerate}
+\item $Q=8{,}33\cdot10^{-6}$ m$^3$/s; $v_1=Q/A_1=5{,}6$ mm/s, $v_2=16{,}7$ mm/s (termini cinetici trascurabili).
+\item Bernoulli: $p_2+\rho gz+\tfrac12\rho v_2^2=p_0+\tfrac12\rho v_1^2$ $\Rightarrow$ $p_2\simeq p_0-\rho g\cdot0{,}69=101\,325-6\,770$
+\item $\ris{p_2\simeq94\,560\ \text{Pa}=709\ \text{mmHg}}$
+\end{enumerate}
+
+\es{21.2}{Venturi orizzontale}
+\testo{$d=1{,}91$ cm, portata 15,6 L/min, pressione esterna 1,1 atm; nella strozzatura si vuole $1/10$ della pressione esterna. Sezione?}
+\begin{enumerate}
+\item $Q=2{,}6\cdot10^{-4}$ m$^3$/s; $A_1=2{,}87$ cm$^2$; $v_1=0{,}91$ m/s.
+\item Bernoulli: $\tfrac12\rho v_2^2=\tfrac12\rho v_1^2+(p_1-p_2)$ con $p_1-p_2=0{,}9\cdot1{,}1$ atm $=1{,}003\cdot10^5$ Pa $\Rightarrow$ $v_2=14{,}2$ m/s.
+\item $A_2=Q/v_2=\ris{0{,}18\ \text{cm}^2}$
+\end{enumerate}
+
+%==========================================================
+\section{Termodinamica (lezioni 22--24)}
+
+\es{22.1}{Bombola di ossigeno}
+\testo{1000 L di O$_2$ a $0^\circ$C e 1 atm ($\rho=1{,}43$ g/L) compressi a 30 atm e $20^\circ$C; dopo l'uso 7 atm e $15^\circ$C. Massa usata.}
+\idea{a volume fisso $m\propto p/T$.}
+\begin{enumerate}
+\item Massa iniziale $m_0=1430$ g.
+\item Rimasta: $m=m_0\frac{p_2}{p_1}\frac{T_1}{T_2}=1430\cdot\frac{7}{30}\cdot\frac{293{,}15}{288{,}15}=340$ g.
+\item Usata: $\ris{\Delta m\simeq1{,}09\ \text{kg}}$
+\end{enumerate}
+
+\es{22.2}{Due palloni a temperature diverse}
+\testo{200 e 100 cm$^3$ collegati, aria a $15^\circ$C e 760 mmHg; il grande va a $100^\circ$C. Pressione finale.}
+\idea{moli totali costanti; la pressione è uguale nei due palloni.}
+\begin{enumerate}
+\item $\dfrac{p_0(V_1+V_2)}{T_0}=p\left(\dfrac{V_1}{T_1}+\dfrac{V_2}{T_0}\right)$ con $T_0=288{,}15$, $T_1=373{,}15$ K.
+\item $p=760\cdot\dfrac{300/288{,}15}{200/373{,}15+100/288{,}15}=\ris{896\ \text{mmHg}}$
+\end{enumerate}
+
+\es{23.1}{Celsius$\to$Fahrenheit}
+\begin{enumerate}
+\item $T_F=\frac95\cdot37+32=\ris{98{,}6^\circ\text{F}}$
+\end{enumerate}
+\nota{la dispensa scrive $-40^\circ$F: è la temperatura in cui le due scale coincidono, non la risposta.}
+
+\es{23.2}{Cilindro di ferro che galleggia sul mercurio}
+\testo{Ferro lungo 30 cm a $0^\circ$, $\rho_{Fe}=7{,}8$; a $10^\circ$ quanto è immerso? $\lambda_{Fe}=12\cdot10^{-6}$, $\beta_{Hg}=18\cdot10^{-5}$ ($\rho_{Hg,0}=13{,}6$ g/cm$^3$).}
+\begin{enumerate}
+\item Massa del cilindro costante: $\rho_0A_0L_0$. Spinta: $\rho_{Hg}(10^\circ)\,A\,h$ con $A=A_0(1+2\lambda\Delta T)$ e $\rho_{Hg}(10^\circ)=\frac{13{,}6}{1+\beta\Delta T}$.
+\item $h=\dfrac{7{,}8\cdot30}{13{,}576\cdot1{,}00024}=\ris{17{,}23\ \text{cm}}$
+\end{enumerate}
+
+\es{23.3}{Calorimetro}
+\testo{Vaso di ottone 50 g ($c=0{,}094$) con 500 g d'acqua a $T$ incognita; si immerge ferro 200 g ($c=0{,}114$) a $100^\circ$; $T_{fin}=3{,}2^\circ$. Trovare $T$.}
+\begin{enumerate}
+\item Calore ceduto dal ferro: $200\cdot0{,}114\cdot96{,}8=2207$ cal.
+\item Assorbito da acqua+vaso: $(500+50\cdot0{,}094)(3{,}2-T)=504{,}7(3{,}2-T)$.
+\item $3{,}2-T=4{,}37$ $\Rightarrow$ $T=\ris{-1{,}17^\circ\text{C}}$
+\end{enumerate}
+\nota{il risultato è negativo (acqua sotto zero): i dati del testo sono incoerenti; la dispensa riporta $1{,}18^\circ$ con il segno sbagliato. Il metodo ($\sum mc\Delta T=0$) è quello da sapere.}
+
+\es{23.4}{Proiettile che si ferma}
+\testo{Ferro ($c=0{,}112$ cal/g$^\circ$C), 1 t, a $10^\circ$, $v=22{,}37$ m/s. Calore sviluppato e temperatura finale.}
+\begin{enumerate}
+\item $Q=\tfrac12mv^2=250\,200$ J $=\ris{59{,}8\ \text{kcal}}$
+\item $\Delta T=\frac{Q}{mc}=\frac{59\,800}{10^6\cdot0{,}112}=0{,}53^\circ$ $\Rightarrow$ $\ris{T\simeq10{,}5^\circ\text{C}}$
+\end{enumerate}
+\nota{la dispensa riporta 585 kcal e $15^\circ$: non compatibili con i dati (servirebbe $v\approx70$ m/s).}
+
+\es{24.1}{Macchina con quattro sorgenti}
+\testo{$T$: 300, 80, 25, $-70^\circ$C; $Q$: $+68$, $-14$, $+22$, $-51$ kcal. Reversibile? Rendimento.}
+\idea{Clausius: $\sum Q_i/T_i\le0$ ($=0$ solo se reversibile).}
+\begin{enumerate}
+\item $\sum\frac{Q_i}{T_i}=\frac{68}{573}-\frac{14}{353}+\frac{22}{298}-\frac{51}{203}=-0{,}098<0$ $\Rightarrow$ \textbf{irreversibile}.
+\item $W=\sum Q_i=25$ kcal; \ $Q_{ass}=68+22=90$ kcal; \ $\eta=\frac{25}{90}=\ris{0{,}28}$
+\end{enumerate}
+
+\es{24.2}{Acqua scaldata e prelevata}
+\testo{Massa $m_0$ a $T_0=300$ K; si fornisce calore $q$ costante e si preleva acqua a $P=2$ g/s. Frazione rimasta quando $T=2T_0$.}
+\begin{enumerate}
+\item $m(t)=m_0-Pt$; \ $mc\,dT=q\,dt$ $\Rightarrow$ $dT=\dfrac{q\,dt}{c(m_0-Pt)}$.
+\item Integrando: $T-T_0=\frac{q}{cP}\ln\frac{m_0}{m}$ $\Rightarrow$ $\ris{\frac{m}{m_0}=e^{-cP(T-T_0)/q}}$
+\item Con $q=1$ kcal/s: $e^{-2\cdot300/1000}=\ris{0{,}55}$
+\end{enumerate}
+\nota{il testo dice ``1 caloria al secondo'', ma la soluzione 0,55 richiede 1 kcal/s (con 1 cal/s la frazione sarebbe praticamente zero).}
+
+\es{24.3}{Due macchine in cascata}
+\testo{M tra $T_1$ e $T_2$, M$'$ tra $T_2$ e $T_3$; M$'$ usa il calore $Q_2$ scaricato da M. a) Stesso $\eta$, $Q_1=2\cdot10^6$ J, $L'=0{,}5\cdot10^6$ J. b) Due Carnot con $L=L'$, $T_1-T_2=100$ K: $T_2-T_3$?}
+\begin{enumerate}
+\item a) $L=\eta Q_1$, $Q_2=(1-\eta)Q_1$, $L'=\eta Q_2=\eta(1-\eta)Q_1$ $\Rightarrow$ $\eta(1-\eta)=0{,}25$ $\Rightarrow$ $\ris{\eta=\eta'=0{,}5}$
+\item Complessivo: $\eta''=\frac{L+L'}{Q_1}=\frac{1{,}5}{2}=\ris{0{,}75}$ \ (in generale $1-(1-\eta)(1-\eta')$).
+\item b) Carnot: $L=Q_1\frac{T_1-T_2}{T_1}$, $Q_2=Q_1\frac{T_2}{T_1}$, $L'=Q_2\frac{T_2-T_3}{T_2}=Q_1\frac{T_2-T_3}{T_1}$.
+\item $L=L'$ $\Rightarrow$ $\ris{T_2-T_3=T_1-T_2=100\ \text{K}}$
+\end{enumerate}
+
+%==========================================================
+\section{Onde meccaniche (lezione 25)}
+
+\es{25.1}{Modi propri di una sbarra}
+\begin{enumerate}
+\item Facce libere $\Rightarrow$ ventri agli estremi: $l=n\frac\lambda2$ $\Rightarrow$ $\ris{\nu_n=\frac{nc_s}{2l}}$
+\end{enumerate}
+
+\es{25.2}{Profondità del pozzo}
+\testo{Il rumore si sente dopo 10 s; suono a 340 m/s.}
+\idea{tempo totale = caduta + ritorno del suono.}
+\begin{enumerate}
+\item $\sqrt{2d/g}+\frac{d}{340}=10$. Pongo $u=\sqrt d$: $\frac{u^2}{340}+0{,}4515u-10=0$ $\Rightarrow$ $u=19{,}64$.
+\item $\ris{d\simeq386\ \text{m}}$ \ (la dispensa 393 m, arrotondamenti su $g$).
+\end{enumerate}
+
+\es{25.3}{Proiettile e suono dall'elicottero}
+\testo{Proiettile sparato verso il basso a 300 m/s; arriva a terra insieme al suono. Quota?}
+\begin{enumerate}
+\item $h=300t+\tfrac12gt^2$ e $h=340t$ $\Rightarrow$ $40t=\tfrac12gt^2$ $\Rightarrow$ $t=80/g=8{,}15$ s.
+\item $h=340\cdot8{,}15=\ris{2775\ \text{m}}$
+\end{enumerate}
+
+%==========================================================
+\section{Elettrostatica (lezioni 26--30)}
+
+\es{26.1}{Due palline cariche appese}
+\testo{$m=2$ g, $q=3\cdot10^{-7}$ C, fili $a=30$ cm dallo stesso punto. Angolo $\vartheta$ all'equilibrio.}
+\idea{su ogni pallina: peso, tensione, repulsione di Coulomb. $\tan\vartheta=F_e/mg$, con distanza $2a\sin\vartheta$.}
+\begin{enumerate}
+\item $\tan\vartheta=\dfrac{kq^2}{mg(2a\sin\vartheta)^2}$ $\Rightarrow$ $\tan\vartheta\sin^2\vartheta=\dfrac{kq^2}{4a^2mg}=0{,}1146$.
+\item Si risolve per tentativi (o con l'approssimazione suggerita): $\ris{\vartheta\simeq27^\circ{,}8}$ \ (dispensa $27^\circ30'$).
+\end{enumerate}
+
+\es{27.1}{Goccia in equilibrio nel campo terrestre}
+\testo{$E_0=300$ V/m verso il centro della Terra, goccia con $q=-1{,}6\cdot10^{-19}$ C. Raggio per l'equilibrio.}
+\begin{enumerate}
+\item Carica negativa, campo verso il basso $\Rightarrow$ forza elettrica verso l'alto. $|q|E=mg$ $\Rightarrow$ $m=4{,}89\cdot10^{-18}$ kg.
+\item $\frac43\pi r^3\rho=m$ $\Rightarrow$ $r=\sqrt[3]{\frac{3m}{4\pi\rho}}=\ris{1{,}05\cdot10^{-7}\ \text{m}}$
+\end{enumerate}
+
+\es{28.1}{Due cariche uguali}
+\testo{$q=10^{-8}$ C in A e B, $AB=12$ cm. a) $E$ nel punto medio O; b) $E$ in D sull'asse a 6 cm da O; c) $V_D-V_O$.}
+\idea{$\vec E$ si somma vettorialmente, $V$ come scalare.}
+\begin{enumerate}
+\item a) In O i due campi sono uguali e opposti: $\ris{E_O=0}$
+\item b) $r_{AD}=\sqrt{0{,}06^2+0{,}06^2}=8{,}49$ cm. Le componenti lungo AB si annullano; lungo l'asse: $E=2\frac{kq}{r^2}\cos45^\circ=\ris{1{,}76\cdot10^4\ \text{V/m}}$
+\item c) $V_O=\frac{2kq}{0{,}06}=2997$ V, $V_D=\frac{2kq}{0{,}0849}=2119$ V $\Rightarrow$ $\ris{V_D-V_O\simeq-875\ \text{V}}$
+\end{enumerate}
+
+\es{28.2}{Quattro cariche ai vertici di un quadrato}
+\testo{Lato 20 cm; $q_A=2$, $q_B=4$, $q_C=-4$, $q_D=-2$ ($\times10^{-8}$ C). Forza su $q=3\cdot10^{-6}$ C nel centro O; lavoro da O a H (metà di AD).}
+\begin{enumerate}
+\item Distanza vertice--centro $r=0{,}141$ m, $r^2=0{,}02$.
+\item A e C sono opposti: $+2$ in A spinge verso C, $-4$ in C attira verso C $\Rightarrow$ si sommano: $E_{AC}=k\frac{6\cdot10^{-8}}{0{,}02}$. Idem B e D: $E_{BD}=k\frac{6\cdot10^{-8}}{0{,}02}$. Le diagonali sono perpendicolari.
+\item $E=\sqrt2\cdot k\frac{6\cdot10^{-8}}{0{,}02}=3{,}81\cdot10^4$ V/m $\Rightarrow$ $F=qE=\ris{0{,}114\ \text{N}}$
+\item $V_O=\frac kr\sum q_i=0$; \ in H: A e D a 10 cm ($+2-2=0$), B e C a 22,4 cm ($+4-4=0$) $\Rightarrow$ $V_H=0$ $\Rightarrow$ $\ris{L=0}$
+\end{enumerate}
+\nota{la dispensa dà $F=1{,}14\cdot10^{-5}$ N: corrisponde a $q=3\cdot10^{-10}$ C.}
+
+\es{28.3}{Campo sull'asse di un disco carico}
+\testo{$R=25$ cm, $\sigma=1{,}67\cdot10^{-12}$ C/cm$^2$, punto sull'asse a 70 cm.}
+\begin{enumerate}
+\item $\sigma=1{,}67\cdot10^{-8}$ C/m$^2$. \ $E=\dfrac{\sigma}{2\varepsilon_0}\left(1-\dfrac{z}{\sqrt{z^2+R^2}}\right)=943\cdot(1-0{,}9417)$
+\item $\ris{E\simeq55\ \text{V/m}}$
+\end{enumerate}
+\nota{la dispensa dà 547 V/m: corrisponde a $\sigma$ dieci volte più grande.}
+
+\es{30.1}{Carica della Terra e dell'atmosfera}
+\testo{$E=300$ V/m al livello del mare, 20 V/m a 1400 m, entrambi verso il centro. $\sigma$ al suolo e $\rho$ media nell'atmosfera.}
+\begin{enumerate}
+\item Conduttore: $E=\sigma/\varepsilon_0$, campo entrante $\Rightarrow$ $\sigma=-\varepsilon_0E=-2{,}66\cdot10^{-9}$ C/m$^2=\ris{-0{,}00266\ \text{C/km}^2}$
+\item Gauss su un ``cilindretto'' di base $A$ tra 0 e 1400 m: flusso uscente $=300A-20A=280A$.
+\item $280A=\frac{\rho A\cdot1400}{\varepsilon_0}$ $\Rightarrow$ $\ris{\rho=1{,}77\cdot10^{-12}\ \text{C/m}^3}$
+\end{enumerate}
+
+\es{30.2}{Gusci sferici concentrici}
+\testo{$r_1=10$ cm con $q_1=5\cdot10^{-10}$ C, $r_2=20$ cm con $q_2=3\cdot10^{-10}$ C. $E$ a 5 cm, appena fuori $r_1$, a 15 cm, appena fuori $r_2$, a 25 cm.}
+\idea{Gauss con sfere concentriche: $E=kQ_{int}/r^2$.}
+\begin{enumerate}
+\item $r=5$ cm: $Q_{int}=0$ $\Rightarrow$ $\ris{E=0}$
+\item $r_1^+$: $\frac{kq_1}{0{,}01}=\ris{449}$; \ 15 cm: $\frac{kq_1}{0{,}0225}=\ris{200}$ V/m
+\item $r_2^+$: $\frac{k(q_1+q_2)}{0{,}04}=\ris{180}$; \ 25 cm: $\frac{k(q_1+q_2)}{0{,}0625}=\ris{115}$ V/m
+\end{enumerate}
+
+\es{30.3}{Due conduttori collegati}
+\testo{A: $8\cdot10^{-8}$ C a 1000 V; B: $1{,}2\cdot10^{-7}$ C a 600 V. Si collegano. Verso della carica, potenziale comune, energia persa.}
+\begin{enumerate}
+\item $C_A=Q_A/V_A=80$ pF, \ $C_B=200$ pF. La carica va da A (potenziale più alto) a B.
+\item $V=\dfrac{Q_A+Q_B}{C_A+C_B}=\dfrac{2\cdot10^{-7}}{2{,}8\cdot10^{-10}}=\ris{714\ \text{V}}$
+\item $U_i=\tfrac12(Q_AV_A+Q_BV_B)=7{,}6\cdot10^{-5}$ J; \ $U_f=\tfrac12QV=7{,}14\cdot10^{-5}$ J $\Rightarrow$ $\ris{\Delta U=4{,}6\cdot10^{-6}\ \text{J}}$
+\end{enumerate}
+
+%==========================================================
+\section{Corrente elettrica (lezione 31)}
+
+\es{31.1}{Acqua scaldata dalla corrente}
+\testo{Cubo di 4 cm$^3$ con elettrodi su facce opposte, acqua con $\rho=5\cdot10^3\ \Omega$m, $\Delta V=120$ V. Aumento di temperatura al secondo. (31.3 è identico.)}
+\begin{enumerate}
+\item Lato $L=\sqrt[3]{4}=1{,}587$ cm. \ $R=\rho\frac{L}{L^2}=\frac\rho L=3{,}15\cdot10^5\ \Omega$.
+\item $P=\frac{V^2}{R}=0{,}0457$ W. \ Capacità termica: 4 g $\cdot4{,}186=16{,}7$ J/K.
+\item $\frac{dT}{dt}=\frac{0{,}0457}{16{,}7}=\ris{2{,}7\cdot10^{-3}\ ^\circ\text{C/s}}$
+\end{enumerate}
+\nota{la dispensa dà $1{,}92\cdot10^{-3}$; con i dati si ottiene $2{,}7\cdot10^{-3}$.}
+
+\es{31.2}{Generatore reale e massima potenza}
+\testo{$\mathcal E=62$ V, $r=420\,\Omega$, carico $R$. a) $P$ per $R=1250\,\Omega$; b) $R$ per $P$ massima; c) potenze in quel caso.}
+\begin{enumerate}
+\item $i=\frac{\mathcal E}{R+r}$, \ $P_R=\frac{\mathcal E^2R}{(R+r)^2}$. \ a) $P=\frac{3844\cdot1250}{1670^2}=\ris{1{,}72\ \text{W}}$
+\item b) $\frac{dP}{dR}=0$ $\Rightarrow$ $\ris{R=r}$. Minima ($P\to0$) per $R\to0$ o $R\to\infty$.
+\item c) $P_R=\frac{\mathcal E^2}{4r}=\ris{2{,}29\ \text{W}}$, \ $P_{tot}=\frac{\mathcal E^2}{2r}=\ris{4{,}58\ \text{W}}$ (rendimento 50\%).
+\end{enumerate}
+
+%==========================================================
+\section{Campo magnetico (lezioni 32--34)}
+
+\es{32.1}{Ione idrogeno in campo magnetico}
+\testo{Giro completo in $10^{-7}$ s. $B$? Il periodo dipende dall'energia? Raggio per $E=1000$ eV.}
+\idea{Lorentz = forza centripeta: $qvB=mv^2/r$.}
+\begin{enumerate}
+\item $r=\frac{mv}{qB}$, \ $T=\frac{2\pi r}{v}=\frac{2\pi m}{qB}$: \textbf{non dipende da $v$ né dall'energia}.
+\item $B=\frac{2\pi m}{qT}=\frac{2\pi\cdot1{,}66\cdot10^{-27}}{1{,}6\cdot10^{-19}\cdot10^{-7}}=\ris{0{,}652\ \text{T}}$
+\item $mv=\sqrt{2mE}$ $\Rightarrow$ $r=\frac{\sqrt{2mE}}{qB}=\frac{7{,}29\cdot10^{-22}}{1{,}6\cdot10^{-19}\cdot0{,}652}=\ris{6{,}96\cdot10^{-3}\ \text{m}}$
+\end{enumerate}
+\nota{nel testo $m_H=1{,}66\cdot10^{-17}$ kg è un refuso: è $10^{-27}$.}
+
+\es{32.2}{Dipolo magnetico terrestre}
+\testo{Dipolo al centro della Terra ($r\simeq6{,}73\cdot10^6$ m); alla latitudine magnetica $40^\circ$ la componente orizzontale è $H=19$ A/m. Momento del dipolo e inclinazione.}
+\idea{campo di dipolo: $H_r=\frac{2m\sin\lambda}{4\pi\mu_0r^3}$, $H_{oriz}=\frac{m\cos\lambda}{4\pi\mu_0r^3}$ (con $m$ in Wb\,m).}
+\begin{enumerate}
+\item $m=\dfrac{4\pi\mu_0r^3H}{\cos\lambda}=\ris{1{,}2\cdot10^{17}\ \text{Wb\,m}}$ \ ($=9{,}5\cdot10^{22}$ A\,m$^2$).
+\item Inclinazione del campo sull'orizzontale: $\tan I=\frac{H_r}{H_{oriz}}=2\tan\lambda$ $\Rightarrow$ $I\simeq59^\circ$.
+\end{enumerate}
+\nota{la soluzione stampata è illeggibile ($4\times10$ Wb\,m) e l'angolo $50^\circ12'$ dipende da dati non presenti nel testo. Studia il metodo: componenti del campo di dipolo.}
+
+\es{32.3}{Campo magnetico della Terra in moto sul Sole}
+\testo{Terra con carica 1 C a 30 km/s, distanza $1{,}5\cdot10^{11}$ m. $B$ sul Sole.}
+\begin{enumerate}
+\item Carica in moto (Biot-Savart, $\vec v\perp\vec r$): $B=\frac{\mu_0}{4\pi}\frac{qv}{r^2}=10^{-7}\frac{3\cdot10^4}{2{,}25\cdot10^{22}}=\ris{1{,}33\cdot10^{-25}\ \text{T}}$
+\end{enumerate}
+\nota{la dispensa dà $1{,}33\cdot10^{-19}$: ha usato $r=1{,}5\cdot10^{8}$ m (confusione km/m).}
+
+\es{33.1}{Nastro metallico}
+\testo{Nastro indefinito largo $l=4{,}5$ cm, $i=6$ A; punto nel piano a $s=12$ cm dal bordo.}
+\idea{il nastro è fatto di fili $di=\frac il\,dx$; ognuno dà $dH=\frac{di}{2\pi x}$, tutti nello stesso verso.}
+\begin{enumerate}
+\item $H=\int_s^{s+l}\frac{i}{2\pi l}\frac{dx}{x}=\frac{i}{2\pi l}\ln\frac{s+l}{s}=21{,}2\cdot\ln1{,}375$
+\item $\ris{H=6{,}76\ \text{A/m}}$
+\end{enumerate}
+
+\es{33.2}{Spira quadrata}
+\testo{Lato 35 cm, $i=3$ A. $H$ al centro.}
+\begin{enumerate}
+\item Un lato a distanza $d=a/2$, angoli $\pm45^\circ$: $H_1=\frac{i}{4\pi d}(\sin45^\circ+\sin45^\circ)=\frac{\sqrt2\,i}{2\pi a}$.
+\item Quattro lati: $H=\frac{2\sqrt2\,i}{\pi a}=\ris{7{,}72\ \text{A/m}}$
+\end{enumerate}
+
+\es{34.1}{Coppia su una spira}
+\testo{$R=25$ cm, $H=1{,}5\cdot10^5$ A/m, piano parallelo al campo, $i=5$ A.}
+\begin{enumerate}
+\item $B=\mu_0H=0{,}188$ T; \ $m=i\pi R^2=0{,}98$ A\,m$^2$; piano $\parallel$ campo $\Rightarrow$ $\sin\theta=1$.
+\item $\tau=mB=\ris{0{,}185\ \text{N\,m}}$
+\end{enumerate}
+
+\es{34.2}{Bussola nella bobina}
+\testo{30 spire, $R=15$ cm, nel piano del meridiano; l'ago fa 11 osc/min con corrente, 9 senza. $H_T=16$ A/m. Corrente.}
+\idea{periodo di un ago in campo $H$: $f\propto\sqrt H$. Bobina nel meridiano $\Rightarrow$ il suo campo è perpendicolare a $H_T$.}
+\begin{enumerate}
+\item $\left(\frac{11}{9}\right)^2=\frac{H_{tot}}{H_T}=1{,}494$; \ $H_{tot}=\sqrt{H_T^2+H_b^2}$ $\Rightarrow$ $H_b=H_T\sqrt{1{,}494^2-1}=17{,}8$ A/m.
+\item Bobina: $H_b=\frac{Ni}{2R}$ $\Rightarrow$ $i=\frac{2RH_b}{N}=\ris{0{,}18\ \text{A}}$
+\end{enumerate}
+\nota{la dispensa dà 0,15 A; con il modello indicato si ottiene 0,18 A.}
+
+%==========================================================
+\section{Induzione elettromagnetica (lezioni 36--37)}
+
+\es{36.1}{Lavoro per ruotare un magnete}
+\testo{Due magneti ($m=10^{-8}$ Wb\,m, lunghi 10 cm), allineati con poli opposti affacciati, centri a 20 cm. Lavoro per ruotarne uno di $180^\circ$.}
+\idea{modello a poli: $p=m/l=10^{-7}$ Wb; energia tra poli $U=\frac{p_1p_2}{4\pi\mu_0r}$.}
+\begin{enumerate}
+\item Poli a $-5,+5$ cm e $+15,+25$ cm. Coppie: $+5/+15$ (0,1 m, opposti), $+5/+25$ (0,2, uguali), $-5/+15$ (0,2, uguali), $-5/+25$ (0,3, opposti).
+\item $U=\frac{p^2}{4\pi\mu_0}\left(-\frac1{0{,}1}+\frac1{0{,}2}+\frac1{0{,}2}-\frac1{0{,}3}\right)=-3{,}33\frac{p^2}{4\pi\mu_0}$; ruotando, cambia segno.
+\item $L=\Delta U=6{,}67\frac{p^2}{4\pi\mu_0}=\ris{4{,}2\cdot10^{-9}\ \text{J}}$
+\end{enumerate}
+
+\es{36.2}{Energia magnetica dentro un filo}
+\testo{Filo di rame, $i=50$ A. Energia per unità di lunghezza del campo interno.}
+\begin{enumerate}
+\item Ampère dentro il filo: $B=\frac{\mu_0ir}{2\pi R^2}$; \ $u=\frac{B^2}{2\mu_0}$.
+\item $\frac{U}{l}=\int_0^R\frac{B^2}{2\mu_0}2\pi r\,dr=\frac{\mu_0i^2}{16\pi}=\ris{6{,}25\cdot10^{-5}\ \text{J/m}}$ \ (indipendente da $R$).
+\end{enumerate}
+\nota{la dispensa riporta $6{,}25\cdot10^{-6}$: è $10^{-5}$.}
+
+\es{36.3}{Elica che solleva un peso}
+\testo{Elica (solenoide) con $r=3$ cm, $n=1200$ spire/m, peso $m=20$ g all'estremo libero. Corrente per sollevarlo.}
+\idea{le spire percorse da correnti concordi si attraggono: il solenoide si ``comprime'' con forza $F=\frac{B^2A}{2\mu_0}$ (pressione magnetica).}
+\begin{enumerate}
+\item $B=\mu_0ni$, $A=\pi r^2$: $F=\frac{\mu_0n^2i^2A}{2}=mg$.
+\item $i=\sqrt{\frac{2mg}{\mu_0n^2A}}=\ris{8{,}75\ \text{A}}$
+\end{enumerate}
+
+\es{36.4}{Disco di Barlow}
+\testo{$R=12$ cm, 2000 giri/min, $B=0{,}08$ T parallelo all'asse. f.e.m. centro--bordo.}
+\begin{enumerate}
+\item $\omega=209$ rad/s. Ogni elemento radiale: $d\mathcal E=B\omega r\,dr$.
+\item $\mathcal E=\tfrac12B\omega R^2=\ris{0{,}121\ \text{V}}$
+\end{enumerate}
+
+\es{37.1}{Forza tra due bobine coassiali}
+\testo{Bobina grande: 150 spire, $R=25$ cm, 10 A. Bobina piccola coassiale a $x=35$ cm: 30 spire, $r=1{,}5$ cm, 4 A. Forza e $x$ per forza massima.}
+\idea{la piccola è un dipolo $m=N_2i_2\pi r^2$ nel campo non uniforme della grande: $F=m\frac{dB}{dx}$.}
+\begin{enumerate}
+\item $B(x)=\dfrac{\mu_0N_1i_1R^2}{2(R^2+x^2)^{3/2}}$ $\Rightarrow$ $\left|\dfrac{dB}{dx}\right|=\dfrac{3\mu_0N_1i_1R^2x}{2(R^2+x^2)^{5/2}}=4{,}2\cdot10^{-3}$ T/m.
+\item $m=30\cdot4\cdot\pi(0{,}015)^2=0{,}085$ A\,m$^2$ $\Rightarrow$ $\ris{F=3{,}6\cdot10^{-4}\ \text{N}}$
+\item Massimo di $\frac{x}{(R^2+x^2)^{5/2}}$: derivando, $R^2+x^2=5x^2$ $\Rightarrow$ $\ris{x=R/2}$
+\end{enumerate}
+\nota{la dispensa riporta 0,357 N: il valore corretto è $3{,}57\cdot10^{-4}$ N (fattore 1000).}
+
+\es{37.2}{Treno sui binari}
+\testo{Binari a 1,5 m, treno a 80 km/h, componente verticale $H=45$ A/m.}
+\begin{enumerate}
+\item L'assale è una barra che si muove: $\mathcal E=Bvd$ con $B=\mu_0H=5{,}65\cdot10^{-5}$ T, $v=22{,}2$ m/s.
+\item $\mathcal E=\ris{1{,}9\cdot10^{-3}\ \text{V}}$ \ (dispensa $1{,}67\cdot10^{-3}$).
+\end{enumerate}
+
+\es{37.3}{Carica che fluisce all'apertura}
+\testo{Bobina $L=0{,}2$ H, $r=25\,\Omega$, $I=600$ mA; in parallelo $R=35\,\Omega$. Si apre T: carica attraverso $R$.}
+\idea{all'apertura la corrente dell'induttanza si richiude su $R$ e decade con $\tau=L/(R+r)$.}
+\begin{enumerate}
+\item $i(t)=I\,e^{-t/\tau}$, \ $Q=\int_0^\infty i\,dt=I\tau=\frac{LI}{R+r}$.
+\item $Q=\frac{0{,}2\cdot0{,}6}{60}=\ris{2\cdot10^{-3}\ \text{C}}$
+\end{enumerate}
+
+%==========================================================
+\section{Onde elettromagnetiche e fisica moderna (lezioni 38--41)}
+
+\es{38.1}{Velocità in un mezzo}
+\testo{$\varepsilon_r=3{,}2$, $\mu_r=1{,}05$.}
+\begin{enumerate}
+\item $v=\frac{c}{\sqrt{\varepsilon_r\mu_r}}=\frac{3\cdot10^8}{1{,}833}=\ris{1{,}64\cdot10^8\ \text{m/s}}$, \ $\frac vc=\ris{0{,}546}$
+\end{enumerate}
+
+\es{40.1}{Onda sferica al ricevitore}
+\testo{$E_0=7{,}08\cdot10^{-2}$ V/m in aria. Potenza per unità di superficie; ampiezza ``alla sorgente'' se dista 10 km.}
+\begin{enumerate}
+\item $I=\tfrac12c\varepsilon_0E_0^2=\ris{6{,}7\cdot10^{-6}\ \text{W/m}^2}$ \ (dispensa $6{,}27\cdot10^{-6}$).
+\item Onda sferica: $E\propto1/r$ $\Rightarrow$ $E\,r=$ cost. A 1 m: $E=7{,}08\cdot10^{-2}\cdot10^4=\ris{708\ \text{V/m}}$
+\end{enumerate}
+
+\es{41.1}{Legge di Wien}
+\begin{enumerate}
+\item $\lambda=10^4$ Å $=10^{-4}$ cm. \ $T=\frac{0{,}2891}{10^{-4}}=\ris{2891\ \text{K}}$
+\end{enumerate}
+
+\es{41.2}{Lunghezza d'onda minima dei raggi X}
+\begin{enumerate}
+\item Tutta l'energia $eV$ di un elettrone in un fotone: $\frac{hc}{\lambda}=eV$ $\Rightarrow$ $\lambda=\frac{hc}{eV}=\frac{1{,}24\cdot10^{-6}}{1{,}2\cdot10^5}=\ris{0{,}103\ \text{Å}}$
+\end{enumerate}
+
+%==========================================================
+\section{Dielettrici e magnetismo nella materia (lezioni 42--44)}
+
+\es{42.1}{Condensatore immerso per metà in olio}
+\testo{Lastre quadrate $a=10$ cm, $l=2$ mm, collegato a 100 V; immerso per metà in olio ($\varepsilon_r=8$). Variazione di carica.}
+\idea{metà area con olio, metà in aria $\Rightarrow$ parallelo. $V$ fisso (generatore collegato).}
+\begin{enumerate}
+\item $C_0=\frac{\varepsilon_0a^2}{l}=44{,}3$ pF. \ $C=\frac{\varepsilon_0(a^2/2)}{l}(1+8)=4{,}5\,C_0$.
+\item $\Delta Q=(C-C_0)V=3{,}5\cdot44{,}3\cdot10^{-12}\cdot100=\ris{1{,}55\cdot10^{-8}\ \text{C}}$
+\end{enumerate}
+\nota{la dispensa scrive $10^{-9}$: con i dati è $10^{-8}$.}
+
+\es{42.2}{Condensatore sferico con dielettrico}
+\testo{$r_1=4$ cm, $r_2=5$ cm, $\varepsilon_r=3$, $V=2000$ V. Capacità, energia, densità di energia a metà intercapedine.}
+\begin{enumerate}
+\item $C=4\pi\varepsilon_0\varepsilon_r\frac{r_1r_2}{r_2-r_1}=\ris{66{,}8\ \text{pF}}$
+\item $U=\tfrac12CV^2=\ris{1{,}34\cdot10^{-4}\ \text{J}}$
+\item A $r=4{,}5$ cm: $Q=CV=1{,}34\cdot10^{-7}$ C, $E=\frac{Q}{4\pi\varepsilon_0\varepsilon_rr^2}=1{,}98\cdot10^5$ V/m.
+\item $w=\tfrac12\varepsilon_0\varepsilon_rE^2=\ris{0{,}52\ \text{J/m}^3}$
+\end{enumerate}
+\nota{la dispensa dà $3{,}1\cdot10^4$ J/m$^3$: impossibile, perché l'energia totale divisa per il volume ($2{,}6\cdot10^{-4}$ m$^3$) dà proprio $\approx0{,}5$ J/m$^3$.}
+
+\es{42.3}{Rifrazione delle linee di campo}
+\testo{Da $\varepsilon_1=2{,}4$ a $\varepsilon_2=3{,}5$, angolo $\alpha_1=17^\circ$ (con la normale), $E_1=100$ V/m.}
+\idea{all'interfaccia si conservano $E_t$ e $D_n$.}
+\begin{enumerate}
+\item $\frac{\tan\alpha_2}{\tan\alpha_1}=\frac{\varepsilon_2}{\varepsilon_1}$ $\Rightarrow$ $\tan\alpha_2=0{,}446$ $\Rightarrow$ $\ris{\alpha_2=24^\circ}$
+\item $E_1\sin\alpha_1=E_2\sin\alpha_2$ $\Rightarrow$ $\ris{E_2=71{,}8\ \text{V/m}}$
+\item $\frac{D_2}{D_1}=\frac{\varepsilon_2E_2}{\varepsilon_1E_1}=1{,}047$ $\Rightarrow$ $\ris{+4{,}7\%}$
+\end{enumerate}
+
+\es{43.1}{Rifrazione delle linee di $H$}
+\testo{$\mu_1/\mu_2=0{,}9$; $\alpha_1=45^\circ$; $H_1=10^3$ A/m; $\mu_1=0{,}99$ (relativa).}
+\idea{si conservano $H_t$ e $B_n$ $\Rightarrow$ $\frac{\tan\alpha_2}{\tan\alpha_1}=\frac{\mu_2}{\mu_1}$.}
+\begin{enumerate}
+\item $\tan\alpha_2=\frac{1}{0{,}9}$ $\Rightarrow$ $\alpha_2=48^\circ$.
+\item $H_t=707$ A/m; \ $H_{2n}=\frac{\mu_1}{\mu_2}H_{1n}=636$ A/m $\Rightarrow$ $H_2=951$ A/m.
+\item $B_1=\mu_0\mu_1H_1=1{,}24\cdot10^{-3}$ T; \ $\mu_2=1{,}1$: $B_2=\mu_0\mu_2H_2=1{,}32\cdot10^{-3}$ T.
+\item $w=\tfrac12BH$: $w_1=0{,}62$ J/m$^3$, $w_2=0{,}63$ J/m$^3$.
+\end{enumerate}
+\nota{la dispensa usa il rapporto invertito ($\alpha_2=42^\circ$, $H_2=1{,}06\cdot10^3$). Con le condizioni al contorno corrette ($B_n$ e $H_t$ continui) si ottengono i valori sopra.}
+
+\es{44.1}{Toro di ferro e circuito magnetico}
+\testo{$\mu_r=300$, raggio interno $r=8$ cm, sezione quadrata $a=8$ cm, $N=1000$, $i=0{,}1$ A.}
+\idea{legge di Hopkinson $NI=\Phi\mathcal R$, con $\mathcal R=\frac{l}{\mu A}$; riluttanze in serie si sommano, in parallelo come resistenze in parallelo.}
+\begin{enumerate}
+\item 1) Campo uniforme, $l=2\pi(r+a/2)=0{,}754$ m, $A=a^2$: $\mathcal R=\frac{l}{\mu_0\mu_rA}=\ris{3{,}12\cdot10^5\ \text{H}^{-1}}$
+\item 2) Reale: $H=\frac{NI}{2\pi\rho}$, $\Phi=\int_r^{r+a}\mu\frac{NI}{2\pi\rho}a\,d\rho=\frac{\mu NIa}{2\pi}\ln2$ $\Rightarrow$ $\mathcal R=\frac{2\pi}{\mu_0\mu_ra\ln2}=3{,}01\cdot10^5$; differenza $\approx4\%$.
+\item 3) $\Phi=\frac{NI}{\mathcal R}=\ris{3{,}3\cdot10^{-4}\ \text{Wb}}$
+\item 4) Traferro 1 mm in serie: $+\frac{10^{-3}}{\mu_0a^2}=1{,}24\cdot10^5$ $\Rightarrow$ $\ris{\mathcal R'=4{,}2\cdot10^5\ \text{H}^{-1}}$
+\item 5) A $\rho=10$ cm, Ampère: $H_f(2\pi\rho-l)+H_il=NI$ con $B$ uguale (continuità di $B_n$): $B\left[\frac{0{,}627}{\mu_0\mu_r}+\frac{10^{-3}}{\mu_0}\right]=100$ $\Rightarrow$ $\ris{B=4{,}06\cdot10^{-2}\ \text{T}}$
+\item 6) $H_i=B/\mu_0=3{,}23\cdot10^4$ A/m; \ $H_f=B/(\mu_0\mu_r)=108$ A/m.
+\item 7) $w=\tfrac12BH$: $w_i=660$ J/m$^3$, $w_f=2{,}2$ J/m$^3$ (l'energia sta quasi tutta nel traferro).
+\item 8) Secondo anello ($\mu_r=100$, riluttanza tripla) affiancato: parallelo, $\frac1{\mathcal R}=\frac1{\mathcal R_1}+\frac1{3\mathcal R_1}$ $\Rightarrow$ $\mathcal R=\frac34\mathcal R_1=\ris{2{,}34\cdot10^5\ \text{H}^{-1}}$
+\end{enumerate}
+
+%==========================================================
+\section{Ottica (lezioni 46--49)}
+
+\es{46.1}{Lastra a facce piane parallele}
+\testo{$d=1$ cm, $n=1{,}635$, $i=54^\circ50'$. Spostamento laterale e cammino ottico.}
+\begin{enumerate}
+\item Snell: $\sin r=\frac{\sin i}{n}=0{,}500$ $\Rightarrow$ $r=30^\circ$.
+\item Percorso nel vetro: $d/\cos r$. \ Spostamento: $s=\frac{d\sin(i-r)}{\cos r}=\ris{0{,}485\ \text{cm}}$
+\item Cammino ottico: $L=n\frac{d}{\cos r}=\ris{1{,}89\ \text{cm}}$
+\end{enumerate}
+
+\es{46.2}{Rifrazione e angolo limite (= 47.1)}
+\testo{Da $\varepsilon_r=1$ a $\varepsilon_r=2{,}6$ ($\mu_r=1$), $i=25^\circ$.}
+\begin{enumerate}
+\item $n=\sqrt{\varepsilon_r\mu_r}=1{,}612$. \ $\sin r=\frac{\sin25^\circ}{1{,}612}$ $\Rightarrow$ $\ris{r=15^\circ12'}$
+\item Angolo limite (dal mezzo 2 verso 1): $\sin\theta_L=\frac1n$ $\Rightarrow$ $\ris{\theta_L=38^\circ20'}$
+\end{enumerate}
+
+\es{46.3}{Prisma alla minima deviazione}
+\testo{$n=1{,}534$, $\alpha=60^\circ$; punto di incidenza a 6 cm dallo spigolo.}
+\begin{enumerate}
+\item Minima deviazione: percorso simmetrico, $r=\alpha/2=30^\circ$; $\sin i=n\sin30^\circ=0{,}767$ $\Rightarrow$ $\ris{i=50^\circ5'}$
+\item Il raggio è parallelo alla base: con prisma equilatero il tratto interno forma un triangolo equilatero con lo spigolo $\Rightarrow$ lungo 6 cm.
+\item $L=n\cdot6=\ris{9{,}2\ \text{cm}}$
+\end{enumerate}
+
+\es{47.2}{Esperimento di Young}
+\testo{Sorgenti a 0,3 cm, schermo a 100 cm, frange distanti 0,02 cm. $\lambda$?}
+\begin{enumerate}
+\item $\Delta y=\frac{\lambda L}{d}$ $\Rightarrow$ $\lambda=\frac{0{,}02\cdot0{,}3}{100}=\ris{6\cdot10^{-5}\ \text{cm}}=600$ nm.
+\end{enumerate}
+
+\es{48.1}{Lastrina che sposta le frange}
+\testo{Lastrina ($n=1{,}5$) su un raggio: la frangia centrale si sposta di 4 frange. $\lambda=5\cdot10^{-5}$ cm. Spessore.}
+\begin{enumerate}
+\item Cammino ottico aggiunto: $(n-1)s=4\lambda$ $\Rightarrow$ $s=\frac{4\cdot5\cdot10^{-5}}{0{,}5}=\ris{4\cdot10^{-4}\ \text{cm}}$
+\end{enumerate}
+
+\es{49.1}{Lamina a quarto d'onda}
+\testo{Quarzo, $\lambda=4000$ Å, $n_o=1{,}54$, $n_s=1{,}55$.}
+\begin{enumerate}
+\item Sfasamento di $\lambda/4$: $s(n_s-n_o)=\frac\lambda4$ $\Rightarrow$ $s=\frac{4\cdot10^{-5}}{4\cdot0{,}01}=\ris{10^{-3}\ \text{cm}}$
+\item Luce lineare a $45^\circ$ dall'asse: componenti uguali sfasate di $90^\circ$ $\Rightarrow$ \textbf{polarizzazione circolare}.
+\end{enumerate}
+
+\es{49.2}{Reticolo di diffrazione}
+\testo{$\lambda=7{,}27\cdot10^{-5}$ cm, passo $b=6{,}5\cdot10^{-4}$ cm, lunghezza 6,3 cm. 1) angolo del 2° ordine; 2) potere risolutivo e dispersivo; 3) angoli con incidenza a $6^\circ$.}
+\begin{enumerate}
+\item $\sin\theta=\frac{2\lambda}{b}=0{,}2237$ $\Rightarrow$ $\ris{\theta=12^\circ56'}$
+\item $N=\frac{6{,}3}{b}=9692$; \ $R=mN=\ris{1{,}94\cdot10^4}$; \ $D=\frac{m}{b\cos\theta}=\ris{3{,}16\cdot10^3\ \text{rad/cm}}$
+\item Incidenza obliqua: $b(\sin\theta-\sin i)=\pm m\lambda$; l'ordine zero è a $\theta=i$. \ $\sin\theta=0{,}1045\pm0{,}2237$ $\Rightarrow$ distanze dall'ordine zero $\ris{13^\circ10'\ \text{e}\ 12^\circ51'}$ (dispensa: $13^\circ7'$ e $12^\circ48'$).
+\end{enumerate}
+
+\end{document}

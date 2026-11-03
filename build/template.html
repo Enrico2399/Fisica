@@ -1,0 +1,416 @@
+<title>Fisica Esercizi Risolti</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
+<style>/*KATEX*/</style>
+<style>
+/* Layout: barra in alto + pillole dei macroargomenti; colonna esercizi con indice laterale; formulario con sommario a sinistra.
+   Palette e tipografia riprese dalla webapp di Metodi Matematici (blu accento, oro per i titoli, carta chiara). */
+:root {
+  --bg: #f7f6f2; --bg-card: #ffffff; --border: #e2e0d8;
+  --text: #1a1a18; --text2: #55534c; --text3: #8a877c;
+  --accent: #2e5c8a; --accent2: #1f4569; --accent-solid: #2e5c8a; --accent-solid-hover: #1f4569;
+  --gold: #8a6d1a; --gold-bg: #fbf3dd; --gold-border: #e9d9a8;
+  --green: #1a7f37; --green-bg: #e7f3e9; --green-border: #b9dcc0;
+  --red: #9b2c2c; --red-bg: #fce9e9; --red-border: #eec3c3;
+  --blue-bg: #e8eef7; --blue-border: #c6d6ec; --gray-bg: #f2f1ee; --zebra: #faf9f6;
+  --on-solid: #ffffff; --fig-bg: #ffffff;
+  --radius: 10px;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: Consolas, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #1a1d24; --bg-card: #242833; --border: #3a3f4d; --text: #e8e6e0; --text2: #bcb9b0; --text3: #8f8c82;
+  --accent: #8ab4e8; --accent2: #aecdf2; --accent-solid: #2f699e; --accent-solid-hover: #3a6ea5;
+  --gold: #e0b866; --gold-bg: #3a3120; --gold-border: #5c4d2a; --green: #7bd696; --green-bg: #203524; --green-border: #2d4a35;
+  --red: #f29a9a; --red-bg: #3a2323; --red-border: #5c3535; --blue-bg: #202c3d; --blue-border: #35455c; --gray-bg: #262a33; --zebra: #262a33;
+  --on-solid: #ffffff; --fig-bg: #f4f2ec; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #1a1d24; --bg-card: #242833; --border: #3a3f4d; --text: #e8e6e0; --text2: #bcb9b0; --text3: #8f8c82;
+  --accent: #8ab4e8; --accent2: #aecdf2; --accent-solid: #2f699e; --accent-solid-hover: #3a6ea5;
+  --gold: #e0b866; --gold-bg: #3a3120; --gold-border: #5c4d2a; --green: #7bd696; --green-bg: #203524; --green-border: #2d4a35;
+  --red: #f29a9a; --red-bg: #3a2323; --red-border: #5c3535; --blue-bg: #202c3d; --blue-border: #35455c; --gray-bg: #262a33; --zebra: #262a33;
+  --on-solid: #ffffff; --fig-bg: #f4f2ec; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.6; font-size: 15px;
+  padding-left: max(0px, env(safe-area-inset-left, 0px)); padding-right: max(0px, env(safe-area-inset-right, 0px)); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--bg-card); }
+a { color: var(--accent); }
+button { font-family: var(--sans); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: var(--bg-card); border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px 20px; flex-wrap: wrap;
+  padding-block: 12px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.brand { font-family: var(--serif); font-weight: 700; font-size: 18px; color: var(--text); }
+.brand small { font-family: var(--sans); font-weight: 600; font-size: 12px; color: var(--text3); margin-left: 6px; letter-spacing: .04em; }
+.topbar nav { display: flex; gap: 4px; margin-left: auto; }
+.navbtn { background: none; border: none; padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: var(--text2); cursor: pointer; }
+.navbtn:hover { background: var(--gray-bg); }
+.navbtn.active { color: var(--accent); background: var(--blue-bg); }
+.theme-btn { background: var(--gray-bg); border: 1px solid var(--border); color: var(--text2); border-radius: 999px; padding: 5px 12px; font-size: 12.5px; font-weight: 600; cursor: pointer; }
+
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 22px 80px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1 { font-family: var(--serif); font-size: 28px; margin: 4px 0 4px; text-wrap: balance; }
+.subtitle { color: var(--text3); margin: 0 0 16px; font-size: 14px; }
+h2 { font-family: var(--serif); font-size: 21px; margin: 6px 0 4px; padding-bottom: 6px; border-bottom: 2px solid var(--gold); text-wrap: balance; }
+h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--accent2); margin: 18px 0 6px; }
+
+.view { display: none; } .view.active { display: block; }
+
+/* pillole */
+.topics-row { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 10px; scrollbar-width: thin; }
+.topic-btn { flex: 0 0 auto; white-space: nowrap; background: var(--bg-card); border: 1px solid var(--border); border-radius: 999px;
+  padding: 8px 14px; font-size: 13.5px; font-weight: 600; color: var(--text); cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+.topic-btn:hover { border-color: var(--accent); background: var(--blue-bg); }
+.topic-btn.active { background: var(--accent-solid); color: var(--on-solid); border-color: var(--accent-solid); }
+.topic-btn .cnt { font-size: 11px; font-weight: 700; opacity: .75; font-variant-numeric: tabular-nums; }
+
+.toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 6px 0 14px; }
+.search { flex: 1 1 240px; min-width: 0; border: 1px solid var(--border); background: var(--bg-card); color: var(--text); border-radius: 8px; padding: 8px 12px; font-size: 14px; }
+.tbtn { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; font-size: 13px; font-weight: 600; color: var(--text2); cursor: pointer; }
+.tbtn:hover { border-color: var(--accent); color: var(--accent); }
+
+.layout { display: grid; grid-template-columns: minmax(0,1fr) 250px; gap: 24px; align-items: start; }
+@media (max-width: 860px) { .layout { grid-template-columns: minmax(0,1fr); } .side { order: -1; } }
+.side { position: sticky; top: 76px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; max-height: calc(100vh - 100px); overflow: auto; }
+@media (max-width: 860px) { .side { position: static; max-height: none; } .side ol { columns: 2; } }
+.side-title { font-size: 11.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--text3); font-weight: 700; margin-bottom: 6px; }
+.side ol { list-style: none; margin: 0; padding: 0; font-size: 13px; }
+.side li a { display: flex; gap: 8px; padding: 3px 0; color: var(--text2); text-decoration: none; }
+.side li a:hover { color: var(--accent); }
+.side li .n { font-weight: 700; color: var(--accent2); min-width: 34px; font-variant-numeric: tabular-nums; }
+.side li.done a { color: var(--green); }
+.progress { font-size: 12.5px; color: var(--text2); margin-bottom: 10px; }
+.bar { height: 6px; background: var(--gray-bg); border-radius: 99px; overflow: hidden; margin-top: 4px; }
+.bar i { display: block; height: 100%; background: var(--green); width: 0; }
+
+/* card esercizio */
+.ex { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; margin: 0 0 16px; scroll-margin-top: 80px; }
+.ex.done { border-color: var(--green-border); }
+.ex-head { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.ex-num { font-family: var(--mono); font-weight: 700; font-size: 13px; background: var(--accent-solid); color: var(--on-solid); border-radius: 6px; padding: 2px 8px; }
+.ex-title { font-family: var(--serif); font-size: 18px; font-weight: 600; margin: 0; flex: 1 1 auto; min-width: 0; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0 4px; }
+.chip { font-size: 12px; font-weight: 600; border-radius: 999px; padding: 3px 10px; background: var(--gold-bg); border: 1px solid var(--gold-border); color: var(--gold); cursor: pointer; }
+.chip:hover { border-color: var(--gold); }
+.chip.fig { background: var(--gray-bg); border-color: var(--border); color: var(--text3); cursor: default; }
+.done-lbl { font-size: 12.5px; color: var(--text3); display: inline-flex; gap: 6px; align-items: center; cursor: pointer; user-select: none; }
+.done-lbl input { accent-color: var(--green); }
+
+.box { border-radius: 8px; padding: 10px 14px; margin: 10px 0; font-size: 14.5px; }
+.box .lbl { display: block; font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; margin-bottom: 4px; }
+.box.testo { background: var(--blue-bg); border: 1px solid var(--blue-border); } .box.testo .lbl { color: var(--accent2); }
+.box.idea, .box.gold { background: var(--gold-bg); border: 1px solid var(--gold-border); } .box.idea .lbl, .box.gold .lbl { color: var(--gold); }
+.box.warn { background: var(--red-bg); border: 1px solid var(--red-border); } .box.warn .lbl { color: var(--red); }
+.box.ex, .box.info { background: var(--green-bg); border: 1px solid var(--green-border); } .box.ex .lbl, .box.info .lbl { color: var(--green); }
+.box ul, .box ol { margin: 4px 0 0; padding-left: 20px; }
+
+figure { margin: 10px 0; background: var(--fig-bg); border: 1px solid var(--border); border-radius: 8px; padding: 8px; text-align: center; }
+figure img { max-width: 100%; max-height: 260px; height: auto; }
+figcaption { font-size: 12px; color: #6d6a60; }
+
+.steps-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.steps-head .lbl { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--text3); margin-right: auto; }
+.sbtn { background: var(--accent-solid); color: var(--on-solid); border: none; border-radius: 7px; padding: 6px 12px; font-size: 12.5px; font-weight: 700; cursor: pointer; }
+.sbtn:hover { background: var(--accent-solid-hover); }
+.sbtn.ghost { background: var(--gray-bg); color: var(--text2); border: 1px solid var(--border); }
+.sbtn[disabled] { opacity: .45; cursor: default; }
+ol.steps { counter-reset: s; list-style: none; padding: 0; margin: 8px 0 0; }
+ol.steps li { counter-increment: s; position: relative; padding: 8px 10px 8px 44px; margin: 0 0 4px; border-radius: 6px; overflow-x: auto; }
+ol.steps li::before { content: counter(s); position: absolute; left: 8px; top: 8px; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--bg-card); border: 2px solid var(--accent); color: var(--accent); font-weight: 700; font-size: 12px; display: grid; place-items: center; }
+ol.steps li:nth-child(odd) { background: var(--zebra); }
+.steps-empty { font-size: 13px; color: var(--text3); font-style: italic; margin: 8px 0 0; }
+.katex-display { overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+.empty { color: var(--text3); font-style: italic; padding: 20px 0; }
+
+/* formulario */
+.flayout { display: grid; grid-template-columns: 230px minmax(0,1fr); gap: 26px; align-items: start; }
+@media (max-width: 860px) { .flayout { grid-template-columns: minmax(0,1fr); } }
+.ftoc { position: sticky; top: 76px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; font-size: 13px; max-height: calc(100vh - 100px); overflow: auto; }
+@media (max-width: 860px) { .ftoc { position: static; max-height: none; } }
+.ftoc a { display: flex; gap: 8px; padding: 3px 0; color: var(--text2); text-decoration: none; }
+.ftoc a b { color: var(--accent2); min-width: 22px; font-variant-numeric: tabular-nums; }
+.ftoc a:hover { color: var(--accent); }
+.fsec { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 20px; margin-bottom: 16px; scroll-margin-top: 80px; }
+.fsec.flash { box-shadow: 0 0 0 3px var(--gold-border); }
+.fsec h2 { display: flex; gap: 10px; align-items: baseline; }
+.fsec h2 .sn { font-family: var(--mono); font-size: 14px; background: #d42a2f; color: #fff; border-radius: 6px; padding: 1px 8px; }
+.tw { overflow-x: auto; margin: 8px 0; }
+.tw table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.tw th { background: var(--accent-solid); color: var(--on-solid); text-align: left; padding: 6px 10px; font-weight: 600; }
+.tw td { padding: 6px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tw tr:nth-child(even) td { background: var(--zebra); }
+.fsec p { color: var(--text); margin: 8px 0; }
+.back { position: fixed; right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40;
+  background: var(--accent-solid); color: var(--on-solid); border: none; border-radius: 999px; padding: 10px 16px; font-weight: 700; font-size: 13px; cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,.2); }
+.teo { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 20px; margin: 0 0 20px; }
+.teo-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.teo-head h3 { font-family: var(--serif); font-size: 19px; margin: 0; margin-right: auto; }
+.teo-intro { margin: 8px 0 4px; color: var(--text); }
+.qgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: 14px; margin-top: 12px; }
+.qcard { border: 1px solid var(--border); border-radius: 9px; padding: 12px 14px; background: var(--bg); min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.qcard .qtag { font-family: var(--mono); font-size: 11.5px; font-weight: 700; background: #d42a2f; color: #fff; border-radius: 5px; padding: 1px 7px; margin-right: 6px; }
+.qcard .qq { font-weight: 700; font-size: 14.5px; color: var(--accent2); }
+.qcard .ans { background: var(--gold-bg); border-left: 3px solid var(--gold); padding: 7px 10px; border-radius: 0 6px 6px 0; font-style: italic; font-size: 14px; }
+.qcard .ans b.k { font-style: normal; font-size: 10.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--gold); display: block; }
+.qcard figure { margin: 0; }
+.qcard figure img { max-height: 190px; }
+.qcard ul { margin: 0; padding-left: 18px; font-size: 13.5px; }
+.qcard .life { font-size: 13px; color: var(--text2); background: var(--green-bg); border: 1px solid var(--green-border); border-radius: 6px; padding: 6px 10px; }
+.qcard .life b { color: var(--green); font-size: 10.5px; letter-spacing: .07em; text-transform: uppercase; display: block; }
+.side .teo-link { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+#install-banner { display: flex; align-items: center; gap: 16px; margin: 4px 0 18px; border-radius: var(--radius); padding: 14px 18px; color: var(--on-solid);
+  background: linear-gradient(135deg, var(--accent-solid), var(--accent-solid-hover)); }
+#install-banner img { width: 52px; height: 52px; border-radius: 12px; flex: 0 0 auto; box-shadow: 0 2px 8px rgba(0,0,0,.25); }
+#install-banner .install-text { flex: 1 1 auto; min-width: 0; }
+#install-banner .install-text strong { display: block; font-size: 15px; margin-bottom: 2px; }
+#install-banner .install-text span { font-size: 12.5px; opacity: .92; }
+#install-banner .btn-install-cta { flex: 0 0 auto; background: #fff; color: #2e5c8a; border: none; border-radius: 8px; padding: 9px 16px; font-weight: 700; font-size: 13.5px; cursor: pointer; white-space: nowrap; }
+#install-instructions { font-size: 13px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.35); }
+@media (max-width: 560px) { #install-banner { flex-wrap: wrap; } #install-banner .btn-install-cta { width: 100%; } }
+.pdf-link { display: inline-flex; gap: 8px; align-items: center; font-weight: 700; font-size: 13.5px; background: var(--gold-bg); border: 1px solid var(--gold-border); color: var(--gold); border-radius: 8px; padding: 7px 12px; text-decoration: none; margin-bottom: 14px; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<header class="topbar">
+  <div class="brand">Fisica <small>ESAME UNICO · I + II</small></div>
+  <nav>
+    <button class="navbtn active" id="nav-esercizi" data-view="esercizi">Teoria ed esercizi</button>
+    <button class="navbtn" id="nav-formulario" data-view="formulario">Formulario</button>
+  </nav>
+  <button class="theme-btn" id="theme-btn" type="button">Tema</button>
+</header>
+
+<main class="wrap">
+  <section class="view active" id="view-esercizi">
+    <h1>Teoria ed esercizi risolti</h1>
+    <p class="subtitle">Per ogni macroargomento: teoria in breve con le domande d'esame (frase-risposta, schema, vita reale), poi gli esercizi della dispensa risolti un passo alla volta. Le etichette oro rimandano al formulario d'esame.</p>
+    <div id="install-banner">
+      <img src="icon-192.png" alt="Icona dell'app Fisica">
+      <div class="install-text">
+        <strong id="install-title">Installa l'app sul telefono o sul PC</strong>
+        <span id="install-subtitle">Dopo la prima apertura funziona anche offline e si apre come un'app vera, senza store.</span>
+        <div id="install-instructions" hidden></div>
+      </div>
+      <button class="btn-install-cta" id="btn-install" type="button">Installa l'app</button>
+    </div>
+    <div class="topics-row" id="topics"></div>
+    <div class="toolbar">
+      <input class="search" id="search" type="search" placeholder="Cerca per numero o parola (es. 24.1, condensatore, Bernoulli)">
+      <button class="tbtn" id="show-all" type="button">Mostra tutte le soluzioni</button>
+      <button class="tbtn" id="hide-all" type="button">Nascondi tutte</button>
+    </div>
+    <div class="layout">
+      <div id="ex-list"></div>
+      <aside class="side">
+        <div class="side-title" id="side-title">Indice</div>
+        <div class="progress" id="progress"></div>
+        <ol id="side-list"></ol>
+      </aside>
+    </div>
+  </section>
+
+  <section class="view" id="view-formulario">
+    <h1>Formulario d'esame</h1>
+    <p class="subtitle">Lo stesso formulario del PDF da portare all'esame: i numeri di sezione (§) sono quelli citati negli esercizi.</p>
+    <a class="pdf-link" href="Formulario_esame_Fisica.pdf" target="_blank" rel="noopener">Scarica il formulario in PDF</a>
+    <div class="flayout">
+      <nav class="ftoc" id="ftoc"></nav>
+      <div id="fbody"></div>
+    </div>
+  </section>
+</main>
+<button class="back" id="back" hidden type="button">← Torna all'esercizio</button>
+
+<script id="data" type="application/json">/*DATA*/</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<script>
+(function(){
+const D = JSON.parse(document.getElementById('data').textContent);
+const $ = s => document.querySelector(s);
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+};
+let done = store.get('fis_done_v1', {});
+let topic = store.get('fis_topic_v1', 0);
+let backTarget = null;
+
+/* ---------- tema ---------- */
+function applyTheme(t) { if (t) document.documentElement.setAttribute('data-theme', t); else document.documentElement.removeAttribute('data-theme'); }
+applyTheme(store.get('fis_theme_v1', null));
+function curDark() { const a = document.documentElement.getAttribute('data-theme'); return a ? a === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; }
+function themeLabel() { $('#theme-btn').textContent = curDark() ? 'Tema chiaro' : 'Tema scuro'; }
+$('#theme-btn').addEventListener('click', () => { const t = curDark() ? 'light' : 'dark'; applyTheme(t); store.set('fis_theme_v1', t); themeLabel(); });
+themeLabel();
+
+function math(el) {
+  if (window.renderMathInElement) renderMathInElement(el, { delimiters: [ {left:'\\[', right:'\\]', display:true}, {left:'$', right:'$', display:false} ], throwOnError: false });
+}
+const FNAME = {}; D.formulario.forEach(f => FNAME[f.n] = f.name.replace(/:.*/, ''));
+const short = n => n.replace(/\s*\(lezion[ei].*?\)/, '');
+const lez = n => (n.match(/\((lezion[ei].*?)\)/) || [,''])[1];
+const id = num => 'ex-' + num.replace(/\./g, '-');
+
+/* ---------- pillole ---------- */
+function renderTopics() {
+  $('#topics').innerHTML = D.sections.map((s, i) => {
+    const tot = s.ex.length, ok = s.ex.filter(e => done[e.num]).length;
+    return `<button class="topic-btn ${i === topic ? 'active' : ''}" data-i="${i}" type="button">${short(s.name)} <span class="cnt">${ok}/${tot}</span></button>`;
+  }).join('');
+  $('#topics').querySelectorAll('.topic-btn').forEach(b => b.addEventListener('click', () => { topic = +b.dataset.i; store.set('fis_topic_v1', topic); $('#search').value = ''; renderEx(); renderTopics(); setHash('esercizi-' + topic); window.scrollTo({top: 0}); }));
+}
+
+/* ---------- esercizi ---------- */
+function card(e, sec) {
+  const chips = (e.f || []).map(n => `<button class="chip" data-f="${n}" data-from="${e.num}" type="button">Formulario §${n} · ${FNAME[n] || ''}</button>`).join('');
+  const fig = e.img ? `<figure><img src="${D.img[e.img]}" alt="Figura dell'esercizio ${e.num}"><figcaption>Figura dalla dispensa</figcaption></figure>` : '';
+  const steps = e.passi.map(p => `<li hidden>${p}</li>`).join('');
+  return `<article class="ex ${done[e.num] ? 'done' : ''}" id="${id(e.num)}" data-num="${e.num}">
+    <div class="ex-head"><span class="ex-num">${e.num}</span><h3 class="ex-title">${e.title}</h3>
+      <label class="done-lbl"><input type="checkbox" id="chk-${id(e.num)}" ${done[e.num] ? 'checked' : ''}> fatto</label></div>
+    <div class="chips">${chips}${sec ? `<span class="chip fig">${short(sec)}</span>` : ''}</div>
+    ${fig}
+    ${e.testo ? `<div class="box testo"><span class="lbl">Testo</span>${e.testo}</div>` : ''}
+    ${e.idea ? `<div class="box idea"><span class="lbl">Idea risolutiva</span>${e.idea}</div>` : ''}
+    <div class="steps-head"><span class="lbl">Passaggi · <span class="sc">0</span>/${e.passi.length}</span>
+      <button class="sbtn next" type="button">Passo successivo</button><button class="sbtn ghost all" type="button">Tutti</button><button class="sbtn ghost hide" type="button">Nascondi</button></div>
+    <ol class="steps">${steps}</ol>
+    ${e.nota ? `<div class="box warn" hidden data-nota><span class="lbl">Nota sul libro</span>${e.nota}</div>` : ''}
+  </article>`;
+}
+function update(art) {
+  const lis = [...art.querySelectorAll('ol.steps li')], shown = lis.filter(l => !l.hidden).length;
+  art.querySelector('.sc').textContent = shown;
+  art.querySelector('.next').disabled = shown === lis.length;
+  const n = art.querySelector('[data-nota]'); if (n) n.hidden = shown < lis.length;
+}
+function wire(root) {
+  root.querySelectorAll('article.ex').forEach(art => {
+    const lis = () => [...art.querySelectorAll('ol.steps li')];
+    art.querySelector('.next').addEventListener('click', () => { const h = lis().find(l => l.hidden); if (h) h.hidden = false; update(art); });
+    art.querySelector('.all').addEventListener('click', () => { lis().forEach(l => l.hidden = false); update(art); });
+    art.querySelector('.hide').addEventListener('click', () => { lis().forEach(l => l.hidden = true); update(art); });
+    art.querySelector('input[type=checkbox]').addEventListener('change', ev => {
+      const num = art.dataset.num; if (ev.target.checked) done[num] = 1; else delete done[num];
+      store.set('fis_done_v1', done); art.classList.toggle('done', ev.target.checked); renderTopics(); renderSide();
+    });
+    art.querySelectorAll('.chip[data-f]').forEach(c => c.addEventListener('click', () => openF(+c.dataset.f, c.dataset.from)));
+    update(art);
+  });
+}
+
+/* ---------- teoria ---------- */
+let teoOpen = store.get('fis_teo_open_v1', true);
+function teoHTML(i) {
+  const t = D.teo[String(i)]; if (!t) return '';
+  const cards = t.q.map(q => `<div class="qcard">
+    <div class="qq">${q.tag ? `<span class="qtag">${q.tag}</span>` : ''}${q.q}</div>
+    <div class="ans"><b class="k">Risposta in una frase</b>${q.r}</div>
+    ${q.fig && D.teoimg[q.fig] ? `<figure><img src="${D.teoimg[q.fig]}" alt="Schema: ${q.q.replace(/"/g, '')}"></figure>` : ''}
+    <ul>${q.c.map(c => `<li>${c}</li>`).join('')}</ul>
+    <div class="life"><b>Nella vita reale</b>${q.v.join(' · ')}</div>
+  </div>`).join('');
+  return `<section class="teo" id="teo"><div class="teo-head"><h3>Teoria e domande</h3>
+    <button class="sbtn ghost" id="teo-toggle" type="button">${teoOpen ? 'Nascondi teoria' : 'Mostra teoria'}</button></div>
+    <div id="teo-body" ${teoOpen ? '' : 'hidden'}><p class="teo-intro">${t.intro}</p><div class="qgrid">${cards}</div></div></section>`;
+}
+function wireTeo(root) {
+  const b = root.querySelector('#teo-toggle'); if (!b) return;
+  b.addEventListener('click', () => { teoOpen = !teoOpen; store.set('fis_teo_open_v1', teoOpen); root.querySelector('#teo-body').hidden = !teoOpen; b.textContent = teoOpen ? 'Nascondi teoria' : 'Mostra teoria'; });
+}
+let current = [];
+function renderEx() {
+  const q = $('#search').value.trim().toLowerCase();
+  let list;
+  if (q) {
+    list = [];
+    D.sections.forEach(s => s.ex.forEach(e => { const t = (e.num + ' ' + e.title + ' ' + (e.testo || '') + ' ' + (e.idea || '')).toLowerCase(); if (t.includes(q)) list.push([e, s.name]); }));
+  } else list = D.sections[topic].ex.map(e => [e, null]);
+  current = list.map(x => x[0]);
+  const el = $('#ex-list');
+  el.innerHTML = (q ? `<h2>Risultati per “${q.replace(/[<>&]/g, '')}” · ${list.length}</h2>` : `<h2>${short(D.sections[topic].name)}</h2><p class="subtitle">${lez(D.sections[topic].name)}</p>` + teoHTML(topic))
+    + (list.length ? list.map(([e, s]) => card(e, s)).join('') : '<p class="empty">Nessun esercizio trovato. Prova con un numero (es. 30.2) o una parola del testo.</p>');
+  math(el); wire(el); wireTeo(el); renderSide();
+}
+function renderSide() {
+  const q = $('#search').value.trim();
+  $('#side-title').textContent = q ? 'Risultati' : short(D.sections[topic].name);
+  const ok = current.filter(e => done[e.num]).length;
+  $('#progress').innerHTML = `${ok} di ${current.length} fatti<div class="bar"><i style="width:${current.length ? 100 * ok / current.length : 0}%"></i></div>`;
+  $('#side-list').innerHTML = (!q && D.teo[String(topic)] ? `<li><a href="#" data-go="teo"><span class="n">★</span><span>Teoria e domande</span></a></li>` : '') + current.map(e => `<li class="${done[e.num] ? 'done' : ''}"><a href="#" data-go="${id(e.num)}"><span class="n">${e.num}</span><span>${e.title}</span></a></li>`).join('');
+  math($('#side-list'));
+  $('#side-list').querySelectorAll('a').forEach(a => a.addEventListener('click', ev => { ev.preventDefault(); document.getElementById(a.dataset.go).scrollIntoView({behavior: 'smooth', block: 'start'}); }));
+}
+$('#search').addEventListener('input', () => { renderEx(); });
+$('#show-all').addEventListener('click', () => document.querySelectorAll('#ex-list article.ex').forEach(a => { a.querySelectorAll('ol.steps li').forEach(l => l.hidden = false); update(a); }));
+$('#hide-all').addEventListener('click', () => document.querySelectorAll('#ex-list article.ex').forEach(a => { a.querySelectorAll('ol.steps li').forEach(l => l.hidden = true); update(a); }));
+
+/* ---------- formulario ---------- */
+function renderF() {
+  $('#ftoc').innerHTML = '<div class="side-title">Sezioni</div>' + D.formulario.map(f => `<a href="#" data-f="${f.n}"><b>§${f.n}</b><span>${f.name}</span></a>`).join('');
+  $('#fbody').innerHTML = D.formulario.map(f => `<section class="fsec" id="f-${f.n}"><h2><span class="sn">§${f.n}</span>${f.name}</h2>${f.html}</section>`).join('');
+  math($('#fbody')); math($('#ftoc'));
+  $('#ftoc').querySelectorAll('a').forEach(a => a.addEventListener('click', ev => { ev.preventDefault(); goF(+a.dataset.f); }));
+}
+function goF(n) {
+  const s = document.getElementById('f-' + n); if (!s) return;
+  s.scrollIntoView({behavior: 'smooth', block: 'start'});
+  s.classList.add('flash'); setTimeout(() => s.classList.remove('flash'), 1600);
+  setHash('formulario-' + n);
+}
+function openF(n, from) { backTarget = from || null; show('formulario', false); $('#back').hidden = !backTarget; setTimeout(() => goF(n), 30); }
+$('#back').addEventListener('click', () => {
+  const t = backTarget; backTarget = null; $('#back').hidden = true; show('esercizi');
+  if (t) setTimeout(() => { const el = document.getElementById(id(t)); if (el) el.scrollIntoView({block: 'start'}); }, 30);
+});
+
+/* ---------- viste e hash ---------- */
+function setHash(h) { try { history.replaceState(null, '', '#' + h); } catch (e) {} }
+function show(v, hash = true) {
+  document.querySelectorAll('.view').forEach(x => x.classList.toggle('active', x.id === 'view-' + v));
+  document.querySelectorAll('.navbtn').forEach(b => b.classList.toggle('active', b.dataset.view === v));
+  if (v === 'esercizi') $('#back').hidden = true;
+  if (hash) setHash(v === 'esercizi' ? 'esercizi-' + topic : v);
+}
+document.querySelectorAll('.navbtn').forEach(b => b.addEventListener('click', () => { show(b.dataset.view); window.scrollTo({top: 0}); }));
+function route() {
+  const h = location.hash.slice(1);
+  let m;
+  if ((m = h.match(/^formulario(?:-(\d+))?$/))) { show('formulario', false); if (m[1]) setTimeout(() => goF(+m[1]), 50); }
+  else if ((m = h.match(/^esercizi-(\d+)$/)) && D.sections[+m[1]]) { topic = +m[1]; show('esercizi', false); renderTopics(); renderEx(); }
+  else show('esercizi', false);
+}
+
+/* ---------- installazione PWA (come la webapp di Metodi Matematici) ---------- */
+let deferredInstallPrompt = null;
+const isStandalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+const isIOS = () => /iphone|ipad|ipod/i.test(navigator.userAgent);
+function showInstalled() {
+  $('#install-title').textContent = 'App già installata';
+  $('#install-subtitle').textContent = 'La stai usando come app: la trovi nella schermata Home o nel menu Start.';
+  $('#btn-install').hidden = true; $('#install-instructions').hidden = true;
+}
+function instructions(html) { const b = $('#install-instructions'); b.innerHTML = html; b.hidden = !b.hidden; }
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredInstallPrompt = e; });
+window.addEventListener('appinstalled', () => { deferredInstallPrompt = null; showInstalled(); });
+if (isStandalone()) showInstalled();
+$('#btn-install').addEventListener('click', async () => {
+  if (location.protocol === 'file:') { instructions("Per installarla apri la pagina pubblicata su GitHub Pages: da file locale il browser non permette l'installazione."); return; }
+  if (deferredInstallPrompt) { deferredInstallPrompt.prompt(); const c = await deferredInstallPrompt.userChoice; if (c.outcome === 'accepted') deferredInstallPrompt = null; return; }
+  if (isIOS()) { instructions("Su iPhone/iPad: apri la pagina in <b>Safari</b>, tocca <b>Condividi</b> (il quadrato con la freccia) e scegli <b>Aggiungi a Home</b>."); return; }
+  instructions("Apri il menu del browser (⋮ in alto a destra su Chrome/Edge) e scegli <b>Installa app</b> o <b>Aggiungi a schermata Home</b>. Su PC c'è anche l'icona di installazione nella barra dell'indirizzo.");
+});
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js').catch(e => console.warn('SW non registrato:', e)));
+}
+if (topic >= D.sections.length) topic = 0;
+renderTopics(); renderEx(); renderF(); route();
+window.addEventListener('hashchange', route);
+window.addEventListener('load', () => { math($('#ex-list')); math($('#fbody')); });
+})();
+</script>
