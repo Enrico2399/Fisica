@@ -114,43 +114,50 @@ for sm in re.finditer(r'\\section\{(.*?)\}\n(.*?)(?=\\section\{|\Z)',src,re.S):
 # ---------------- FORMULARIO
 fs=open(f'{ROOT}/src/formulario_esame.tex',encoding='utf-8').read()
 fs=fs[fs.index('\\section{Come'):fs.index('\\end{multicols*}')]
+import sys as _s0, pathlib as _pl0; _s0.path.insert(0,str(_pl0.Path(__file__).resolve().parent))
+from formulario_extra import X as FX
 fsecs=[];n=0
 def conv_block(b):
-    html=[]
-    # tokens: tab, environments, subsection, text
+    """Divide il contenuto di una sezione in tre aree: passi (scalette + esempi), regole (testo e riquadri), tabelle."""
+    out={'passi':[], 'regole':[], 'tabelle':[]}
     pat=re.compile(r'\\begin\{tab\}\{([^\n]*?)\}\n(.*?)\\end\{tab\}|\\begin\{(oro|svolto|bx)\}((?:\{[^{}]*\})*)\n?(.*?)\\end\{\3\}|\\begin\{(esame|errori)\}(.*?)\\end\{\6\}|\\subsection\{(.*?)\}',re.S)
-    pos=0
+    pos=0; pend=''
     for m in pat.finditer(b):
         pre=b[pos:m.start()].strip()
-        if pre: html.append('<p>'+text2html(pre)+'</p>')
+        if pre: out['regole'].append('<p>'+text2html(pre)+'</p>')
         pos=m.end()
         if m.group(2) is not None:
             rows=[r.strip() for r in re.split(r'\\\\\s*(?:\\hline)?',m.group(2)) if r.strip() and r.strip()!='\\hline']
-            t=['<div class="tw"><table>']
+            t=['<div class="tw"><table>']; first=None
             for r in rows:
                 hd=r.startswith('\\hd')
                 r=r.replace('\\hd','').strip()
                 cells=[c.strip() for c in re.split(r'(?<!\\)&',r)]
+                if first is None: first=cells[0]
                 tag='th' if hd else 'td'
                 t.append('<tr>'+''.join(f'<{tag}>{text2html(c)}</{tag}>' for c in cells)+'</tr>')
-            t.append('</table></div>'); html.append(''.join(t))
+            t.append('</table></div>')
+            area='passi' if first=='N' else 'tabelle'
+            out[area].append(pend+''.join(t)); pend=''
         elif m.group(3):
             kind=m.group(3); a=re.findall(r'\{([^{}]*)\}',m.group(4)); title=a[-1] if a else ''
             body=m.group(5)
             cls={'oro':'gold','svolto':'ex','bx':'info'}[kind]
             if kind=='svolto': title='esempio svolto — '+title
             inner=('<ol>'+''.join('<li>'+x+'</li>' for x in items(body))+'</ol>') if '\\item' in body and 'enumerate' in body else (('<ul>'+''.join('<li>'+x+'</li>' for x in items(body))+'</ul>') if '\\item' in body else text2html(body))
-            html.append(f'<div class="box {cls}"><span class="lbl">{text2html(title)}</span>{inner}</div>')
+            h=f'<div class="box {cls}"><span class="lbl">{text2html(title)}</span>{inner}</div>'
+            out['passi' if kind=='svolto' else 'regole'].append(h)
         elif m.group(6):
             kind=m.group(6); cls={'esame':'gold','errori':'warn'}[kind]; title={'esame':"nell'esame",'errori':'errori da evitare'}[kind]
-            html.append(f'<div class="box {cls}"><span class="lbl">{title}</span>{text2html(m.group(7))}</div>')
+            out['regole'].append(f'<div class="box {cls}"><span class="lbl">{title}</span>{text2html(m.group(7))}</div>')
         elif m.group(8):
-            html.append('<h4>'+text2html(m.group(8))+'</h4>')
+            pend='<h4>'+text2html(m.group(8))+'</h4>'
     rest=b[pos:].strip()
-    if rest: html.append('<p>'+text2html(rest)+'</p>')
-    return ''.join(html)
+    if rest: out['regole'].append('<p>'+text2html(rest)+'</p>')
+    return {k:''.join(v) for k,v in out.items()}
 for sm in re.finditer(r'\\section\{(.*?)\}\n(.*?)(?=\\section\{|\Z)',fs,re.S):
-    fsecs.append({'n':n,'name':text2html(sm.group(1)),'html':conv_block(sm.group(2))}); n+=1
+    blk=conv_block(sm.group(2)); ex=FX.get(n,{})
+    fsecs.append(dict(n=n,name=text2html(sm.group(1)),frase=ex.get('frase',[]),metodo=ex.get('metodo',[]),figs=ex.get('figs',[]),**blk)); n+=1
 imgs={}
 for f in os.listdir(f'{ROOT}/img'):
     if f.endswith('.png'):

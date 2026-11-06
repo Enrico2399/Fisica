@@ -1,0 +1,609 @@
+\documentclass[9pt]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo}
+\usepackage[a4paper,left=1.1cm,right=1.1cm,top=1.2cm,bottom=1.3cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[table]{xcolor}
+\usepackage{multicol,tabularx,array}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec,enumitem,fancyhdr}
+\renewcommand{\sfdefault}{phv}
+\definecolor{rosso}{HTML}{D42A2F}
+\definecolor{verde}{HTML}{DCEFD7}
+\definecolor{verdeb}{HTML}{6AA84F}
+\definecolor{giallo}{HTML}{FFF6D5}
+\definecolor{gialloc}{HTML}{F5D76E}
+\definecolor{azz}{HTML}{E6EEF8}
+\definecolor{azzc}{HTML}{3D6FB6}
+\definecolor{rosa}{HTML}{FBE9EA}
+% sezioni
+\newcommand{\secbox}[1]{\colorbox{rosso}{\parbox{\dimexpr\linewidth-2\fboxsep}{\strut\color{white}\thesection\quad #1}}}
+\titleformat{\section}{\sffamily\bfseries}{}{0pt}{\secbox}
+\titlespacing*{\section}{0pt}{6pt}{3pt}
+\titleformat{\subsection}{\sffamily\color{rosso}}{\thesubsection}{0.5em}{}
+\titlespacing*{\subsection}{0pt}{4pt}{2pt}
+\renewcommand{\thesection}{\arabic{section}}
+\setlength{\parindent}{0pt}\setlength{\parskip}{1.5pt}
+\setlength{\columnsep}{12pt}\setlength{\columnseprule}{0.4pt}
+\setlist{nosep,leftmargin=11pt}
+\setlength{\abovedisplayskip}{2pt}\setlength{\belowdisplayskip}{2pt}
+\setlength{\abovedisplayshortskip}{1pt}\setlength{\belowdisplayshortskip}{1pt}
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{3pt}
+% riquadri
+\newtcolorbox{bx}[3]{enhanced,colback=#1,colframe=#1,boxrule=0pt,arc=0pt,left=4pt,right=4pt,top=2pt,bottom=2pt,before skip=4pt,after skip=4pt,
+ title={\textsc{#3}},coltitle=#2,colbacktitle=#1,fonttitle=\sffamily\footnotesize,attach title to upper={\par}}
+\newenvironment{esame}{\begin{bx}{giallo}{rosso!80!black}{nell'esame}}{\end{bx}}
+\newenvironment{svolto}[1]{\begin{bx}{azz}{azzc}{esempio svolto -- #1}}{\end{bx}}
+\newenvironment{errori}{\begin{bx}{rosa}{rosso}{errori da evitare}}{\end{bx}}
+\newenvironment{oro}[1]{\begin{bx}{giallo}{rosso!80!black}{#1}}{\end{bx}}
+% tabelle
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcommand{\hd}{\rowcolor{verde}}
+\newenvironment{tab}[1]{\par\noindent\rowcolors{2}{white}{giallo!70}\tabularx{\linewidth}{|#1|}\hline}{\hline\endtabularx\par\vspace{2pt}}
+\pagestyle{fancy}\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\scriptsize Formulario Fisica -- Enrico Baldasso -- pag. \thepage}
+
+\usepackage{graphicx,needspace}
+\newcommand{\area}[1]{\par\vspace{3pt}{\sffamily\scriptsize\bfseries\color{azzc}\MakeUppercase{#1}}\,{\color{azzc!50}\leaders\hrule height 0.6pt\hfill\kern0pt}\par\nopagebreak[4]\vspace{1pt}}
+\newcommand{\subarea}[1]{\par\needspace{3\baselineskip}\vspace{2pt}{\sffamily\footnotesize\color{rosso}#1}\par}
+\newtcolorbox{frase}{enhanced,colback=gialloc!25,colframe=gialloc!90!black,boxrule=0.5pt,arc=2pt,left=4pt,right=4pt,top=2pt,bottom=2pt,before skip=3pt,after skip=4pt,
+ title={\textsc{in una frase}},coltitle=rosso!80!black,colbacktitle=gialloc!25,fonttitle=\sffamily\footnotesize,attach title to upper={\par}}
+\newcommand{\fq}[2]{{\sffamily\scriptsize\bfseries\color{rosso!80!black}\MakeUppercase{#1}}\ \textit{#2}}
+\newenvironment{passi}{\begin{enumerate}[label=\textcolor{white}{\colorbox{azzc}{\scriptsize\bfseries\arabic*}},leftmargin=16pt,itemsep=1pt]}{\end{enumerate}}
+\newcommand{\figone}[2]{\par\begin{center}\includegraphics[width=0.78\linewidth,height=3.6cm,keepaspectratio]{fig/#1}\\[-1pt]{\scriptsize\itshape #2}\end{center}\vspace{-4pt}}
+\newcommand{\figpair}[4]{\par\noindent\begin{minipage}[b]{0.49\linewidth}\centering\includegraphics[width=\linewidth,height=3cm,keepaspectratio]{fig/#1}\\[-1pt]{\scriptsize\itshape #2}\end{minipage}\hfill\begin{minipage}[b]{0.49\linewidth}\centering\includegraphics[width=\linewidth,height=3cm,keepaspectratio]{fig/#3}\\[-1pt]{\scriptsize\itshape #4}\end{minipage}\par\vspace{4pt}}
+\begin{document}
+
+{\sffamily\LARGE\color{rosso} FORMULARIO --- FISICA}{\sffamily\large\color{rosso!70} \ versione 2}\hfill{\sffamily\bfseries Enrico Baldasso 4685}\\[-1pt]
+{\scriptsize\itshape Esame unico Fisica I + Fisica II (4 esercizi F1a, F1b, F2a, F2b + 4 domande D1a, D1b, D2a, D2b). Per ogni sezione: l'argomento in una frase, la procedura passo passo con regole e formule generali, poi grafici e tabelle. Tratto dagli esercizi della dispensa e dal compito d'esempio. Unità SI.}
+\vspace{2pt}
+
+\begin{multicols*}{2}
+\setcounter{section}{-1}
+
+\section{Come muoversi all'esame: mappa e strategia}
+\begin{frase}
+\fq{Strategia}{Riconosci il tipo dalle parole del testo, scrivi in una frase il principio che usi, poi formula letterale, numeri e unità: il procedimento vale più del risultato.}
+\end{frase}
+\area{Procedura passo passo e regole}
+\begin{passi}
+\item Leggi tutto il compito (5 min) e assegna a ogni esercizio il suo § con la tabella qui sotto.
+\item Scrivi prima le 4 domande teoriche: immagine $\to$  definizione $\to$  formula $\to$  esempio $\to$  limiti.
+\item Negli esercizi: disegno, dati in SI, principio in una frase, formula letterale incorniciata, poi i numeri.
+\item Ultimi 10 minuti: controlla unità, kelvin, angoli (piano o normale), raggio o diametro.
+\end{passi}
+\subsection{Riconosci l'esercizio dalle parole del testo}
+\begin{tab}{P{3.3cm}|P{0.5cm}|L}
+\hd Se il testo dice\dots & \S & Metodo in una riga\\\hline
+``disco/asta che ruota'', ``punto fissato al bordo'', ``piccole oscillazioni'' & \S5 & energia con $\frac12I\omega^2$; pendolo fisico $T=2\pi\sqrt{I/mgd}$\\
+``rotola senza strisciare'' & \S5 & $v=\omega R$, \ $K=\frac12(M+I/R^2)v^2$\\
+``piano inclinato'', ``carrucola'', ``tensione'' & \S3 & $\sum\vec F=m\vec a$ su ogni corpo\\
+``velocità in B'', ``quota massima'', ``molla compressa'' & \S3 & conservazione dell'energia\\
+``urto'', ``restano uniti'', ``blocco mobile'' & \S3 & $\sum\vec p$ costante (+ $E$ se elastico)\\
+``scala'', ``asta in equilibrio'' & \S5 & $\sum F=0$, $\sum\tau=0$\\
+``galleggia'', ``immerso'', ``tubo'', ``strozzatura'' & \S6 & Stevino, Archimede, Bernoulli\\
+``ciclo'', ``rendimento'', ``adiabatica'' & \S8 & tabella trasformazioni, $\eta=1-|Q_c|/Q_a$\\
+``sorgenti'', ``reversibile?'' & \S8 & Clausius $\sum Q/T\le0$\\
+``cariche nei vertici'', ``lavoro per spostare'' & \S9 & $\vec E$ vettoriale, $V$ scalare\\
+``sfere concentriche'', ``densità di carica'' & \S9 & Gauss\\
+``condensatore'', ``dielettrico'', ``energia elettrostatica'' & \S10 & serie/parallelo, $U=\frac12CV^2$\\
+``generatore'', ``potenza massima'' & \S11 & $i=\mathcal E/(R+r)$, $R=r$\\
+``ione'', ``raggio'', ``periodo'' in $B$ & \S12 & $r=mv/qB$, $T=2\pi m/qB$\\
+``bobina'', ``$B(t)$'', ``f.e.m.'', ``barra che scorre'' & \S13 & $\mathcal E=-d\Phi/dt$, $i=\mathcal E/R$\\
+``frange'', ``fenditure'', ``prisma'', ``lastra'' & \S14 & $d\sin\theta=m\lambda$, Snell\\
+\end{tab}
+\subarea{Regole e formule generali}
+\begin{oro}{regole d'oro valide in ogni esercizio}
+\begin{itemize}
+\item \textbf{Prima la formula letterale}, poi i numeri, poi le unità: il procedimento vale più del numero.
+\item \textbf{Scrivi il principio in una frase} (``si conserva l'energia perché non c'è attrito'').
+\item \textbf{Dati in SI}: cm$\to$m, km/h$\to$m/s ($\div3{,}6$), $^\circ$C$\to$K, cal$\to$J, diametro$\to$raggio.
+\item Se il testo è ambiguo (raggio/diametro, $H$ o $B$) \textbf{dichiara l'interpretazione}.
+\end{itemize}
+\end{oro}
+\begin{bx}{azz}{azzc}{piano di lavoro suggerito}
+\begin{enumerate}[label=\textcolor{rosso}{\bfseries\arabic*.}]
+\item 5 min: leggi tutto e riconosci i 4 esercizi con la tabella 0.1.
+\item Domande teoriche per prime: scaletta \S15 (immagine $\to$ definizione $\to$ formula $\to$ esempio).
+\item Esercizi dal più sicuro; se blocchi oltre 5 min scrivi la scaletta e passa oltre.
+\item Ultimi 10 min: unità, segni, kelvin, angoli, ordini di grandezza.
+\end{enumerate}
+\end{bx}
+
+\section{Strumenti di base}
+\begin{frase}
+\fq{Strumenti}{Le unità sono il cemento della piramide: un dato lasciato in cm, $^\circ$C o km/h rovina anche il ragionamento giusto.}
+\end{frase}
+\area{Procedura passo passo e regole}
+\begin{passi}
+\item Riscrivi ogni dato in SI accanto al testo prima di iniziare.
+\item Le grandezze vettoriali si scompongono: $A_x=A\cos\theta$, $A_y=A\sin\theta$.
+\item Alla fine verifica le dimensioni del risultato (m/s, J, N, V\dots{}).
+\end{passi}
+\subarea{Regole e formule generali}
+Vettori: $A_x=A\cos\theta$, $A_y=A\sin\theta$, $|\vec A|=\sqrt{A_x^2+A_y^2}$; $\vec a\cdot\vec b=ab\cos\theta$, $|\vec a\times\vec b|=ab\sin\theta$.\\
+Grafici: pendenza $=$ derivata, area $=$ integrale ($F=-dU/dx$, $W=$ area sotto $p(V)$).
+\area{Grafici e tabelle}
+\begin{tab}{L|L}
+\hd Costante & Valore\\\hline
+$g$ & $9{,}81$ m/s$^2$\\
+$R$ gas, $k_B$ & $8{,}314$ J/(mol\,K), \ $1{,}38\cdot10^{-23}$ J/K\\
+$k=\frac1{4\pi\varepsilon_0}$, \ $\varepsilon_0$ & $8{,}99\cdot10^9$, \ $8{,}854\cdot10^{-12}$ F/m\\
+$\mu_0$ & $4\pi\cdot10^{-7}$ H/m\\
+$e$, $m_e$, $m_p$ & $1{,}6\cdot10^{-19}$ C, $9{,}11\cdot10^{-31}$, $1{,}67\cdot10^{-27}$ kg\\
+$c$, $h$ & $3\cdot10^8$ m/s, \ $6{,}63\cdot10^{-34}$ J\,s\\
+1 atm, 1 cal, 1 eV & $1{,}013\cdot10^5$ Pa $=760$ mmHg; $4{,}186$ J; $1{,}6\cdot10^{-19}$ J\\
+giri/min $\to$ rad/s & $\times2\pi/60$\\
+\end{tab}
+
+\section{Cinematica}
+\begin{frase}
+\fq{Moto parabolico}{Due film proiettati insieme: in orizzontale il corpo va dritto a velocità costante, in verticale cade come un sasso.}
+
+\fq{Moto circolare}{La velocità cambia direzione di continuo: qualcosa deve girare il volante verso il centro.}
+\end{frase}
+\area{Procedura passo passo e regole}
+\begin{passi}
+\item Fissa origine e assi (di solito $y$ verso l'alto) e scrivi i dati con il segno.
+\item Scrivi separatamente $x(t)$ e $y(t)$: orizzontale uniforme, verticale accelerato con $-g$.
+\item Usa la condizione del testo per trovare il tempo: $y=0$ (atterra), $v_y=0$ (quota massima), $x=$ bersaglio.
+\item Sostituisci il tempo nelle altre equazioni; la velocità finale è $\sqrt{v_x^2+v_y^2}$ con il suo angolo.
+\end{passi}
+\begin{svolto}{9.5}
+Lancio a $60^\circ$, bersaglio a $x=24$, $y=13{,}4$ m. Dalla traiettoria: $v_0^2=\frac{gx^2}{2\cos^2\theta(x\tan\theta-y)}$ $\Rightarrow$ $v_0=20{,}0$ m/s; $t=x/v_x=2{,}40$ s, $v_y=v_0\sin\theta-gt=-6{,}2$ $\Rightarrow$ $v=11{,}76$ m/s a $31^\circ36'$.
+\end{svolto}
+\area{Grafici e tabelle}
+\figone{fig32}{Moto parabolico: componenti della velocità, quota massima e gittata}
+\begin{tab}{P{2.3cm}|L}
+\hd Moto & Equazioni\\\hline
+Rettilineo unif. & $x=x_0+vt$\\
+Unif. accelerato & $x=x_0+v_0t+\frac12at^2$, \ $v=v_0+at$, \ $v^2=v_0^2+2a\Delta x$\\
+Lancio verticale & $h_{max}=\frac{v_0^2}{2g}$, \ $t_{sal}=\frac{v_0}{g}$\\
+Parabolico & $x=v_0\cos\theta\,t$, \ $y=v_0\sin\theta\,t-\frac12gt^2$\\
+& traiettoria $y=x\tan\theta-\frac{gx^2}{2v_0^2\cos^2\theta}$; gittata $\frac{v_0^2\sin2\theta}{g}$\\
+Circolare & $v=\omega R$, \ $a_c=\omega^2R=\frac{v^2}{R}$, \ $\omega=\frac{2\pi}{T}=2\pi f$\\
+Relativo & $\vec v_{ass}=\vec v_{rel}+\vec v_{trasc}$ (ombrello, pioggia)\\
+\end{tab}
+
+\section{Dinamica, lavoro, energia, urti}
+\begin{frase}
+\fq{Newton}{Le forze non tengono in moto i corpi, ne cambiano il moto: il disco da hockey scivola da solo.}
+
+\fq{Energia}{L'energia è una moneta che cambia valuta ma non si crea né si distrugge; il lavoro è lo sportello del cambio.}
+
+\fq{Urti}{Nell'urto i corpi si passano la quantità di moto come una palla: il totale della squadra resta uguale.}
+
+\fq{Gravitazione}{Un'orbita è una caduta senza fine.}
+\end{frase}
+\area{Procedura passo passo e regole}
+\begin{passi}
+\item Disegna ogni corpo separato con tutte le forze (peso, normale, attrito, tensione, molla).
+\item Scegli il principio: velocità tra due posizioni $\to$  energia; accelerazione o tensione $\to$  $\sum\vec F=m\vec a$; urto o corpi che si separano $\to$  $\sum\vec p$.
+\item Proietta le forze su assi comodi (lungo e perpendicolare al piano inclinato).
+\item Risolvi in forma letterale, poi sostituisci; con attrito sottrai il lavoro $\mu Nd$.
+\item Controllo: casi limite ($\mu=0$, $\alpha=90^\circ$) e ordine di grandezza.
+\end{passi}
+\begin{svolto}{11.4}
+Punto $m$ che scivola su blocco $M$ libero: $mv=MV$ e $mgR=\frac12mv^2+\frac12MV^2$ $\Rightarrow$ $v=\sqrt{\frac{2gRM}{M+m}}$, $V=\frac mMv$.
+\end{svolto}
+\area{Grafici e tabelle}
+\figpair{fig01}{Piano inclinato: componenti del peso, normale e attrito}{fig02}{Conservazione dell'energia tra A e B}
+\figpair{fig03}{Urto: quantità di moto prima e dopo}{fig08}{Orbita: forza centripeta gravitazionale}
+\begin{tab}{P{2.3cm}|L}
+\hd Legge & Formula\\\hline
+Newton & $\sum\vec F=m\vec a=\frac{d\vec p}{dt}$\\
+Forze & $P=mg$, \ $f_s\le\mu_sN$, \ $f_d=\mu_dN$, \ $F_{el}=-kx$\\
+Piano inclinato & $N=mg\cos\alpha$, \ $a=g(\sin\alpha-\mu\cos\alpha)$\\
+Carrucola ideale & $a=\frac{m_Bg}{m_A+m_B}$, \ $T=m_Aa$\\
+Curva & $v_{max}=\sqrt{\mu gr}$; \ pendolo nel punto basso $T=mg+\frac{mv^2}{l}$\\
+Lavoro, potenza & $W=\int\vec F\cdot d\vec s$, \ $W_{tot}=\Delta K$, \ $P=Fv$\\
+Energia & $K=\frac12mv^2$, \ $U_g=mgh$, \ $U_{el}=\frac12kx^2$\\
+Conservazione & $K_i+U_i=K_f+U_f$; \ con attrito $\Delta E=-\mu Nd$\\
+Urto anelastico & $v'=\frac{m_1v_1+m_2v_2}{m_1+m_2}$\\
+Urto elastico 1D & $v_1'=\frac{(m_1-m_2)v_1+2m_2v_2}{m_1+m_2}$; masse uguali: si scambiano\\
+Centro di massa & $\vec F_{est}=M\vec a_{cm}$; \ se $F_{est,x}=0$: $m_1x_1+m_2x_2=$ cost.\\
+Gravitazione & $F=G\frac{Mm}{r^2}$, \ orbita $v=\sqrt{GM/r}$\\
+\end{tab}
+
+\section{Oscillazioni e onde}
+\begin{frase}
+\fq{Oscillatore}{Un'altalena che scambia velocità e altezza: la forza tira sempre verso il centro, più forte quanto più ti allontani.}
+
+\fq{Onde}{La ola allo stadio: si sposta la forma, non le persone.}
+\end{frase}
+\area{Procedura passo passo e regole}
+\begin{passi}
+\item Riconosci il sistema: molla, pendolo semplice, pendolo fisico, due masse unite da una molla.
+\item Scrivi la forza (o il momento) di richiamo e portala nella forma $\ddot x=-\omega^2x$.
+\item Ricava $\omega$, poi $T=\frac{2\pi}{\omega}$ e $f=\frac1T$; due masse: usa la massa ridotta.
+\item Onde: $v=\lambda f$ e condizioni agli estremi ($L=n\frac\lambda2$ con estremi fissi).
+\end{passi}
+\area{Grafici e tabelle}
+\figpair{fig07}{Massa e molla con la legge oraria $x(t)$}{fig15}{Onda progressiva e modi stazionari $n=1,2$}
+\begin{tab}{P{2.3cm}|L}
+\hd Sistema & Formula\\\hline
+Molla & $\omega=\sqrt{k/m}$, \ $T=2\pi\sqrt{m/k}$, \ $x=A\cos(\omega t+\phi)$\\
+Due masse + molla & massa ridotta $\mu=\frac{m_1m_2}{m_1+m_2}$, \ $\omega=\sqrt{k/\mu}$\\
+Pendolo semplice & $T=2\pi\sqrt{l/g}$\\
+Pendolo fisico & $T=2\pi\sqrt{\frac{I_O}{m_{tot}gd}}$ \ ($d$ perno--CM)\\
+Onde & $v=\lambda f$, \ corda $v=\sqrt{T/\mu}$, \ suono $340$ m/s\\
+Stazionarie & estremi fissi $f_n=\frac{nv}{2L}$\\
+Pozzo / eco & $t=\sqrt{2h/g}+h/v_s$\\
+\end{tab}
+
+\section{Corpo rigido e statica}
+\begin{frase}
+\fq{Momento d'inerzia}{La pigrizia a girare: più la massa è lontana dall'asse, più fatica fai.}
+
+\fq{Rotolamento}{La ruota è un compasso che fa un passo: il punto a terra è un perno fermo.}
+
+\fq{Statica}{Un corpo è in equilibrio quando non scappa e non gira.}
+\end{frase}
+\area{Procedura passo passo e regole}
+\begin{passi}
+\item Individua l'asse di rotazione e calcola il momento d'inerzia totale (tabella + Steiner + masse puntiformi).
+\item Moto: conservazione dell'energia con $\frac12I\omega^2$ (e $v=\omega R$ se rotola).
+\item Accelerazioni: $\tau=I\alpha$ insieme a $\sum F=ma$ per il centro di massa.
+\item Equilibrio: $\sum F=0$ e $\sum\tau=0$ con il polo dove passano più forze incognite.
+\item Piccole oscillazioni: $\sin\theta\simeq\theta$, $\omega_0^2=\frac{mgd}{I}$.
+\end{passi}
+\subsection{Scalette F1a -- corpo che ruota attorno a un asse fisso}
+\begin{tab}{c|P{2.9cm}|L}
+\hd N & Cosa fai & Scrivi\\\hline
+1 & Disegno: posizioni iniziale e finale & quanto scende ogni massa ($\Delta h$)\\
+2 & Momento d'inerzia totale & $I=I_{corpo}+\sum m_ir_i^2$ (+ Steiner)\\
+3 & Conservazione dell'energia & $\sum m_ig\Delta h_i=\frac12I\omega^2$, $v=\omega r$\\
+4 & Piccole oscillazioni & $I\ddot\theta=-mgd\,\theta$ $\Rightarrow$ $\omega_0^2=\frac{mgd}{I}$\\
+5 & Controllo & caso limite ($M\to0$: pendolo semplice)\\
+\end{tab}
+\begin{svolto}{F1a compito}
+Disco $M,R$ + massa $m$ al bordo, da orizzontale al punto basso: $mgR=\frac12(\frac12M+m)v^2$ $\Rightarrow$ $v=\sqrt{\frac{4mgR}{M+2m}}$; \ $T=2\pi\sqrt{\frac{(M+2m)R}{2mg}}$.
+\end{svolto}
+\subarea{Regole e formule generali}
+Steiner $I=I_{cm}+Md^2$ \quad $\tau=rF\sin\theta=I\alpha$ \quad $K=\frac12I\omega^2$ \quad $L=I\omega$ (cost. se $\tau_{est}=0$)\\
+\textbf{Rotolamento:} $v=\omega R$; \ $K=\frac12(M+\frac{I}{R^2})v^2$; \ da quota $h$: $v=\sqrt{\frac{2gh}{1+I/MR^2}}$ (cilindro $\sqrt{4gh/3}$); \ $a=\frac{g\sin\alpha}{1+I/MR^2}$.\\
+Striscia e poi rotola: $v=v_0-\mu gt$, $\omega=\omega_0+\frac{\mu MgR}{I}t$, fine per $v=\omega R$.\\
+\textbf{Statica:} $\sum\vec F=0$, $\sum\vec\tau=0$ rispetto al polo con più incognite. Scala su parete liscia: $N_s=P_{tot}$, $N_p=f\le\mu N_s$.
+\area{Grafici e tabelle}
+\figpair{fig04}{Momento di una forza e rotazione attorno a un asse}{fig05}{Rotolamento puro: velocità $0$, $v$, $2v$}
+\figone{fig06}{Scala in equilibrio: forze e momenti}
+\begin{tab}{P{2.6cm}|L}
+\hd Corpo (asse per CM) & $I$\\\hline
+punto a distanza $r$ & $mr^2$\\
+anello / cilindro cavo & $MR^2$\\
+disco / cilindro pieno & $\frac12MR^2$\\
+sfera piena / cava & $\frac25MR^2$ \ / \ $\frac23MR^2$\\
+asta (centro / estremo) & $\frac1{12}ML^2$ \ / \ $\frac13ML^2$\\
+\end{tab}
+
+\section{Fluidi}
+\begin{frase}
+\fq{Fluidi fermi}{Più scendi, più acqua hai sulla testa; un corpo immerso riceve dal basso il peso dell'acqua che ha scacciato.}
+
+\fq{Fluidi in moto}{Dove il fiume si stringe l'acqua corre più veloce e la pressione cala.}
+\end{frase}
+\area{Procedura passo passo e regole}
+\begin{passi}
+\item Fluido fermo o in moto? Fermo $\to$  Stevino, Pascal, Archimede; in moto $\to$  continuità e Bernoulli.
+\item Stevino tra due punti: stessa quota nello stesso fluido = stessa pressione.
+\item Galleggiamento: equilibrio peso = spinta, con il solo volume immerso.
+\item In moto: dalla continuità ricavi le velocità, poi Bernoulli tra due punti della stessa linea di flusso.
+\item Attenzione a pressione assoluta e relativa e alle unità (mmHg, atm, Pa).
+\end{passi}
+\area{Grafici e tabelle}
+\figpair{fig09}{Stevino e spinta di Archimede}{fig10}{Tubo di Venturi: sezione, velocità e pressione}
+\begin{tab}{P{2.3cm}|L}
+\hd Legge & Formula\\\hline
+Stevino & $p=p_0+\rho gh$ \ (acqua $10^3$, Hg $13{,}6\cdot10^3$ kg/m$^3$)\\
+Pascal (torchio) & $\frac{F_1}{A_1}=\frac{F_2}{A_2}$\\
+Archimede & $S=\rho_{fl}V_{imm}g$; \ galleggia: $\frac{V_{imm}}{V}=\frac{\rho_c}{\rho_{fl}}$\\
+Peso apparente & $P'=P(1-\rho_{fl}/\rho_c)$\\
+Continuità & $Q=A_1v_1=A_2v_2$\\
+Bernoulli & $p+\frac12\rho v^2+\rho gz=$ cost.; \ Torricelli $v=\sqrt{2gh}$\\
+Gas in tubo/campana & Boyle $p_1V_1=p_2V_2$ + Stevino\\
+\end{tab}
+
+\section{Calore e gas perfetti}
+\begin{frase}
+\fq{Calore}{Il calore passa come acqua tra vasi comunicanti finché le temperature si pareggiano; il calore specifico è la larghezza del vaso.}
+
+\fq{Gas}{La pressione è una grandinata di molecole sulle pareti; la temperatura dice quanto forte grandina.}
+\end{frase}
+\area{Procedura passo passo e regole}
+\begin{passi}
+\item Temperature in kelvin per i gas; in calorimetria contano solo le differenze.
+\item Calorimetria: somma di tutti i calori scambiati $=0$; isola la temperatura incognita.
+\item Gas: individua cosa resta costante ($n$, $V$, $p$ o $T$) e usa il rapporto $\frac{pV}{T}$.
+\item Controlla il risultato: la temperatura finale sta tra le iniziali.
+\end{passi}
+\area{Grafici e tabelle}
+\figpair{fig13}{Teoria cinetica: urti delle molecole sulle pareti}{fig14}{Equilibrio termico tra due corpi}
+\begin{tab}{P{2.3cm}|L}
+\hd Legge & Formula\\\hline
+Calorimetria & $Q=mc\Delta T$; \ $\sum m_ic_i(T_e-T_i)=0$; \ $c_{acqua}=1$ cal/g$^\circ$C\\
+Cinetica$\to$calore & $\frac12mv^2=mc\Delta T$\\
+Dilatazione & $\Delta L=\lambda L_0\Delta T$, \ $\Delta V=\beta V_0\Delta T$ ($\beta\simeq3\lambda$)\\
+Gas perfetto & $pV=nRT$; \ $n$ cost.: $\frac{p_1V_1}{T_1}=\frac{p_2V_2}{T_2}$; \ $m\propto\frac{pV}{T}$\\
+Calori specifici & mono $c_V=\frac32R$, $\gamma=\frac53$; \ bi $c_V=\frac52R$, $c_p=\frac72R$, $\gamma=1{,}4$\\
+Scale & $T_K=T_C+273{,}15$, \ $T_F=\frac95T_C+32$\\
+\end{tab}
+
+\section{Termodinamica}
+\begin{frase}
+\fq{Primo principio}{L'energia interna è un conto in banca: il calore è un versamento, il lavoro del gas un prelievo.}
+
+\fq{Secondo principio}{Il calore cade dal caldo al freddo come una cascata; la macchina è un mulino che ne sfrutta solo una parte.}
+\end{frase}
+\area{Procedura passo passo e regole}
+\begin{passi}
+\item Converti tutte le temperature in kelvin.
+\item Disegna il ciclo nel piano $p$-$V$ e per ogni tratto segna il segno di $Q$.
+\item Trova le temperature mancanti (adiabatica $TV^{\gamma-1}$ cost., isobara $V\propto T$, isocora $p\propto T$).
+\item Calcola $Q_{ass}$ e $|Q_{ced}|$, poi $\eta=1-\frac{|Q_{ced}|}{Q_{ass}}$; più sorgenti: Clausius.
+\item Controllo: $\eta<\eta_{Carnot}$ tra la temperatura massima e la minima.
+\end{passi}
+\subsection{Scalette F1b -- ciclo con gas perfetto}
+\begin{tab}{c|P{2.9cm}|L}
+\hd N & Cosa fai & Scrivi\\\hline
+1 & Temperature in kelvin & $T=T_C+273{,}15$\\
+2 & Per ogni tratto: segno di $Q$ & dove $T$ sale a $p$ o $V$ cost. $\to$ $Q_{ass}$\\
+3 & Temperature mancanti & adiabatiche $TV^{\gamma-1}$ cost., isobare $V\propto T$, isocore $p\propto T$\\
+4 & Calori & $Q_a=\sum nc\,\Delta T$, \ $|Q_c|$ idem\\
+5 & Rendimento e controllo & $\eta=1-\frac{|Q_c|}{Q_a}<\eta_{Carnot}$\\
+\end{tab}
+\begin{svolto}{F1b compito}
+BC adiab., CD isobara, DE adiab., EB isocora, biatomico. $T_E=T_B(T_D/T_C)^\gamma=1051$ K; \ $\eta=1-\frac1\gamma\frac{T_E-T_B}{T_D-T_C}=1-\frac{737{,}6}{1{,}4\cdot1200}=\mathbf{0{,}56}$.
+\end{svolto}
+\begin{svolto}{24.1}
+4 sorgenti: $\sum Q/T=\frac{68}{573}-\frac{14}{353}+\frac{22}{298}-\frac{51}{203}<0$ $\Rightarrow$ irreversibile; $\eta=\frac{68-14+22-51}{68+22}=0{,}28$.
+\end{svolto}
+\subarea{Regole e formule generali}
+$\Delta U=Q-W$ (sempre $\Delta U=nc_V\Delta T$) \quad ciclo: $\Delta U=0$, $W=Q_a-|Q_c|$\\
+$\eta=\frac{W}{Q_a}=1-\frac{|Q_c|}{Q_a}$ \quad Carnot $\eta=1-\frac{T_f}{T_c}$ \quad Frigo $COP=\frac{Q_f}{W}$\\
+Clausius $\sum\frac{Q_i}{T_i}\le0$ ($=0$ reversibile) \quad $\Delta S=nc_V\ln\frac{T_f}{T_i}+nR\ln\frac{V_f}{V_i}$\\
+Macchine in cascata: $\eta_{tot}=1-(1-\eta_1)(1-\eta_2)$
+\begin{errori}
+$^\circ$C invece di K \textbullet\ rendimento diviso per il calore \emph{totale} anziché quello \emph{assorbito} \textbullet\ $c_p$ nell'isocora o $c_V$ nell'isobara \textbullet\ $\gamma$ sbagliato (mono/bi).
+\end{errori}
+\area{Grafici e tabelle}
+\figpair{fig11}{Le quattro trasformazioni nel piano $p$-$V$}{fig12}{Macchina termica e ciclo di Carnot}
+\begin{tab}{P{1.4cm}|P{2.1cm}|P{1.3cm}|L}
+\hd Trasf. & $W$ & $Q$ & note\\\hline
+isocora & $0$ & $nc_V\Delta T$ & $p/T$ cost.\\
+isobara & $p\Delta V$ & $nc_p\Delta T$ & $V/T$ cost.\\
+isoterma & $nRT\ln\frac{V_f}{V_i}$ & $=W$ & $\Delta U=0$\\
+adiabatica & $-\Delta U=\frac{p_iV_i-p_fV_f}{\gamma-1}$ & $0$ & $pV^\gamma$, $TV^{\gamma-1}$ cost.\\
+\end{tab}
+
+\section{Elettrostatica}
+\begin{frase}
+\fq{Campo}{Una carica cambia lo spazio come una calamita sotto la limatura: il campo è la mappa delle forze.}
+
+\fq{Potenziale}{Il potenziale è l'altitudine su una mappa: le cariche positive scendono, le equipotenziali sono le curve di livello.}
+
+\fq{Gauss}{Il sacchetto chiuso conta solo la carica che ha dentro.}
+\end{frase}
+\area{Procedura passo passo e regole}
+\begin{passi}
+\item Disegna le cariche, il punto richiesto e le distanze.
+\item Campo: per ogni carica scrivi $\vec E$ con verso (esce dal $+$, entra nel $-$) e somma per componenti.
+\item Potenziale: somma i numeri $k\frac{q_i}{r_i}$ con il segno; lavoro $W=q\Delta V$.
+\item Distribuzione simmetrica: scegli la superficie di Gauss (sfera, cilindro), calcola $Q_{int}$, poi $E$.
+\end{passi}
+\begin{svolto}{28.1}
+Due $q$ uguali a 12 cm: nel punto medio $E=0$; sull'asse a 6 cm $E=2\frac{kq}{r^2}\cos45^\circ$ (componenti $\parallel$ AB si annullano); $\Delta V=2kq(\frac1{r_D}-\frac1{r_O})$.
+\end{svolto}
+\subarea{Regole e formule generali}
+\begin{errori}
+Sommare i moduli di $\vec E$ invece delle componenti \textbullet\ distanza dal \emph{centro} del quadrato $=l/\sqrt2$.
+\end{errori}
+\area{Grafici e tabelle}
+\figpair{fig16}{Linee di campo di due cariche opposte}{fig17}{Equipotenziali di una carica puntiforme}
+\figone{fig18}{Teorema di Gauss: conta solo la carica interna}
+\begin{tab}{P{2.6cm}|L}
+\hd Legge / caso & Formula\\\hline
+Coulomb & $F=k\frac{q_1q_2}{r^2}$, \ $\vec E=\vec F/q$, \ $E=k\frac{q}{r^2}$\\
+Potenziale & $V=k\frac qr$, \ $\Delta V=-\int\vec E\cdot d\vec l$, \ $W_{est}=q\Delta V$, \ $E$ unif. $\Delta V=Ed$\\
+Gauss & $\oint\vec E\cdot d\vec A=\frac{Q_{int}}{\varepsilon_0}$\\
+sfera/guscio ($r>R$) & $E=k\frac{Q}{r^2}$; \ dentro guscio $0$; sfera piena $E=\frac{kQr}{R^3}$\\
+filo / piano & $E=\frac{\lambda}{2\pi\varepsilon_0r}$ \ / \ $E=\frac{\sigma}{2\varepsilon_0}$\\
+conduttore & dentro $E=0$; fuori $E=\frac{\sigma}{\varepsilon_0}$\\
+asse di un disco & $E=\frac{\sigma}{2\varepsilon_0}\big(1-\frac{z}{\sqrt{z^2+R^2}}\big)$\\
+dipolo & $p=qd$, \ $\tau=pE\sin\theta$\\
+\end{tab}
+
+\section{Condensatori e dielettrici}
+\begin{frase}
+\fq{Condensatore}{Una diga di carica: la capacità è la larghezza del bacino, la tensione il livello.}
+
+\fq{Dielettrico}{Una folla di aghetti che si girano contro il campo e lo indeboliscono.}
+\end{frase}
+\area{Procedura passo passo e regole}
+\begin{passi}
+\item Disegna la geometria in sezione e individua le zone diverse (dielettrico, distanza).
+\item Zone affiancate con la stessa tensione $\to$  parallelo; strati sovrapposti con la stessa carica $\to$  serie.
+\item Calcola aree e distanze (raggio o diametro!) e la capacità totale in forma letterale.
+\item Energia $U=\frac12CV^2$; se il generatore resta collegato $V$ è fissa, se è staccato $Q$ è fissa.
+\end{passi}
+\subsection{Scalette F2a -- condensatore composto}
+\begin{tab}{c|P{2.9cm}|L}
+\hd N & Cosa fai & Scrivi\\\hline
+1 & Disegno in sezione & zone con dielettrico/distanza diversi\\
+2 & Stessa $V$ o stessa $Q$? & parallelo (affiancate) / serie (sovrapposte)\\
+3 & Aree e distanze & raggio vs diametro! corona $\pi(r_2^2-r_1^2)$\\
+4 & $C$ totale, ricava l'incognita & formula letterale prima dei numeri\\
+5 & Energia & $U=\frac12CV^2$\\
+\end{tab}
+\begin{svolto}{F2a compito}
+Disco ($\varepsilon_r=10$, $d_1$) + corona (vuoto, $d_1/2$) in parallelo: $C=\frac{\varepsilon_0}{d_1}(\varepsilon_rA_1+2A_2)$ $\Rightarrow$ $d_1=1{,}36$ mm; \ $U=\frac12\cdot25\,\text{nF}\cdot100^2=1{,}25\cdot10^{-4}$ J.
+\end{svolto}
+\area{Grafici e tabelle}
+\figpair{fig19}{Condensatore piano: campo uniforme tra le armature}{fig20}{Dielettrico: dipoli orientati e campo ridotto}
+\begin{tab}{P{2.6cm}|L}
+\hd Caso & Formula\\\hline
+piano & $C=\frac{\varepsilon_0\varepsilon_rA}{d}$, \ $E=\frac Vd$\\
+sferico / cilindrico & $C=4\pi\varepsilon_0\varepsilon_r\frac{r_1r_2}{r_2-r_1}$ \ / \ $\frac{2\pi\varepsilon_0\varepsilon_rL}{\ln(r_2/r_1)}$\\
+parallelo (stessa $V$) & $C=C_1+C_2$ \ (dielettrico su \emph{parte dell'area})\\
+serie (stessa $Q$) & $\frac1C=\frac1{C_1}+\frac1{C_2}$ \ (dielettrico su \emph{parte dello spessore})\\
+energia & $U=\frac12CV^2=\frac{Q^2}{2C}$, \ $u=\frac12\varepsilon_0\varepsilon_rE^2$\\
+dielettrico & $C=\varepsilon_rC_0$; \ $Q$ fissa: $E=E_0/\varepsilon_r$; \ $V$ fissa: $Q$ aumenta\\
+conduttori collegati & $V=\frac{Q_A+Q_B}{C_A+C_B}$, energia persa $U_i-U_f$\\
+interfaccia & $\frac{\tan\alpha_1}{\tan\alpha_2}=\frac{\varepsilon_1}{\varepsilon_2}$, $E_t$ e $D_n$ continui\\
+\end{tab}
+
+\section{Corrente elettrica}
+\begin{frase}
+\fq{Corrente}{Un fiume di elettroni in un tubo con ostacoli: la tensione è il dislivello, la resistenza gli ostacoli, l'attrito scalda.}
+\end{frase}
+\area{Procedura passo passo e regole}
+\begin{passi}
+\item Disegna il circuito e semplifica le resistenze (serie e parallelo).
+\item Corrente dal generatore reale: $i=\frac{\mathcal E}{R+r}$.
+\item Potenze: $P=Ri^2$ su ogni resistenza; massimo trasferimento per $R=r$.
+\item Circuiti RC e RL: scrivi l'esponenziale con $\tau=RC$ o $\tau=\frac{L}{R}$.
+\end{passi}
+\subarea{Regole e formule generali}
+$i=\frac{dq}{dt}$, \ $V=Ri$, \ $R=\rho\frac{L}{A}$, \ $P=Vi=Ri^2=\frac{V^2}{R}$\\
+Generatore reale: $i=\frac{\mathcal E}{R+r}$, $P_R=\frac{\mathcal E^2R}{(R+r)^2}$, massima per $R=r$: $\frac{\mathcal E^2}{4r}$\\
+Serie $\sum R_i$; parallelo $\frac1R=\sum\frac1{R_i}$; Kirchhoff nodi e maglie\\
+RC: $q=Q_0e^{-t/RC}$ \quad RL all'apertura: $i=I_0e^{-t(R+r)/L}$, carica $Q=\frac{LI_0}{R+r}$\\
+Riscaldamento: $P\,\Delta t=mc\,\Delta T$
+\area{Grafici e tabelle}
+\figone{fig21}{Generatore reale con carico $R$}
+
+\section{Campo magnetico}
+\begin{frase}
+\fq{Lorentz}{Il campo magnetico è un volante, non un acceleratore: fa curvare la carica senza cambiarne la velocità.}
+
+\fq{Sorgenti}{Ogni corrente si avvolge in un mulinello di campo, come la mano destra che stringe il filo.}
+
+\fq{Materia}{Un esercito di bussoline: timide nel diamagnetico, poco allineate nel paramagnetico, compatte nel ferromagnetico.}
+\end{frase}
+\area{Procedura passo passo e regole}
+\begin{passi}
+\item Se il dato è in A/m è $H$: converti con $B=\mu_0\mu_rH$.
+\item Carica in $B$: forza di Lorentz = forza centripeta $\to$  $r=\frac{mv}{qB}$, $T=\frac{2\pi m}{qB}$.
+\item Campo prodotto da correnti: scegli la formula giusta (filo, spira, solenoide) e somma come vettori.
+\item Forze e momenti su fili e spire: $F=iLB\sin\theta$, $\tau=NiAB\sin\theta$.
+\end{passi}
+\subarea{Regole e formule generali}
+\begin{errori}
+\textbf{A/m (Asp/m) è $H$, non $B$}: $B=\mu_0H$ \textbullet\ $m_p=1{,}66\cdot10^{-27}$ kg (non $10^{-17}$).
+\end{errori}
+\area{Grafici e tabelle}
+\figpair{fig22}{Carica in campo uniforme: traiettoria circolare}{fig23}{Campo di un filo e di una spira}
+\figone{fig27}{Ciclo di isteresi di un ferromagnete}
+\begin{tab}{P{2.6cm}|L}
+\hd Caso & Formula\\\hline
+Lorentz & $\vec F=q\vec v\times\vec B$; \ $r=\frac{mv}{qB}=\frac{\sqrt{2mE_k}}{qB}$, \ $T=\frac{2\pi m}{qB}$\\
+filo in $B$ & $F=iLB\sin\theta$\\
+spira in $B$ & $m=NiA$, \ $\tau=mB\sin\theta$ \ (max se piano $\parallel$ $B$)\\
+filo infinito & $B=\frac{\mu_0i}{2\pi r}$\\
+centro spira & $B=\frac{\mu_0Ni}{2R}$; \ asse $\frac{\mu_0iR^2}{2(R^2+z^2)^{3/2}}$\\
+tratto finito & $B=\frac{\mu_0i}{4\pi d}(\sin\theta_1+\sin\theta_2)$; quadrato $\frac{2\sqrt2\mu_0i}{\pi a}$\\
+solenoide / toroide & $B=\mu_0ni$ \ / \ $\frac{\mu_0Ni}{2\pi r}$\\
+nastro largo $l$ & $H=\frac{i}{2\pi l}\ln\frac{s+l}{s}$\\
+fili paralleli & $\frac FL=\frac{\mu_0i_1i_2}{2\pi d}$\\
+materia & $B=\mu_0\mu_rH$; \ $NI=\Phi\mathcal R$, \ $\mathcal R=\frac{l}{\mu_0\mu_rA}$\\
+\end{tab}
+
+\section{Induzione elettromagnetica}
+\begin{frase}
+\fq{Induzione}{Il circuito è conservatore: se cambi il flusso, risponde con una corrente che si oppone. Niente variazione, niente corrente.}
+
+\fq{Maxwell}{Le cariche fanno $E$, $B$ non ha sorgenti, $B$ che varia fa $E$, $E$ che varia fa $B$.}
+\end{frase}
+\area{Procedura passo passo e regole}
+\begin{passi}
+\item Calcola l'area ($r=d/2$) e l'angolo tra $\vec B$ e la normale.
+\item Scrivi il flusso $\Phi(t)=NB(t)A\cos\theta$ con ciò che varia nel tempo.
+\item Deriva: $\mathcal E=-\frac{d\Phi}{dt}$; barra mobile $Blv$, disco $\frac12B\omega R^2$.
+\item Corrente $i=\frac{\mathcal E}{R}$, potenza $Ri^2$; verso con la regola di Lenz.
+\item Controlla che il valore massimo ($t=0$) basti a raggiungere ciò che chiede il testo.
+\end{passi}
+\subsection{Scalette F2b -- bobina in campo variabile}
+\begin{tab}{c|P{2.9cm}|L}
+\hd N & Cosa fai & Scrivi\\\hline
+1 & Area e angolo & $A=\pi r^2$ ($r=d/2$); angolo con la normale\\
+2 & Flusso & $\Phi(t)=NB(t)A\cos\theta$\\
+3 & f.e.m. & $\mathcal E=-d\Phi/dt$ (deriva $B(t)$)\\
+4 & Corrente e incognita & $i=\mathcal E/R$; risolvi per $t$ con $\ln$\\
+5 & Potenza e controllo & $P=Ri^2$; verifica che $i_{max}$ ($t=0$) basti\\
+\end{tab}
+\begin{svolto}{F2b compito}
+200 spire, $d=10$ cm, $R=100\,\Omega$, $30^\circ$ col piano: $\mathcal E=\frac{NA\sin30^\circ B_0}{\tau}e^{-t/\tau}$; $i=1$ A $\Rightarrow$ $t=\tau\ln\frac{\mathcal E_0}{100}\simeq14{,}6$ s; \ $P=100$ W.
+\end{svolto}
+\subarea{Regole e formule generali}
+$\Phi=NBA\cos\theta$ \ ($\theta$ tra $\vec B$ e la \textbf{normale}; se l'angolo è col \emph{piano}: $\sin$)\\
+$\mathcal E=-\frac{d\Phi}{dt}$, \ $i=\frac{\mathcal E}{R}$, \ $P=Ri^2$, \ carica $q=\frac{\Delta\Phi}{R}$\\
+Barra: $\mathcal E=Blv$ \quad Disco di Barlow: $\mathcal E=\frac12B\omega R^2$ \quad Spira rotante: $NBA\omega\sin\omega t$\\
+$B=B_0e^{-t/\tau}$ $\Rightarrow$ $\mathcal E=\frac{NAB_0\cos\theta}{\tau}e^{-t/\tau}$\\
+$L=\mu_0n^2Al$, \ $\mathcal E=-L\frac{di}{dt}$, \ $U=\frac12Li^2$, \ $u=\frac{B^2}{2\mu_0}$; \ filo: $\frac Ul=\frac{\mu_0i^2}{16\pi}$\\
+Mutua: $\Phi_2=Mi_1$; forza su piccola bobina $F=m\frac{dB}{dx}$
+\area{Grafici e tabelle}
+\figpair{fig24}{Barra che scorre in campo uniforme e corrente indotta}{fig25}{Le equazioni di Maxwell come ciclo $E\leftrightarrow B$}
+
+\section{Onde EM e ottica}
+\begin{frase}
+\fq{Onde EM}{Una staffetta nel vuoto: $E$ che varia genera $B$, $B$ che varia genera $E$.}
+
+\fq{Rifrazione}{La luce è un bagnino che vuole arrivare prima: corre sulla sabbia, nuota più lento e piega il percorso.}
+
+\fq{Interferenza}{Due sassi nello stagno: cresta con cresta si rinforza, cresta con ventre si cancella.}
+
+\fq{Polarizzazione}{Una corda che vibra tra le sbarre di un cancello: passa solo la vibrazione parallela.}
+
+\fq{Fotoni}{La luce arriva a pacchetti: conta quanto è grosso ciascuno, non quanti ne mandi.}
+\end{frase}
+\area{Procedura passo passo e regole}
+\begin{passi}
+\item Rifrazione: disegna la normale, misura gli angoli da lì e applica Snell.
+\item Interferenza: differenza di cammino $=m\lambda$ (massimi) o $(m+\frac12)\lambda$ (minimi).
+\item Frange sullo schermo: $\Delta y=\frac{\lambda L}{d}$; lastrina: $(n-1)s=m\lambda$.
+\item Attenzione alle unità di $\lambda$: Å, nm, cm.
+\end{passi}
+\area{Grafici e tabelle}
+\figpair{fig26}{Onda elettromagnetica: $\vec E\perp\vec B$}{fig28}{Riflessione e rifrazione}
+\figpair{fig29}{Esperimento di Young}{fig30}{Polarizzatore e analizzatore (Malus)}
+\figone{fig31}{Effetto fotoelettrico: soglia e pendenza $h$}
+\begin{tab}{P{2.6cm}|L}
+\hd Fenomeno & Formula\\\hline
+Onda EM & $c=\frac1{\sqrt{\varepsilon_0\mu_0}}$, \ $v=\frac{c}{\sqrt{\varepsilon_r\mu_r}}$, \ $E=cB$, \ $I=\frac12c\varepsilon_0E_0^2$\\
+Fotoni & $E=hf$; \ raggi X $\lambda_{min}=\frac{hc}{eV}$; \ Wien $\lambda_{max}T=0{,}29$ cm\,K\\
+Snell & $n_1\sin\theta_1=n_2\sin\theta_2$; \ limite $\sin\theta_L=\frac{n_2}{n_1}$; \ $n=\sqrt{\varepsilon_r}$\\
+Lastra & $s=\frac{d\sin(i-r)}{\cos r}$, \ cammino ottico $L=\frac{nd}{\cos r}$\\
+Prisma (min. dev.) & $r=\frac\alpha2$, \ $n=\frac{\sin\frac{\alpha+\delta}{2}}{\sin\frac\alpha2}$\\
+Young & max $d\sin\theta=m\lambda$, \ $\Delta y=\frac{\lambda L}{d}$; \ lamina $(n-1)s=m\lambda$\\
+Reticolo & $b\sin\theta=m\lambda$, \ $R=mN$, \ $D=\frac{m}{b\cos\theta}$\\
+Polarizzazione & Malus $I=I_0\cos^2\theta$; \ $\lambda/4$: $s(n_s-n_o)=\frac\lambda4$\\
+\end{tab}
+
+\section{Domande teoriche: immagine e punti da scrivere}
+\begin{frase}
+\fq{Domande aperte}{Parti sempre da un'immagine: fa vedere che hai capito e ti fa da scaletta.}
+\end{frase}
+\area{Procedura passo passo e regole}
+\begin{passi}
+\item Apri con la frase-immagine dell'argomento.
+\item Definizione precisa dei termini.
+\item Legge o equazione, con il significato di ogni simbolo.
+\item Un esempio con un disegno o un numero.
+\item Limiti, conseguenze, applicazioni reali.
+\end{passi}
+\area{Grafici e tabelle}
+\begin{tab}{P{1.6cm}|P{2.5cm}|L}
+\hd Domanda & Immagine & Punti\\\hline
+Rotolamento (D1a) & compasso: il contatto è un perno fermo & $v=\omega R$; velocità $0,v,2v$; attrito statico senza lavoro; piano inclinato $a=\frac{g\sin\alpha}{1+I/MR^2}$\\
+II principio (D1b) & mulino sulla cascata: serve la valle sotto & Kelvin, Clausius, equivalenza; Carnot; Clausius $\oint\delta Q/T\le0$; entropia\\
+Gauss (D2a) & sacchetto chiuso: conta solo la carica dentro & flusso; enunciato; dimostrazione con la sfera; sfera, filo, piano; conduttori\\
+Due fenditure (D2b) & due sassi nello stagno & Huygens; coerenza; $\delta=d\sin\theta$; max/min; $\Delta y$; $I=4I_0\cos^2$; inviluppo\\
+Induzione & circuito conservatore (Lenz) & Faraday; $Blv$; esempi; autoinduzione\\
+Maxwell & $E$ e $B$ si inseguono & 4 equazioni; corrente di spostamento; onde, $c$\\
+I principio & conto in banca & $\Delta U=Q-W$; funzione di stato; trasformazioni; Mayer\\
+Urti & passaggio della palla & $\vec p$ cost.; elastico/anelastico; CM\\
+\end{tab}
+\end{multicols*}
+\end{document}

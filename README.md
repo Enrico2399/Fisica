@@ -17,12 +17,14 @@ L'installazione non funziona aprendo il file in locale (`file://`): serve l'indi
 ## Struttura
 - `index.html` — la pagina generata
 - `manifest.json`, `service-worker.js`, `icon-*.png`, `apple-touch-icon.png`, `favicon-32.png` — installazione come app e uso offline
-- `Formulario_esame_Fisica.pdf` — il formulario da scaricare/stampare
+- `Formulario_esame_Fisica.pdf` — il formulario da scaricare/stampare (versione 2: frase, procedura passo passo e regole, grafici e tabelle per ogni sezione)
 - `src/esercizi.tex` — esercizi risolti (sorgente LaTeX)
-- `src/formulario_esame.tex` — formulario d'esame (sorgente LaTeX)
+- `src/formulario_esame.tex` — formulario d'esame (sorgente LaTeX, usato dal sito)
+- `src/formulario_esame_v2.tex` + `src/fig/` — sorgente del PDF versione 2 (`pdflatex formulario_esame_v2.tex` dentro `src/`)
 - `img/` — figure degli esercizi (PNG, nome = numero esercizio)
 - `img_teo/` — schemi della teoria (PNG, `figNN`)
 - `build/piramide.py` — mattoni della piramide interattiva (formula, spiegazione, dipendenze)
+- `build/formulario_extra.py` — formulario web: frase-riassunto, passi risolutivi e schemi per ogni §
 - `build/teoria.py` — teoria per area: introduzione, domande con frase-risposta, concetti, vita reale
 - `build/template.html` — HTML/CSS/JS della pagina
 - `build/conv.py` — converte i `.tex` e le immagini in `build/data.json`

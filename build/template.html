@@ -210,6 +210,18 @@ ol.steps li:nth-child(odd) { background: var(--zebra); }
 .mini { border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid var(--b-bd); background: var(--b-bg); color: var(--text); }
 .bd-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
 .bd-empty { color: var(--text3); font-style: italic; text-align: center; padding: 14px; border: 1px dashed var(--border); border-radius: var(--radius); }
+.fa { margin: 12px 0 4px; }
+.fa-lbl { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.fa-lbl::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+.fa-frase { background: var(--gold-bg); border: 1px solid var(--gold-border); border-radius: 8px; padding: 10px 14px; }
+.fa-frase .fa-lbl { color: var(--gold); } .fa-frase .fa-lbl::after { background: var(--gold-border); }
+.fq { margin: 4px 0; font-style: italic; color: var(--text); }
+.fq b { font-style: normal; font-size: 12px; color: var(--gold); margin-right: 8px; text-transform: uppercase; letter-spacing: .04em; }
+.fa-proc ol.steps { margin-top: 4px; }
+.fa-rules { margin-top: 10px; }
+.fgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 10px; margin-bottom: 8px; }
+.fgrid figure { margin: 0; display: flex; flex-direction: column; justify-content: space-between; }
+.fgrid img { max-height: 170px; margin: 0 auto; }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
 </style>
 
@@ -263,7 +275,7 @@ ol.steps li:nth-child(odd) { background: var(--zebra); }
 
   <section class="view" id="view-formulario">
     <h1>Formulario d'esame</h1>
-    <p class="subtitle">Lo stesso formulario del PDF da portare all'esame: i numeri di sezione (§) sono quelli citati negli esercizi.</p>
+    <p class="subtitle">Ogni sezione ha tre aree: l'argomento in una frase, la procedura passo passo con le regole e le formule generali, poi grafici e tabelle. I numeri di sezione (§) sono quelli citati negli esercizi e corrispondono al PDF da portare all'esame.</p>
     <a class="pdf-link" href="Formulario_esame_Fisica.pdf" target="_blank" rel="noopener">Scarica il formulario in PDF</a>
     <div class="flayout">
       <nav class="ftoc" id="ftoc"></nav>
@@ -401,7 +413,14 @@ $('#hide-all').addEventListener('click', () => document.querySelectorAll('#ex-li
 /* ---------- formulario ---------- */
 function renderF() {
   $('#ftoc').innerHTML = '<div class="side-title">Sezioni</div>' + D.formulario.map(f => `<a href="#" data-f="${f.n}"><b>§${f.n}</b><span>${f.name}</span></a>`).join('');
-  $('#fbody').innerHTML = D.formulario.map(f => `<section class="fsec" id="f-${f.n}"><h2><span class="sn">§${f.n}</span>${f.name}</h2>${f.html}</section>`).join('');
+  $('#fbody').innerHTML = D.formulario.map(f => {
+    const frase = f.frase.length ? `<div class="fa fa-frase"><div class="fa-lbl">In una frase</div>${f.frase.map(([k, t]) => `<p class="fq"><b>${k}</b>${t}</p>`).join('')}</div>` : '';
+    const proc = (f.metodo.length || f.passi || f.regole) ? `<div class="fa fa-proc"><div class="fa-lbl">Procedura passo passo e regole</div>
+      ${f.metodo.length ? `<ol class="steps">${f.metodo.map(x => `<li>${x}</li>`).join('')}</ol>` : ''}${f.passi}${f.regole ? `<div class="fa-rules"><h4>Regole e formule generali</h4>${f.regole}</div>` : ''}</div>` : '';
+    const figs = f.figs.filter(([k]) => D.teoimg[k]).map(([k, c]) => `<figure><img src="${D.teoimg[k]}" alt="${c.replace(/[$"\\]/g, '')}"><figcaption>${c}</figcaption></figure>`).join('');
+    const tab = (figs || f.tabelle) ? `<div class="fa fa-tab"><div class="fa-lbl">Grafici e tabelle</div>${figs ? `<div class="fgrid">${figs}</div>` : ''}${f.tabelle}</div>` : '';
+    return `<section class="fsec" id="f-${f.n}"><h2><span class="sn">§${f.n}</span>${f.name}</h2>${frase}${proc}${tab}</section>`;
+  }).join('');
   math($('#fbody')); math($('#ftoc'));
   $('#ftoc').querySelectorAll('a').forEach(a => a.addEventListener('click', ev => { ev.preventDefault(); goF(+a.dataset.f); }));
 }
